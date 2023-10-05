@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthController::class, 'create']);
-Route::post('/login', [AuthController::class, 'store']);
-Route::get('/logout', [AuthController::class, 'destroy']);
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'create'])
+        ->name('login');
+
+    Route::post('/login', [AuthController::class, 'store'])
+        ->name('login.login');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [AuthController::class, 'destroy'])
+        ->name('logout');
+    
+    Route::get('/home', function () {
+        return view('home');
+    });
+});

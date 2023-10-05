@@ -10,8 +10,7 @@ class AuthController extends Controller
 {
     function create()
     {
-        return view('login')
-            ->with(['title' => 'Sistem Pendataan Administrasi Prakerin']);
+        return view('login');
     }
 
     function store(Request $request)
