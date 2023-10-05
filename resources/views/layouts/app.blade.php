@@ -9,10 +9,24 @@
     <link rel="shortcut icon" href="./assets/img/logo_sekolah.png" type="image/png">
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
-    <link rel="stylesheet" href="./assets/compiled/css/auth.css">
 </head>
 <body>
     <script src="assets/static/js/initTheme.js"></script>
-    @yield('content')
+    <div id="app">
+        @include('layouts.sidebar')
+
+        <div id="main" class='layout-navbar navbar-fixed'>
+            @include('layouts.navbar')
+
+            <div id="main-content">
+                @yield('content')
+            </div>
+
+            @include('layouts.footer')
+        </div>
+    </div>
+
+    <script src="assets/static/js/components/dark.js"></script>
+    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/compiled/js/app.js"></script>
 </body>
-</html>
