@@ -9,6 +9,8 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    protected $table = 'kelas';
+
     protected $fillable = ['id', 'kode', 'nama', 'id_ta', 'id_guru', 'id_program', 'id_periode'];
 
     public function tahun_ajar(){

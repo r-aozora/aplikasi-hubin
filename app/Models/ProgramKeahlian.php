@@ -9,6 +9,8 @@ class ProgramKeahlian extends Model
 {
     use HasFactory;
 
+    protected $table = 'program_keahlian';
+
     protected $fillable = ['id', 'kode', 'nama'];
 
     public function kelas(){

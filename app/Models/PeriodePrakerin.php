@@ -9,6 +9,8 @@ class PeriodePrakerin extends Model
 {
     use HasFactory;
 
+    protected $table = 'periode_prakerin';
+
     protected $fillable = ['id', 'kode', 'awal', 'akhir'];
 
     public function kelas(){

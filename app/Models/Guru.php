@@ -9,6 +9,8 @@ class Guru extends Model
 {
     use HasFactory;
 
+    protected $table = 'guru';
+
     protected $fillable = ['id', 'nama', 'nip', 'sebagai', 'telepon'];
 
     public function user(){

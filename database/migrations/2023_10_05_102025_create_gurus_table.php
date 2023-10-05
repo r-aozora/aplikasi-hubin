@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nip');
-            $table->enum('sebagai', ['wali', 'pembimbing']);
+            $table->enum('sebagai', ['Walikelas', 'Pendamping']);
             $table->string('telepon');
             $table->timestamps();
         });
