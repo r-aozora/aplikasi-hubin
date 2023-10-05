@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TahunAjar extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['id', 'kode', 'nama'];
+
+    public function kelas(){
+        return $this->hasMany(Kelas::class, 'id_ta');
+    }
 }

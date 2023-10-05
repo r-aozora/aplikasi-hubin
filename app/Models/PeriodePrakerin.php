@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class PeriodePrakerin extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['id', 'kode', 'awal', 'akhir'];
+
+    public function kelas(){
+        return $this->hasMany(Kelas::class, 'id_periode');
+    }
 }
