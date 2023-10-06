@@ -11,7 +11,7 @@
                     <div class="auth-logo">
                         <a href="/"><img src="./assets/img/logo_sekolah.png" alt="Logo"></a>
                     </div>
-                    <h3 class="auth-title">{{ $title }}</h3>
+                    <h3 class="auth-title">Sistem Pendataan Administrasi Prakerin</h3>
                     <form action="{{ url('/login') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
