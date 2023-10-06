@@ -10,7 +10,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Data Guru</li>
                         </ol>
                     </nav>
@@ -38,16 +38,19 @@
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
-                                <th>Nama</th>
+                                <th>NO</th>
+                                <th>NAMA</th>
                                 <th>NIP</th>
-                                <th>Sebagai</th>
-                                <th>Telepon</th>
-                                <th>Action</th>
+                                <th>SEBAGAI</th>
+                                <th>TELEPON</th>
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = $gurus->firstItem() ?>
                             @foreach ($gurus as $guru)
                                 <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $guru->nama }}</td>
                                     <td>{{ $guru->nip }}</td>
                                     <td>{{ $guru->sebagai }}</td>
