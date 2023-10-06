@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="./assets/img/logo_sekolah.png" type="image/png">
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="./assets/extensions/simple-datatables/style.css">
+    <link rel="stylesheet" href="./assets/compiled/css/table-datatable.css">
 </head>
 <body>
     <script src="assets/static/js/initTheme.js"></script>
@@ -26,7 +28,9 @@
         </div>
     </div>
 
-    <script src="assets/static/js/components/dark.js"></script>
-    <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/compiled/js/app.js"></script>
+    <script src="./assets/static/js/components/dark.js"></script>
+    <script src="./assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="./assets/compiled/js/app.js"></script>
+    <script src="./assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
+    <script src="./assets/static/js/pages/simple-datatables.js"></script>
 </body>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Dashboard\GuruController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('home');
     });
+
+    Route::resource('/guru', GuruController::class);
 });
