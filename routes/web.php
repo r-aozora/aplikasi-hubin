@@ -16,19 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [AuthController::class, 'create'])
-        ->name('login');
+    Route::get('/', [AuthController::class, 'create']);
 
-    Route::post('/login', [AuthController::class, 'store'])
-        ->name('login.login');
+    Route::post('/login', [AuthController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'destroy'])
-        ->name('logout');
+    Route::get('/logout', [AuthController::class, 'destroy']);
     
-    Route::get('/home', function () {
-        return view('home');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
     });
 
     Route::resource('/guru', GuruController::class);

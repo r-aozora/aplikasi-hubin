@@ -29,7 +29,7 @@
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="row mx-3">
                                         <div class="col-md-3 col-12">
-                                            <img class="card-img-top img-fluid mt-10" src="./assets/img/logo_sekolah.png" alt="Logo Sekolah"/>
+                                            <img class="card-img-top img-fluid mt-10" src="{{ url('assets/img/logo_sekolah.png') }}" alt="Logo Sekolah"/>
                                         </div>
                                         <div class="col-md-9 col-12">
                                             <div class="card-body">

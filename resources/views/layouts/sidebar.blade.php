@@ -3,8 +3,8 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="/home">
-                        <img src="./assets/img/logo_sekolah.png" alt="Logo" srcset="">
+                    <a href="{{ url('/dashboard') }}">
+                        <img src="{{ url('assets/img/logo_sekolah.png') }}" alt="Logo Sekolah" srcset="">
                     </a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -36,7 +36,7 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-item">
-                <a href="/home" class="sidebar-link">
+                <a href="{{ url('/dashboard') }}" class="sidebar-link">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>
@@ -51,10 +51,10 @@
                         <a href="#" class="submenu-link">2022/2023</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XI RPL 1</a>
+                                <a href="#" class="submenu-link">XI RPL 1</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XI RPL 2</a>
+                                <a href="#" class="submenu-link">XI RPL 2</a>
                             </li>
                         </ul>
                     </li>
@@ -62,20 +62,20 @@
                         <a href="#" class="submenu-link">2023/2024</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XII RPL</a>
+                                <a href="#" class="submenu-link">XII RPL</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="/" class="sidebar-link">
+                <a href="{{ url('/guru') }}" class="sidebar-link">
                     <i class="bi bi-people"></i>
                     <span>Data Guru</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="/" class="sidebar-link">
+                <a href="{{ url('/jadwal') }}" class="sidebar-link">
                     <i class="bi bi-calendar-event"></i>
                     <span>Jadwal Prakerin</span>
                 </a>
@@ -90,15 +90,15 @@
                         <a href="#" class="submenu-link">Surat Pengajuan</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">Pengajuan</a>
+                                <a href="{{ url('/pengajuan') }}" class="submenu-link">Pengajuan</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">Tidak Diterima</a>
+                                <a href="{{ url('/tidak-diterima') }}" class="submenu-link">Tidak Diterima</a>
                             </li>
                         </ul>
                     </li>
                     <li class="submenu-item">
-                        <a href="/" class="submenu-link">Surat Pengantar</a>
+                        <a href="{{ url('/pengantar') }}" class="submenu-link">Surat Pengantar</a>
                     </li>
                 </ul>
             </li>
@@ -112,10 +112,10 @@
                         <a href="#" class="submenu-link">2022/2023</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XI RPL 1</a>
+                                <a href="#" class="submenu-link">XI RPL 1</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XI RPL 2</a>
+                                <a href="#" class="submenu-link">XI RPL 2</a>
                             </li>
                         </ul>
                     </li>
@@ -123,26 +123,26 @@
                         <a href="#" class="submenu-link">2023/2024</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="/" class="submenu-link">XII RPL</a>
+                                <a href="#" class="submenu-link">XII RPL</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="/" class="sidebar-link">
+                <a href="{{ url('/perusahaan') }}" class="sidebar-link">
                     <i class="bi bi-buildings"></i>
                     <span>Data Perusahaan</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="/" class="sidebar-link">
+                <a href="{{ url('/data') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola Data</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="/" class="sidebar-link">
+                <a href="{{ url('/user') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola User</span>
                 </a>

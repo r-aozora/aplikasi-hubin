@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect('/home');
+            return redirect('/dashboard');
         } else {
             return redirect()->back();
         }

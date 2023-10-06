@@ -9,7 +9,9 @@
             <div class="col-lg-4 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="/"><img src="./assets/img/logo_sekolah.png" alt="Logo"></a>
+                        <a href="{{ url('/') }}">
+                            <img src="{{ asset('assets/img/logo_sekolah.png') }}" alt="Logo Sekolah">
+                        </a>
                     </div>
                     <h3 class="auth-title">Sistem Pendataan Administrasi Prakerin</h3>
                     <form action="{{ url('/login') }}" method="POST">
