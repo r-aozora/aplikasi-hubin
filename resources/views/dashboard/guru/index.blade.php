@@ -64,7 +64,10 @@
                                                         <i class="bi bi-pencil-square"></i>
                                                         Edit
                                                     </button>
-                                                    {{-- <a class="dropdown-item" href="{{ url('guru/'.$guru->id) }}"><i class="bi bi-trash me-50"></i> Hapus</a> --}}
+                                                    <a href="{{ route('guru.destroy', $guru->id) }}" class="dropdown-item" data-confirm-delete="true">
+                                                        <i class="bi bi-trash"></i>
+                                                        Hapus
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

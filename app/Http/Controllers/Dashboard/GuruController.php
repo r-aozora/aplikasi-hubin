@@ -16,6 +16,8 @@ class GuruController extends Controller
         $gurus = Guru::orderBy('nama', 'asc')
             ->paginate(10);
 
+        confirmDelete('Hapus Data!', 'Hapus data Guru?');
+
         return view('dashboard.guru.index')
             ->with(['gurus' => $gurus]);
     }
@@ -39,6 +41,7 @@ class GuruController extends Controller
             'telepon' => $request->input('telepon'),
         ]);
 
+        toast('Data berhasil ditambahkan!','success');
         return redirect('/guru');
     }
 
@@ -61,6 +64,7 @@ class GuruController extends Controller
             'telepon' => $request->input('telepon'),
         ]);
 
+        toast('Data berhasil di edit!','success');
         return redirect('/guru');
     }
 
@@ -69,6 +73,9 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        $guru->delete();
+
+        toast('Data berhasil dihapus!','success');
+        return redirect('/guru');
     }
 }
