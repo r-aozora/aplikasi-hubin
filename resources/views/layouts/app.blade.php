@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="app">
+        @include('sweetalert::alert')
         @include('layouts.sidebar')
 
         <div id="main" class='layout-navbar navbar-fixed'>

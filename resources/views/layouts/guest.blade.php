@@ -13,6 +13,7 @@
 </head>
 <body>
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
+    @include('sweetalert::alert')
     @yield('content')
 </body>
 </html>
