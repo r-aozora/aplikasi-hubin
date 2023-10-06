@@ -29,7 +29,7 @@
                         <div class="col-6 text-end">
                             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahGuru">
                                 <i class="bi bi-plus-circle"></i>
-                                Tambah    
+                                Tambah
                             </button>
                         </div>
                     </div>
@@ -55,15 +55,20 @@
                                     <td>
                                         <div class="btn-group mb-1">
                                             <div class="dropdown">
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle me-1" type="button" id="dropdownMenuButtonIcon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bi bi-error-circle me-50"></i> Opsi
+                                                <button class="btn btn-secondary btn-sm dropdown-toggle me-1" type="button" id="option" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="bi bi-error-circle me-50"></i>
+                                                    Opsi
                                                 </button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonIcon">
-                                                    <a class="dropdown-item" href="{{ url('guru/'.$guru->id.'/edit') }}"><i class="bi bi-pencil-square me-50"></i> Edit</a>
+                                                <div class="dropdown-menu" aria-labelledby="option">
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editGuru{{ $guru->id }}">
+                                                        <i class="bi bi-pencil-square"></i>
+                                                        Edit
+                                                    </button>
                                                     {{-- <a class="dropdown-item" href="{{ url('guru/'.$guru->id) }}"><i class="bi bi-trash me-50"></i> Hapus</a> --}}
                                                 </div>
                                             </div>
                                         </div>
+                                        @include('dashboard.guru.components.edit')
                                     </td>
                                 </tr>
                             @endforeach

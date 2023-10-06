@@ -21,14 +21,6 @@ class GuruController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -40,32 +32,14 @@ class GuruController extends Controller
             'telepon' => 'required',
         ]);
 
-        $guru = [
+        Guru::create([
             'nama' => $request->input('nama'),
             'nip' => $request->input('nip'),
             'sebagai' => $request->input('sebagai'),
             'telepon' => $request->input('telepon'),
-        ];
-
-        Guru::create($guru);
+        ]);
 
         return redirect('/guru');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Guru $guru)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Guru $guru)
-    {
-        //
     }
 
     /**
@@ -73,7 +47,21 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nip' => 'required',
+            'sebagai' => 'required',
+            'telepon' => 'required',
+        ]);
+
+        $guru->update([
+            'nama' => $request->input('nama'),
+            'nip' => $request->input('nip'),
+            'sebagai' => $request->input('sebagai'),
+            'telepon' => $request->input('telepon'),
+        ]);
+
+        return redirect('/guru');
     }
 
     /**
