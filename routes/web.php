@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard\GuruController;
+use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/guru', GuruController::class);
     Route::delete('/guru/{guru}', [GuruController::class, 'destroy'])
         ->name('guru.destroy');
+
+    Route::resource('/user', UserController::class);
 });
