@@ -13,7 +13,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('guru')->latest()
+        $users = User::with('guru')
+            ->whereHas('guru', function ($query) {
+                $query->orderBy('guru.nama', 'desc');
+            })
             ->paginate(10);
 
         return view('dashboard.user.index')
