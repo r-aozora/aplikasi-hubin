@@ -63,7 +63,9 @@
                         </li>
                     @endforeach
                     <li class="submenu-item">
-                        <a href="{{ url('/angkatan/create') }}" class="submenu-link">Tambah Angkatan</a>
+                        <a type="button"
+                            {{-- href="{{ url('/angkatan/create') }}"  --}}
+                            class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahAngkatan">Tambah Angkatan</a>
                     </li>
                 </ul>
             </li>

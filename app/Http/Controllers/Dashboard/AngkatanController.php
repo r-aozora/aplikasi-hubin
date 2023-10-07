@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use App\Models\Angkatan;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,18 @@ class AngkatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+
+        Angkatan::create([
+            'kode' => $request->kode,
+            'nama' => $request->nama,
+        ]);
+
+        toast('Angkatan berhasil ditambahkan!', 'success');
+        return redirect()->back();
     }
 
     /**
