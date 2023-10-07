@@ -19,8 +19,8 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <select class="choices form-select" id="nama" name="nama">
-                                        <?php $notUsers->push($user) ?>
-                                        @foreach ($notUsers as $guru)   
+                                        <option value="{{ $user->guru->id }}" selected>{{ $user->guru->nama }}</option>
+                                        @foreach ($notUsers as $guru)
                                             <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
                                         @endforeach
                                     </select>

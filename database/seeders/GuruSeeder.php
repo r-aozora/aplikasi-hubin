@@ -29,6 +29,11 @@ class GuruSeeder extends Seeder
                 'nip' => '123456789',
                 'sebagai' => 'Pendamping',
                 'telepon' => '08123456789',
+            ], [
+                'nama' => 'Arnold Darmawan',
+                'nip' => '123456789',
+                'sebagai' => 'Pendamping',
+                'telepon' => '08123456789',
             ]
         ]);
     }

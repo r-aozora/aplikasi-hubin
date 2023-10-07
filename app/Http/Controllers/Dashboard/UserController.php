@@ -16,8 +16,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('guru')
-            ->join('guru', 'users.id_guru', '=', 'guru.id')
-            ->orderBy('guru.nama', 'asc')
             ->paginate(10);
 
         $notUsers = Guru::whereDoesntHave('user')
