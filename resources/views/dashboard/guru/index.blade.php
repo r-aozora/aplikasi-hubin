@@ -29,7 +29,7 @@
                         <div class="col-6 text-end">
                             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahGuru">
                                 <i class="bi bi-plus-circle"></i>
-                                Tambah
+                                Tambah Guru
                             </button>
                         </div>
                     </div>

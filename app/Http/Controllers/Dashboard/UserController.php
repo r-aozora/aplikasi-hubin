@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guru;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -14,13 +16,16 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('guru')
-            ->whereHas('guru', function ($query) {
-                $query->orderBy('guru.nama', 'desc');
-            })
+            ->join('guru', 'users.id_guru', '=', 'guru.id')
+            ->orderBy('guru.nama', 'asc')
             ->paginate(10);
 
+        $notUsers = Guru::whereDoesntHave('user')
+            ->orderBy('nama', 'asc')
+            ->get();
+
         return view('dashboard.user.index')
-            ->with(['users' => $users]);
+            ->with(['users' => $users, 'notUsers' => $notUsers]);
     }
 
     /**
@@ -28,7 +33,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'level' => 'required',
+        ]);
+
+        User::create([
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
+            'level' => $request->input('level'),
+            'id_guru' => $request->input('nama'),
+        ]);
+
+        toast('Data berhasil ditambahkan!','success');
+        return redirect('/user');
     }
 
     /**

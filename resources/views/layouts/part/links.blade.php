@@ -4,3 +4,4 @@
 <link rel="stylesheet" href="{{ asset('assets/compiled/css/app-dark.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/extensions/simple-datatables/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/compiled/css/table-datatable.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">

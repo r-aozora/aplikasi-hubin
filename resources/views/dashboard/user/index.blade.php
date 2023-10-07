@@ -29,7 +29,7 @@
                         <div class="col-6 text-end">
                             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahUser">
                                 <i class="bi bi-plus-circle"></i>
-                                Tambah
+                                Tambah User
                             </button>
                         </div>
                     </div>
@@ -83,5 +83,5 @@
             </div>
         </section>
     </div>
-    {{-- @include('dashboard.user.components.create') --}}
+    @include('dashboard.user.components.create')
 @endsection
