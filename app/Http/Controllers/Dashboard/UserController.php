@@ -54,9 +54,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+            'level' => 'required',
+        ]);
+
+        $user->update([
+            'username' => $request->input('username'),
+            'level' => $request->input('level'),
+            'id_guru' => $request->input('nama'),
+        ]);
+
+        toast('Data berhasil di edit!','success');
+        return redirect('/user');
     }
 
     /**
