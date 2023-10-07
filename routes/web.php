@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\GuruController;
 use App\Http\Controllers\Dashboard\KelasController;
 use App\Http\Controllers\Dashboard\SiswaController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Dashboard\ProgramKeahlianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/user', UserController::class);
 
     Route::resource('/angkatan', AngkatanController::class);
+
+    Route::resource('/program', ProgramKeahlianController::class);
 
     Route::resource('/kelas', KelasController::class);
 

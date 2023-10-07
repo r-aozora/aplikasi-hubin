@@ -63,6 +63,9 @@
                         <a type="button" class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahKelas">Tambah Kelas</a>
                     </li>
                     <li class="submenu-item">
+                        <a type="button" class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahProgram">Tambah Program Keahlian</a>
+                    </li>
+                    <li class="submenu-item">
                         <a type="button" class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahAngkatan">Tambah Angkatan</a>
                     </li>
                 </ul>

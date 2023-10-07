@@ -23,6 +23,7 @@
         </div>
 
         @include('dashboard.angkatan.components.create')
+        @include('dashboard.program.components.create')
         @include('dashboard.kelas.components.create')
     </div>
 
