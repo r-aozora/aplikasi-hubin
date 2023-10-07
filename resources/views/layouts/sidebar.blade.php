@@ -53,19 +53,17 @@
                             <ul class="submenu submenu-level-2">
                                 @foreach ($item->kelas as $kelas)
                                     <li class="submenu-item">
-                                        <a href="{{ url('/angkatan/'.$item->kode.'/kelas/'.$kelas->kode.'/siswa') }}" class="submenu-link">{{ $kelas->nama }}</a>
+                                        <a href="{{ url('/angkatan/'.$item->id.'/kelas/'.$kelas->id.'/siswa') }}" class="submenu-link">{{ $kelas->nama }}</a>
                                     </li>
                                 @endforeach
-                                <li class="submenu-item">
-                                    <a href="{{ url('/angkatan/'.$item->kode.'/kelas/create') }}" class="submenu-link">Tambah Kelas</a>
-                                </li>
                             </ul>
                         </li>
                     @endforeach
                     <li class="submenu-item">
-                        <a type="button"
-                            {{-- href="{{ url('/angkatan/create') }}"  --}}
-                            class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahAngkatan">Tambah Angkatan</a>
+                        <a type="button" class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahKelas">Tambah Kelas</a>
+                    </li>
+                    <li class="submenu-item">
+                        <a type="button" class="submenu-link" data-bs-toggle="modal" data-bs-target="#tambahAngkatan">Tambah Angkatan</a>
                     </li>
                 </ul>
             </li>

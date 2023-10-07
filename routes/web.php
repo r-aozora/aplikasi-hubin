@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/angkatan', AngkatanController::class);
 
-    Route::resource('/angkatan/{angkatan}/kelas', KelasController::class);
+    Route::resource('/kelas', KelasController::class);
 
     Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
 });

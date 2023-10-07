@@ -35,8 +35,8 @@ class AngkatanController extends Controller
         ]);
 
         Angkatan::create([
-            'kode' => $request->kode,
-            'nama' => $request->nama,
+            'kode' => $request->input('kode'),
+            'nama' => $request->input('nama'),
         ]);
 
         toast('Angkatan berhasil ditambahkan!', 'success');
