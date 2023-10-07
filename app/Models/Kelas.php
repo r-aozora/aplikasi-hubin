@@ -11,10 +11,10 @@ class Kelas extends Model
 
     protected $table = 'kelas';
 
-    protected $fillable = ['id', 'kode', 'nama', 'id_ta', 'id_guru', 'id_program', 'id_periode'];
+    protected $fillable = ['id', 'kode', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
 
-    public function tahun_ajar(){
-        return $this->belongsTo(TahunAjar::class, 'id_ta');
+    public function angkatan(){
+        return $this->belongsTo(Angkatan::class, 'id_angkatan');
     }
 
     public function guru(){

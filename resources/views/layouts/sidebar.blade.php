@@ -47,24 +47,23 @@
                     <span>Data Siswa</span>
                 </a>  
                 <ul class="submenu">
-                    <li class="submenu-item has-sub">
-                        <a href="#" class="submenu-link">2022/2023</a>
-                        <ul class="submenu submenu-level-2">
-                            <li class="submenu-item">
-                                <a href="#" class="submenu-link">XI RPL 1</a>
-                            </li>
-                            <li class="submenu-item">
-                                <a href="#" class="submenu-link">XI RPL 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="submenu-item has-sub">
-                        <a href="#" class="submenu-link">2023/2024</a>
-                        <ul class="submenu submenu-level-2">
-                            <li class="submenu-item">
-                                <a href="#" class="submenu-link">XII RPL</a>
-                            </li>
-                        </ul>
+                    @foreach ($angkatan as $item)
+                        <li class="submenu-item has-sub">
+                            <a href="#" class="submenu-link">{{ $item->nama }}</a>
+                            <ul class="submenu submenu-level-2">
+                                @foreach ($item->kelas as $kelas)
+                                    <li class="submenu-item">
+                                        <a href="{{ url('/angkatan/'.$item->kode.'/kelas/'.$kelas->kode.'/siswa') }}" class="submenu-link">{{ $kelas->nama }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="submenu-item">
+                                    <a href="{{ url('/angkatan/'.$item->kode.'/kelas/create') }}" class="submenu-link">Tambah Kelas</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endforeach
+                    <li class="submenu-item">
+                        <a href="{{ url('/angkatan/create') }}" class="submenu-link">Tambah Angkatan</a>
                     </li>
                 </ul>
             </li>
