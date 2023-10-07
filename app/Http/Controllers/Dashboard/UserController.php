@@ -24,6 +24,8 @@ class UserController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
+        confirmDelete('Hapus Data!', 'Hapus data User?');
+
         return view('dashboard.user.index')
             ->with(['users' => $users, 'notUsers' => $notUsers]);
     }
@@ -75,8 +77,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        toast('Data berhasil dihapus!','success');
+        return redirect('/user');
     }
 }

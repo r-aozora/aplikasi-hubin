@@ -33,8 +33,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('/guru', GuruController::class);
-    Route::delete('/guru/{guru}', [GuruController::class, 'destroy'])
-        ->name('guru.destroy');
 
     Route::resource('/user', UserController::class);
 });
