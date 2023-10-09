@@ -23,7 +23,9 @@ class DataController extends Controller
 
         $periode = PeriodePrakerin::orderBy('kode', 'asc')
             ->get();
-            
+
+        confirmDelete('Hapus Data?', 'Data akan dihapus.');
+
         return view('dashboard.data.index')->with([
             'guru' => $guru, 
             'angkatan' => $angkatan, 

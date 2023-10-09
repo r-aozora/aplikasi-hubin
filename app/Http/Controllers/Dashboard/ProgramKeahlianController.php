@@ -9,22 +9,6 @@ use Illuminate\Http\Request;
 class ProgramKeahlianController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -39,39 +23,37 @@ class ProgramKeahlianController extends Controller
             'nama' => $request->input('nama'),
         ]);
 
-        toast('Program Keahlian Berhasil Ditambahkan!', 'success');
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProgramKeahlian $programKeahlian)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProgramKeahlian $programKeahlian)
-    {
-        //
+        toast('Program Keahlian berhasil ditambahkan!', 'success');
+        return redirect('/data');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProgramKeahlian $programKeahlian)
+    public function update(Request $request, ProgramKeahlian $program)
     {
-        //
+        $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+
+        $program->update([
+            'kode' => $request->input('kode'),
+            'nama' => $request->input('nama'),
+        ]);
+
+        toast('Program Keahlian berhasil diedit!');
+        return redirect('/data');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgramKeahlian $programKeahlian)
+    public function destroy(ProgramKeahlian $program)
     {
-        //
+        $program->delete();
+
+        toast('Program Keahlian berhasil dihapus!');
+        return redirect('/data');
     }
 }
