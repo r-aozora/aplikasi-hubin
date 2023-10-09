@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Angkatan;
 use App\Models\Kelas;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -54,9 +56,17 @@ class KelasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kelas $kelas)
+    public function show($angkatan, $kelas)
     {
-        //
+        $getKelas = Kelas::with(['angkatan', 'program', 'siswa', 'siswa', 'guru', 'periode'])
+            ->where('id', $kelas)
+            ->first();
+        
+        $siswa = Siswa::where('id_kelas', $kelas)
+            ->paginate(10);
+        
+        return view('dashboard.data.kelas.index')
+            ->with(['kelas' => $getKelas, 'id_angkatan' => $angkatan, 'siswa' => $siswa]);
     }
 
     /**

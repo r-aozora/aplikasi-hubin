@@ -53,7 +53,7 @@
                             <ul class="submenu submenu-level-2">
                                 @foreach ($item->kelas as $kelas)
                                     <li class="submenu-item">
-                                        <a href="{{ url('/angkatan/'.$item->id.'/kelas/'.$kelas->id.'/siswa') }}" class="submenu-link">{{ $kelas->nama }}</a>
+                                        <a href="{{ url('/angkatan/'.$item->id.'/kelas/'.$kelas->id) }}" class="submenu-link">{{ $kelas->nama }}</a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Angkatan;
 use App\Models\Kelas;
 use App\Models\ProgramKeahlian;
+use App\Models\Siswa;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -63,6 +64,20 @@ class KelasSeeder extends Seeder
                 'id_guru' => 1,
                 'id_program' => 3,
                 'id_periode' => null,
+            ]
+        ]);
+
+        Siswa::insert([
+            [
+                'nama' => 'Yasser',
+                'nis' => '123',
+                'nisn' => '12345',
+                'jenis_kelamin' => 'L',
+                'telepon' => '0987654321',
+                'telepon_ortu' => '0987654321',
+                'email' => 'yasser@gmail.com',
+                'alamat' => 'jalan jalan',
+                'id_kelas' => 1
             ]
         ]);
     }
