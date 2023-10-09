@@ -29,7 +29,32 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_kelas' => 'required',
+            'nama' => 'required',
+            'nis' => 'required',
+            'nisn' => 'required',
+            'jkel' => 'required',
+            'telepon' => 'required',
+            'telepon_ortu' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        Siswa::create([
+            'nama' => $request->input('nama'),
+            'nis' => $request->input('nis'),
+            'nisn' => $request->input('nisn'),
+            'jenis_kelamin' => $request->input('jkel'),
+            'telepon' => $request->input('telepon'),
+            'telepon_ortu' => $request->input('telepon_ortu'),
+            'email' => $request->input('email'),
+            'alamat' => $request->input('alamat'),
+            'id_kelas' => $request->input('id_kelas'),
+        ]);
+
+        toast('Data Siswa berhasil ditambahkan!', 'success');
+        return redirect()->back();
     }
 
     /**

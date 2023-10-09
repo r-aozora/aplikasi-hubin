@@ -58,11 +58,12 @@ class KelasController extends Controller
      */
     public function show($angkatan, $kelas)
     {
-        $getKelas = Kelas::with(['angkatan', 'program', 'siswa', 'siswa', 'guru', 'periode'])
+        $getKelas = Kelas::with(['angkatan', 'program', 'siswa', 'guru'])
             ->where('id', $kelas)
             ->first();
         
         $siswa = Siswa::where('id_kelas', $kelas)
+            ->orderBy('nama', 'asc')
             ->paginate(10);
         
         return view('dashboard.data.kelas.index')

@@ -28,7 +28,7 @@
                                 {{ $kelas->nama }} - {{ $kelas->guru->nama }}
                             </h5>
                             <p>
-                                TAHUN AJARAN {{ $kelas->angkatan->nama }}
+                                {{ $kelas->program->nama }} - TAHUN AJARAN {{ $kelas->angkatan->nama }}
                             </p>
                         </div>
                         <div class="col-6 text-end">
@@ -87,7 +87,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @include('dashboard.guru.edit')
+                                        @include('dashboard.siswa.detail')
+                                        @include('dashboard.siswa.edit')
                                     </td>
                                 </tr>
                             @endforeach
@@ -98,5 +99,5 @@
             </div>
         </section>
     </div>
-    @include('dashboard.guru.create')
+    @include('dashboard.siswa.create')
 @endsection
