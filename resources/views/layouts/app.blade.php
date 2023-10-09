@@ -21,10 +21,6 @@
 
             @include('layouts.footer')
         </div>
-
-        @include('dashboard.angkatan.components.create')
-        @include('dashboard.program.components.create')
-        @include('dashboard.kelas.components.create')
     </div>
 
     @include('layouts.part.scripts')

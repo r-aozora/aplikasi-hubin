@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard\AngkatanController;
+use App\Http\Controllers\Dashboard\DataController;
 use App\Http\Controllers\Dashboard\GuruController;
 use App\Http\Controllers\Dashboard\KelasController;
 use App\Http\Controllers\Dashboard\SiswaController;
@@ -47,4 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('/kelas', KelasController::class);
 
     Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
+
+    Route::get('/data', [DataController::class, 'index']);
 });
