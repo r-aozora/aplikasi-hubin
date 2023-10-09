@@ -9,22 +9,6 @@ use Illuminate\Http\Request;
 class AngkatanController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -40,23 +24,7 @@ class AngkatanController extends Controller
         ]);
 
         toast('Angkatan berhasil ditambahkan!', 'success');
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Angkatan $angkatan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Angkatan $angkatan)
-    {
-        //
+        return redirect('/data');
     }
 
     /**
@@ -64,7 +32,18 @@ class AngkatanController extends Controller
      */
     public function update(Request $request, Angkatan $angkatan)
     {
-        //
+        $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+
+        $angkatan->update([
+            'kode' => $request->input('kode'),
+            'nama' => $request->input('nama'),
+        ]);
+
+        toast('Angkatan berhasil diedit!');
+        return redirect('/data');
     }
 
     /**
@@ -72,6 +51,9 @@ class AngkatanController extends Controller
      */
     public function destroy(Angkatan $angkatan)
     {
-        //
+        $angkatan->delete();
+
+        toast('Angkatan berhasil dihapus!');
+        return redirect('/data');
     }
 }
