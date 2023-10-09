@@ -75,7 +75,7 @@
             </li>
             <li class="sidebar-item has-sub">
                 <a href="#" class="sidebar-link">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-file-earmark-text"></i>
                     <span>Surat-surat</span>
                 </a>  
                 <ul class="submenu">
@@ -97,7 +97,7 @@
             </li>
             <li class="sidebar-item has-sub">
                 <a href="#" class="sidebar-link">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-clipboard-data"></i>
                     <span>Monitoring</span>
                 </a>  
                 <ul class="submenu ">
