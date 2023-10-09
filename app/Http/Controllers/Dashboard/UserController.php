@@ -15,17 +15,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('guru')
+        $user = User::with('guru')
             ->paginate(10);
 
-        $notUsers = Guru::whereDoesntHave('user')
+        $notUser = Guru::whereDoesntHave('user')
             ->orderBy('nama', 'asc')
             ->get();
 
         confirmDelete('Hapus Data!', 'Hapus data User?');
 
         return view('dashboard.user.index')
-            ->with(['users' => $users, 'notUsers' => $notUsers]);
+            ->with(['user' => $user, 'notUser' => $notUser]);
     }
 
     /**

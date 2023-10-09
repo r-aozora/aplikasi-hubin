@@ -13,13 +13,13 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $gurus = Guru::orderBy('nama', 'asc')
+        $guru = Guru::orderBy('nama', 'asc')
             ->paginate(10);
 
         confirmDelete('Hapus Data!', 'Hapus data Guru?');
 
         return view('dashboard.guru.index')
-            ->with(['gurus' => $gurus]);
+            ->with(['guru' => $guru]);
     }
 
     /**

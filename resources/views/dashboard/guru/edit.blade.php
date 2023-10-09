@@ -1,15 +1,15 @@
-<div class="modal fade" id="editGuru{{ $guru->id }}" tabindex="-1" role="dialog" aria-labelledby="editGuru{{ $guru->id }}" aria-hidden="true">
+<div class="modal fade" id="editGuru{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editGuru{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editGuru{{ $guru->id }}">
+                <h5 class="modal-title" id="editGuru{{ $item->id }}">
                     Edit Data Guru
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/guru/'.$guru->id) }}" method="post">
+            <form class="form form-vertical" action="{{ url('/guru/'.$item->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -18,27 +18,27 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="nama">Nama Guru</label>
-                                    <input type="text" id="nama" class="form-control" name="nama" value="{{ $guru->nama }}">
+                                    <input type="text" id="nama" class="form-control" name="nama" value="{{ $item->nama }}">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="nip">NIP</label>
-                                    <input type="text" id="nip" class="form-control" name="nip" value="{{ $guru->nip }}">
+                                    <input type="text" id="nip" class="form-control" name="nip" value="{{ $item->nip }}">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <fieldset class="form-group">
                                     <label for="sebagai">Sebagai</label>
-                                    <select class="form-select" id="sebagai" name="sebagai" value="{{ $guru->sebagai }}">
+                                    <select class="form-select" id="sebagai" name="sebagai">
                                         <option value="Walikelas" 
-                                            @if ($guru->sebagai === 'Walikelas') 
+                                            @if ($item->sebagai === 'Walikelas') 
                                                 selected 
                                             @endif>
                                             Wali Kelas
                                         </option>
                                         <option value="Pendamping" 
-                                            @if ($guru->sebagai === 'Pendamping') 
+                                            @if ($item->sebagai === 'Pendamping') 
                                                 selected 
                                             @endif>
                                             Guru Pendamping
@@ -49,7 +49,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="telepon">Telepon</label>
-                                    <input type="text" id="telepon" class="form-control" name="telepon" value="{{ $guru->telepon }}">
+                                    <input type="text" id="telepon" class="form-control" name="telepon" value="{{ $item->telepon }}">
                                 </div>
                             </div>
                         </div>

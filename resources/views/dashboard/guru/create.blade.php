@@ -1,8 +1,8 @@
-<div class="modal fade" id="tambahGuru" tabindex="-1" role="dialog" aria-labelledby="tambahGuruTitle" aria-hidden="true">
+<div class="modal fade" id="tambahGuru" tabindex="-1" role="dialog" aria-labelledby="tambahGuru" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahGuruTitle">
+                <h5 class="modal-title" id="tambahGuru">
                     Tambah Data Guru
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">

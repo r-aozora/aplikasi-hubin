@@ -47,14 +47,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $gurus->firstItem() ?>
-                            @foreach ($gurus as $guru)
+                            <?php $i = $guru->firstItem() ?>
+                            @foreach ($guru as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $guru->nama }}</td>
-                                    <td>{{ $guru->nip }}</td>
-                                    <td>{{ $guru->sebagai }}</td>
-                                    <td>{{ $guru->telepon }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->nip }}</td>
+                                    <td>{{ $item->sebagai }}</td>
+                                    <td>{{ $item->telepon }}</td>
                                     <td>
                                         <div class="btn-group mb-1">
                                             <div class="dropdown">
@@ -63,11 +63,11 @@
                                                     Opsi
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="option">
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editGuru{{ $guru->id }}">
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editGuru{{ $item->id }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                         Edit
                                                     </button>
-                                                    <a href="{{ route('guru.destroy', $guru->id) }}" class="dropdown-item" data-confirm-delete="true">
+                                                    <a href="{{ route('guru.destroy', $item->id) }}" class="dropdown-item" data-confirm-delete="true">
                                                         <i class="bi bi-trash"></i>
                                                         Hapus
                                                     </a>
@@ -80,7 +80,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $gurus->withQueryString()->links() }}
+                    {{ $guru->withQueryString()->links() }}
                 </div>
             </div>
         </section>

@@ -1,15 +1,15 @@
-<div class="modal fade" id="editUser{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="editUser{{ $user->id }}" aria-hidden="true">
+<div class="modal fade" id="editUser{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editUser{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editUser{{ $user->id }}">
+                <h5 class="modal-title" id="editUser{{ $item->id }}">
                     Edit Data User
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/user/'.$user->id) }}" method="post">
+            <form class="form form-vertical" action="{{ url('/user/'.$item->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -19,9 +19,9 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <select class="choices form-select" id="nama" name="nama">
-                                        <option value="{{ $user->guru->id }}" selected>{{ $user->guru->nama }}</option>
-                                        @foreach ($notUsers as $guru)
-                                            <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                                        <option value="{{ $item->guru->id }}" selected>{{ $item->guru->nama }}</option>
+                                        @foreach ($notUser as $option)
+                                            <option value="{{ $option->id }}">{{ $option->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -29,21 +29,21 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" class="form-control" name="username" value="{{ $user->username }}">
+                                    <input type="text" id="username" class="form-control" name="username" value="{{ $item->username }}">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <fieldset class="form-group">
                                     <label for="level">level</label>
-                                    <select class="form-select" id="level" name="level" value="{{ $user->level }}">
+                                    <select class="form-select" id="level" name="level">
                                         <option value="Admin" 
-                                            @if ($user->level === 'Admin') 
+                                            @if ($item->level === 'Admin') 
                                                 selected 
                                             @endif>
                                             Admin
                                         </option>
                                         <option value="Guru" 
-                                            @if ($user->level === 'Guru') 
+                                            @if ($item->level === 'Guru') 
                                                 selected 
                                             @endif>
                                             Guru

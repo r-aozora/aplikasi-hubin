@@ -46,13 +46,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $users->firstItem() ?>
-                            @foreach ($users as $user)
+                            <?php $i = $user->firstItem() ?>
+                            @foreach ($user as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $user->guru->nama }}</td>
-                                    <td>{{ $user->username }}</td>
-                                    <td>{{ $user->level }}</td>
+                                    <td>{{ $item->guru->nama }}</td>
+                                    <td>{{ $item->username }}</td>
+                                    <td>{{ $item->level }}</td>
                                     <td>
                                         <div class="btn-group mb-1">
                                             <div class="dropdown">
@@ -61,11 +61,11 @@
                                                     Opsi
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="option">
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editUser{{ $user->id }}">
+                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editUser{{ $item->id }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                         Edit
                                                     </button>
-                                                    <a href="{{ route('user.destroy', $user->id) }}" class="dropdown-item" data-confirm-delete="true">
+                                                    <a href="{{ route('user.destroy', $item->id) }}" class="dropdown-item" data-confirm-delete="true">
                                                         <i class="bi bi-trash"></i>
                                                         Hapus
                                                     </a>
@@ -78,7 +78,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->withQueryString()->links() }}
+                    {{ $user->withQueryString()->links() }}
                 </div>
             </div>
         </section>

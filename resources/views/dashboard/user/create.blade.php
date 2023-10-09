@@ -1,8 +1,8 @@
-<div class="modal fade" id="tambahUser" tabindex="-1" role="dialog" aria-labelledby="tambahUserTitle" aria-hidden="true">
+<div class="modal fade" id="tambahUser" tabindex="-1" role="dialog" aria-labelledby="tambahUser" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahUserTitle">
+                <h5 class="modal-title" id="tambahUser">
                     Tambah Data User
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -18,8 +18,8 @@
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
                                     <select class="choices form-select" id="nama" name="nama">
-                                        @foreach ($notUsers as $guru)   
-                                            <option value="{{ $guru->id }}">{{ $guru->nama }}</option>
+                                        @foreach ($notUser as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
