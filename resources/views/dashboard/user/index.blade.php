@@ -72,7 +72,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @include('dashboard.user.components.edit')
+                                        @include('dashboard.user.edit')
                                     </td>
                                 </tr>
                             @endforeach
@@ -83,5 +83,5 @@
             </div>
         </section>
     </div>
-    @include('dashboard.user.components.create')
+    @include('dashboard.user.create')
 @endsection

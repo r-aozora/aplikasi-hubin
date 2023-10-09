@@ -74,7 +74,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @include('dashboard.guru.components.edit')
+                                        @include('dashboard.guru.edit')
                                     </td>
                                 </tr>
                             @endforeach
@@ -85,5 +85,5 @@
             </div>
         </section>
     </div>
-    @include('dashboard.guru.components.create')
+    @include('dashboard.guru.create')
 @endsection
