@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Angkatan;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -65,6 +64,8 @@ class KelasController extends Controller
         $siswa = Siswa::where('id_kelas', $kelas)
             ->orderBy('nama', 'asc')
             ->paginate(10);
+
+        confirmDelete('Hapus Data!', 'Hapus data Siswa/i?');
         
         return view('dashboard.data.kelas.index')
             ->with(['kelas' => $getKelas, 'id_angkatan' => $angkatan, 'siswa' => $siswa]);

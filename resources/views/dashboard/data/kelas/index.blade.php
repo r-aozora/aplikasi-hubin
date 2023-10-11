@@ -25,10 +25,10 @@
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                {{ $kelas->nama }} - {{ $kelas->guru->nama }}
+                                {{ $kelas->nama }} - {{ strtoupper($kelas->guru->nama) }}
                             </h5>
                             <p>
-                                {{ $kelas->program->nama }} - TAHUN AJARAN {{ $kelas->angkatan->nama }}
+                                {{ strtoupper($kelas->program->nama) }} - TAHUN AJARAN {{ $kelas->angkatan->nama }}
                             </p>
                         </div>
                         <div class="col-6 text-end">
@@ -58,7 +58,7 @@
                             @foreach ($siswa as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ strtoupper($item->nama) }}</td>
                                     <td>{{ $item->nisn }}</td>
                                     <td>{{ $item->nis }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
