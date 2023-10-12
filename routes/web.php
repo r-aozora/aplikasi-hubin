@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('/guru', GuruController::class);
+    Route::post('/guru/import', [GuruController::class, 'import'])
+        ->name('guru.import');
 
     Route::resource('/user', UserController::class);
 

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Imports\GuruImport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
 {
@@ -77,5 +80,23 @@ class GuruController extends Controller
 
         toast('Data berhasil dihapus!','success');
         return redirect('/guru');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        $file = $request->file('file');
+
+        $path = $file->storeAs('public/excel/', $file->getClientOriginalName());
+
+        Excel::import(new GuruImport(), storage_path('app/public/excel/' . $file->getClientOriginalName()));
+
+        // Storage::delete($path);
+
+        toast('Data berhasil diimpor!', 'success');
+        return redirect()->back();
     }
 }

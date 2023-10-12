@@ -33,6 +33,10 @@
                                 <i class="bi bi-plus-circle"></i>
                                 Tambah Guru
                             </button>
+                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#importGuru">
+                                <i class="bi bi-upload"></i>
+                                Impor File
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -88,4 +92,5 @@
         </section>
     </div>
     @include('dashboard.guru.create')
+    @include('dashboard.guru.import')
 @endsection
