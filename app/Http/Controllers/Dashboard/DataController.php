@@ -16,10 +16,10 @@ class DataController extends Controller
             ->get();
 
         $angkatan = Angkatan::orderBy('nama', 'asc')
-            ->paginate(10);
+            ->get();
 
         $program = ProgramKeahlian::orderBy('nama', 'asc')
-            ->paginate(10);
+            ->get();
 
         $periode = PeriodePrakerin::orderBy('kode', 'asc')
             ->get();

@@ -16,7 +16,7 @@ class PerusahaanController extends Controller
     public function index()
     {
         $perusahaan = Perusahaan::orderBy('nama', 'asc')
-            ->paginate(10);
+            ->get();
 
         return view('dashboard.perusahaan.index')
             ->with(['perusahaan' => $perusahaan]);

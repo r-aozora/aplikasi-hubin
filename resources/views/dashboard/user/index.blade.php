@@ -48,7 +48,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $user->firstItem() ?>
+                            <?php $i = 1 ?>
                             @foreach ($user as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -80,7 +80,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $user->withQueryString()->links() }}
                 </div>
             </div>
         </section>

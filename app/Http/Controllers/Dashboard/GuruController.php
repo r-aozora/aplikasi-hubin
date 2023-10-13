@@ -17,7 +17,7 @@ class GuruController extends Controller
     public function index()
     {
         $guru = Guru::orderBy('nama', 'asc')
-            ->paginate(10);
+            ->get();
 
         confirmDelete('Hapus Data!', 'Hapus data Guru?');
 

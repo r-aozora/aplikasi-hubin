@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $guru->firstItem() ?>
+                            <?php $i = 1 ?>
                             @foreach ($guru as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -82,7 +82,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $guru->withQueryString()->links() }}
                 </div>
             </div>
         </section>

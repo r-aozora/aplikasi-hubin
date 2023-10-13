@@ -54,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $siswa->firstItem() ?>
+                            <?php $i = 1 ?>
                             @foreach ($siswa as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -94,7 +94,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $siswa->withQueryString()->links() }}
                 </div>
             </div>
         </section>

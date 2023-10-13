@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = $perusahaan->firstItem() ?>
+                            <?php $i = 1 ?>
                             @foreach ($perusahaan as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -86,7 +86,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $perusahaan->withQueryString()->links() }}
                 </div>
             </div>
         </section>

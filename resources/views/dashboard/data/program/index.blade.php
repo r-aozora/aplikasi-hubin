@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = $program->firstItem() ?>
+                    <?php $i = 1 ?>
                     @foreach ($program as $item)
                         <tr>
                             <td>{{ $i++ }}</td>
@@ -57,7 +57,6 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $program->withQueryString()->links() }}
         </div>
     </div>
 </section>

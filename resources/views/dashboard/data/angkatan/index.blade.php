@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = $angkatan->firstItem() ?>
+                    <?php $i = 1 ?>
                     @foreach ($angkatan as $item)
                         <tr>
                             <td>{{ $i++ }}</td>
@@ -57,7 +57,6 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $angkatan->withQueryString()->links() }}
         </div>
     </div>
 </section>
