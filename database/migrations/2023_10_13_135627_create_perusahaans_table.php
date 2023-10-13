@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('penerima');
+            $table->string('penerima')->nullable();
             $table->string('kecamatan');
             $table->string('kota');
             $table->string('provinsi');
-            $table->string('lokasi');
+            $table->string('lokasi')->nullable();
             $table->string('telepon');
-            $table->text('koordinat');
+            $table->text('koordinat')->nullable();
             $table->timestamps();
         });
     }

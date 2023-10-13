@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
 
     Route::resource('/perusahaan', PerusahaanController::class);
+    Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
+        ->name('perusahaan.import');
 
     Route::get('/data', [DataController::class, 'index']);
 });

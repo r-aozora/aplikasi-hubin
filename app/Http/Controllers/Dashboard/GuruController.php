@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Imports\GuruImport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller

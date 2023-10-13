@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Imports\PerusahaanImport;
 use App\Models\Perusahaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PerusahaanController extends Controller
 {
@@ -18,14 +20,6 @@ class PerusahaanController extends Controller
 
         return view('dashboard.perusahaan.index')
             ->with(['perusahaan' => $perusahaan]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -45,14 +39,6 @@ class PerusahaanController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Perusahaan $perusahaan)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Perusahaan $perusahaan)
@@ -66,5 +52,17 @@ class PerusahaanController extends Controller
     public function destroy(Perusahaan $perusahaan)
     {
         //
+    }
+
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new PerusahaanImport(), $request->file('file'));
+
+        toast('Data berhasil diimpor!', 'success');
+        return redirect()->back();
     }
 }

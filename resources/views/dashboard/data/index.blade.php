@@ -96,6 +96,7 @@
         </section>
 
         @include('dashboard.guru.import')
+        @include('dashboard.perusahaan.import')
 
         <div class="row">
             @include('dashboard.data.program.index')
