@@ -33,10 +33,14 @@
                                 <i class="bi bi-plus-circle"></i>
                                 Tambah Guru
                             </button>
-                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#importGuru">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#importGuru">
                                 <i class="bi bi-upload"></i>
                                 Impor File
                             </button>
+                            <a href="{{ route('guru.export') }}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-download"></i>
+                                Download Data
+                            </a>
                         </div>
                     </div>
                 </div>

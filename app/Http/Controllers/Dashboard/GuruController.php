@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\GuruExport;
 use App\Http\Controllers\Controller;
 use App\Imports\GuruImport;
 use App\Models\Guru;
@@ -87,16 +88,15 @@ class GuruController extends Controller
         $request->validate([
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
-
-        $file = $request->file('file');
-
-        $path = $file->storeAs('public/excel/', $file->getClientOriginalName());
-
-        Excel::import(new GuruImport(), storage_path('app/public/excel/' . $file->getClientOriginalName()));
-
-        // Storage::delete($path);
+        
+        Excel::import(new GuruImport(), $request->file('file'));
 
         toast('Data berhasil diimpor!', 'success');
         return redirect()->back();
+    }
+
+    public function export()
+    {
+        return Excel::download(new GuruExport(), 'Data Guru.xlsx');
     }
 }
