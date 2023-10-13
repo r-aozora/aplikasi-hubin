@@ -1,4 +1,4 @@
-<section id="data-angkatan" class="section">
+<section id="data-angkatan" class="section col-6">
     <div class="card">
         <div class="card-header">
             <div class="row">
