@@ -30,7 +30,7 @@
                             </h5>
                         </div>
                         <div class="col-6 text-end">
-                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPerusahaan">
+                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editPerusahaan{{ $item->id }}">
                                 <i class="bi bi-pencil-square"></i>
                                 Edit Perusahaan
                             </button>
@@ -40,25 +40,26 @@
                 <div class="card-body">
                     <p class="card-text">
                         Nama Perusahaan :<br>
-                        <b>{{ strtoupper($perusahaan->nama) }}</b>
+                        <b>{{ strtoupper($item->nama) }}</b>
                     </p>
                     <hr>
                     <p class="card-text">
                         <b>Alamat Perusahaan : </b><br>
-                        {{ $perusahaan->alamat }}, {{ $perusahaan->kecamatan }}, {{ $perusahaan->kota }}, {{ $perusahaan->provinsi }}
+                        {{ $item->alamat }}, {{ $item->kecamatan }}, {{ $item->kota }}, {{ $item->provinsi }}
                     </p>
                     <p class="card-text">
                         <b>Penerima Surat :</b><br>
-                        {{ $perusahaan->penerima }}
+                        {{ $item->penerima }}
                     </p>
                     <p class="card-text">
                         <b>Nomor Telepon Perusahaan</b><br>
-                        {{ $perusahaan->telepon }}
+                        {{ $item->telepon }}
                     </p>
                     <p class="card-text">MAPS</p>
-                    {!! $perusahaan->koordinat !!}
+                    {!! $item->koordinat !!}
                 </div>
             </div>
         </section>
     </div>
+    @include('dashboard.perusahaan.edit')
 @endsection

@@ -53,7 +53,7 @@
                             @foreach ($perusahaan as $item)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ strtoupper($item->nama) }}</td>
                                     <td>{{ $item->alamat }}</td>
                                     <td>{{ $item->lokasi }}</td>
                                     <td>{{ $item->telepon }}</td>
@@ -80,7 +80,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- @include('dashboard.perusahaan.edit') --}}
+                                        @include('dashboard.perusahaan.edit')
                                     </td>
                                 </tr>
                             @endforeach

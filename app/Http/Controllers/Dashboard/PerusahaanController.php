@@ -62,7 +62,7 @@ class PerusahaanController extends Controller
     public function show(Perusahaan $perusahaan)
     {
         return view('dashboard.perusahaan.detail')
-            ->with(['perusahaan' => $perusahaan]);
+            ->with(['item' => $perusahaan]);
     }
 
     /**
@@ -70,7 +70,32 @@ class PerusahaanController extends Controller
      */
     public function update(Request $request, Perusahaan $perusahaan)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'penerima' => 'required',
+            'kecamatan' => 'required',
+            'kota' => 'required',
+            'provinsi' => 'required',
+            'lokasi' => 'required',
+            'telepon' => 'required',
+            'koordinat' => 'required'
+        ]);
+
+        $perusahaan->update([
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat'),
+            'penerima' => $request->input('penerima'),
+            'kecamatan' => $request->input('kecamatan'),
+            'kota' => $request->input('kota'),
+            'provinsi' => $request->input('provinsi'),
+            'lokasi' => $request->input('lokasi'),
+            'telepon' => $request->input('telepon'),
+            'koordinat' => $request->input('koordinat'),
+        ]);
+
+        toast('Data Perusahaan berhasil diedit!', 'success');
+        return redirect()->back();
     }
 
     /**
