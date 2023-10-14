@@ -61,7 +61,8 @@ class PerusahaanController extends Controller
      */
     public function show(Perusahaan $perusahaan)
     {
-        //
+        return view('dashboard.perusahaan.detail')
+            ->with(['perusahaan' => $perusahaan]);
     }
 
     /**

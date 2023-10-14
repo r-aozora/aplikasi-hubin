@@ -65,10 +65,10 @@
                                                     Opsi
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="option">
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="detailPerusahaan{{ $item->id }}">
+                                                    <a href="{{ route('perusahaan.show', $item->id) }}" class="dropdown-item">
                                                         <i class="bi bi-person-square"></i>
                                                         Detail
-                                                    </button>
+                                                    </a>
                                                     <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editPerusahaan{{ $item->id }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                         Edit
