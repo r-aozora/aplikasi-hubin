@@ -19,6 +19,8 @@ class PerusahaanController extends Controller
         $perusahaan = Perusahaan::orderBy('nama', 'asc')
             ->get();
 
+        confirmDelete('Hapus Data!', 'Hapus data Perusahaan?');
+
         return view('dashboard.perusahaan.index')
             ->with(['perusahaan' => $perusahaan]);
     }
@@ -103,7 +105,10 @@ class PerusahaanController extends Controller
      */
     public function destroy(Perusahaan $perusahaan)
     {
-        //
+        $perusahaan->delete();
+
+        toast('Data Perusahaan berhasil dihapus!', 'success');
+        return redirect()->back();
     }
 
     public function import(Request $request)
