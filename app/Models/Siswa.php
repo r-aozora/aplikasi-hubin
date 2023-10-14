@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
+    
+    protected $guarded = [];
 
     protected $table = 'siswa';
 
-    protected $fillable = ['id', 'nama', 'nis', 'nisn', 'jenis_kelamin', 'telepon', 'telepon_ortu', 'email', 'alamat', 'id_kelas'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['nama', 'nis', 'nisn', 'jenis_kelamin', 'telepon', 'telepon_ortu', 'email', 'alamat', 'id_kelas'];
 
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'id_kelas');

@@ -12,9 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $guarded = [];
+
     protected $table = 'users';
 
-    protected $fillable = ['id', 'username', 'password', 'level', 'id_guru'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['username', 'password', 'level', 'id_guru'];
 
     public function guru(){
         return $this->belongsTo(Guru::class, 'id_guru');

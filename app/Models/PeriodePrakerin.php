@@ -9,9 +9,13 @@ class PeriodePrakerin extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $table = 'periode_prakerin';
 
-    protected $fillable = ['id', 'kode', 'awal', 'akhir'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['kode', 'awal', 'akhir'];
 
     public function kelas(){
         return $this->hasMany(Kelas::class, 'id_periode');

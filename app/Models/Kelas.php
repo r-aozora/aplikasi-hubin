@@ -9,9 +9,13 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $table = 'kelas';
 
-    protected $fillable = ['id', 'kode', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['kode', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
 
     public function angkatan(){
         return $this->belongsTo(Angkatan::class, 'id_angkatan');

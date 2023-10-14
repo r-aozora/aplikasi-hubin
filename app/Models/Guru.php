@@ -9,9 +9,13 @@ class Guru extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $table = 'guru';
 
-    protected $fillable = ['id', 'nama', 'nip', 'sebagai', 'telepon'];
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['nama', 'nip', 'sebagai', 'telepon'];
 
     public function user(){
         return $this->hasOne(User::class, 'id_guru');
