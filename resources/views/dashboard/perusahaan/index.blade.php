@@ -90,5 +90,5 @@
             </div>
         </section>
     </div>
-    {{-- @include('dashboard.perusahaan.create') --}}
+    @include('dashboard.perusahaan.create')
 @endsection

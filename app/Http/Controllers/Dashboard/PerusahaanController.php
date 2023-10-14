@@ -28,7 +28,32 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'penerima' => 'required',
+            'kecamatan' => 'required',
+            'kota' => 'required',
+            'provinsi' => 'required',
+            'lokasi' => 'required',
+            'telepon' => 'required',
+            'koordinat' => 'required'
+        ]);
+
+        Perusahaan::create([
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat'),
+            'penerima' => $request->input('penerima'),
+            'kecamatan' => $request->input('kecamatan'),
+            'kota' => $request->input('kota'),
+            'provinsi' => $request->input('provinsi'),
+            'lokasi' => $request->input('lokasi'),
+            'telepon' => $request->input('telepon'),
+            'koordinat' => $request->input('koordinat'),
+        ]);
+
+        toast('Data Perusahaan berhasil ditambahakan!', 'success');
+        return redirect()->back();
     }
 
     /**
