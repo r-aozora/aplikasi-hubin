@@ -69,7 +69,7 @@
                                 <i class="bi bi-upload"></i>
                                 Impor Data Perusahaan
                             </button>
-                            <a href="{{ url('/') }}" class="btn btn-primary btn-sm">
+                            <a href="{{ route('perusahaan.export') }}" class="btn btn-primary btn-sm">
                                 <i class="bi bi-download"></i>
                                 Download Data Perusahaan
                             </a>

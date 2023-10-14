@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\PerusahaanExport;
 use App\Imports\PerusahaanImport;
 use App\Models\Perusahaan;
 use App\Http\Controllers\Controller;
@@ -64,5 +65,10 @@ class PerusahaanController extends Controller
 
         toast('Data berhasil diimpor!', 'success');
         return redirect()->back();
+    }
+
+    public function export()
+    {
+        return Excel::download(new PerusahaanExport, 'Data Perusahaan Prakerin.xlsx');
     }
 }

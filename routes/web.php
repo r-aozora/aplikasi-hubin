@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/perusahaan', PerusahaanController::class);
     Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
         ->name('perusahaan.import');
+    Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
+        ->name('perusahaan.export');
 
     Route::get('/data', [DataController::class, 'index']);
 });
