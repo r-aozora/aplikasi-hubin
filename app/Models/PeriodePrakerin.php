@@ -20,4 +20,8 @@ class PeriodePrakerin extends Model
     public function kelas(){
         return $this->hasMany(Kelas::class, 'id_periode');
     }
+
+    public function jadwal(){
+        return $this->hasMany(JadwalPrakerin::class, 'id_periode');
+    }
 }

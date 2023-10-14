@@ -36,4 +36,8 @@ class Kelas extends Model
     public function siswa(){
         return $this->hasMany(Siswa::class, 'id_kelas');
     }
+
+    public function jadwal(){
+        return $this->hasOne(JadwalPrakerin::class, 'id_kelas');
+    }
 }
