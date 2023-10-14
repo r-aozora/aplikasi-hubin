@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\JadwalPrakerin;
 use App\Http\Controllers\Controller;
+use App\Models\PeriodePrakerin;
 use Illuminate\Http\Request;
 
 class JadwalPrakerinController extends Controller
@@ -13,37 +14,20 @@ class JadwalPrakerinController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $jadwal = JadwalPrakerin::with(['kelas', 'kelas.guru', 'kelas.angkatan', 'periode'])
+            ->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $periode = PeriodePrakerin::orderBy('kode', 'asc')
+            ->get();
+
+        return view('dashboard.jadwal.index')
+            ->with(['jadwal' => $jadwal, 'periode' => $periode]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(JadwalPrakerin $jadwalPrakerin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(JadwalPrakerin $jadwalPrakerin)
     {
         //
     }

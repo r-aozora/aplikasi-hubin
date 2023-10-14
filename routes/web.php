@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard\AngkatanController;
 use App\Http\Controllers\Dashboard\DataController;
 use App\Http\Controllers\Dashboard\GuruController;
+use App\Http\Controllers\Dashboard\JadwalPrakerinController;
 use App\Http\Controllers\Dashboard\KelasController;
+use App\Http\Controllers\Dashboard\PeriodePrakerinController;
 use App\Http\Controllers\Dashboard\SiswaController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
@@ -59,6 +61,10 @@ Route::middleware('auth')->group(function () {
         ->name('perusahaan.import');
     Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
         ->name('perusahaan.export');
+
+    Route::resource('/jadwal', JadwalPrakerinController::class);
+
+    Route::resource('/periode', PeriodePrakerinController::class);
 
     Route::get('/data', [DataController::class, 'index']);
 });
