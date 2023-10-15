@@ -16,17 +16,17 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'username' => 'citrahdy',
+                'username' => 'admin',
                 'password' => Hash::make('password'),
                 'level' => 'Admin',
                 'id_guru' => 1,
             ], [
-                'username' => 'nataardhana',
+                'username' => 'admin2',
                 'password' => Hash::make('password'),
                 'level' => 'Admin',
                 'id_guru' => 3,
             ], [
-                'username' => 'azizalfalah',
+                'username' => 'guru',
                 'password' => Hash::make('password'),
                 'level' => 'Guru',
                 'id_guru' => 2,

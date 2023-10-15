@@ -18,22 +18,40 @@ class KelasSeeder extends Seeder
     {
         ProgramKeahlian::insert([
             [
-                'kode' => 'RPL',
+                'kode' => ' PK01',
                 'nama' => 'Rekayasa Perangkat Lunak',
             ], [
-                'kode' => 'TKJ',
-                'nama' => 'Teknik Komputer Jaringan',
+                'kode' => 'PK02',
+                'nama' => 'Teknik Geomatika',
             ], [
-                'kode' => 'DKV',
-                'nama' => 'Desain Komunikasi Visual',
+                'kode' => 'PK03',
+                'nama' => 'Desain Pemodelan dan Info Bangunan',
+            ], [
+                'kode' => 'PK04',
+                'nama' => 'Bisnis Kontruksi dan Properti',
+            ], [
+                'kode' => 'PK05',
+                'nama' => 'Teknik Instalasi Tenaga Listrik',
+            ], [
+                'kode' => 'PK06',
+                'nama' => 'Teknik Pemesinan',
+            ], [
+                'kode' => 'PK07',
+                'nama' => 'Teknik Mekanik Industri',
+            ], [
+                'kode' => 'PK08',
+                'nama' => 'Desain Gambar Mesin',
+            ], [
+                'kode' => 'PK09',
+                'nama' => 'Teknik Perawatan Gedung',
+            ], [
+                'kode' => 'PK10',
+                'nama' => 'Teknik Otomasi Industri',
             ]
         ]);
 
         Angkatan::insert([
             [
-                'kode' => '2122',
-                'nama' => '2021/2022',
-            ], [
                 'kode' => '2223',
                 'nama' => '2022/2023',
             ], [
@@ -44,40 +62,19 @@ class KelasSeeder extends Seeder
 
         Kelas::insert([
             [
-                'kode' => '12RPL',
+                'kode' => 'RPL23',
                 'nama' => 'XII RPL',
-                'id_angkatan' => 3,
-                'id_guru' => 2,
+                'id_angkatan' => 2,
+                'id_guru' => 1,
                 'id_program' => 1,
                 'id_periode' => null,
             ], [
-                'kode' => '11TKJ',
-                'nama' => 'XI TKJ',
-                'id_angkatan' => 2,
-                'id_guru' => 3,
-                'id_program' => 2,
-                'id_periode' => null,
-            ], [
-                'kode' => '10DKV',
-                'nama' => 'X DKV',
+                'kode' => '1RPL22',
+                'nama' => 'XI RPL 1',
                 'id_angkatan' => 1,
-                'id_guru' => 1,
-                'id_program' => 3,
+                'id_guru' => 3,
+                'id_program' => 1,
                 'id_periode' => null,
-            ]
-        ]);
-
-        Siswa::insert([
-            [
-                'nama' => 'Yasser',
-                'nis' => '123',
-                'nisn' => '12345',
-                'jenis_kelamin' => 'L',
-                'telepon' => '0987654321',
-                'telepon_ortu' => '0987654321',
-                'email' => 'yasser@gmail.com',
-                'alamat' => 'jalan jalan',
-                'id_kelas' => 1
             ]
         ]);
     }

@@ -12,25 +12,25 @@ class DataController extends Controller
 {
     public function index()
     {
-        $guru = Guru::orderBy('nama', 'asc')
+        // $guru = Guru::orderBy('nama', 'asc')
+        //     ->get();
+
+        $angkatan = Angkatan::orderBy('kode', 'asc')
             ->get();
 
-        $angkatan = Angkatan::orderBy('nama', 'asc')
+        $program = ProgramKeahlian::orderBy('kode', 'asc')
             ->get();
 
-        $program = ProgramKeahlian::orderBy('nama', 'asc')
-            ->get();
-
-        $periode = PeriodePrakerin::orderBy('kode', 'asc')
-            ->get();
+        // $periode = PeriodePrakerin::orderBy('kode', 'asc')
+        //     ->get();
 
         confirmDelete('Hapus Data?', 'Data akan dihapus.');
 
         return view('dashboard.data.index')->with([
-            'guru' => $guru, 
+            // 'guru' => $guru, 
             'angkatan' => $angkatan, 
             'program' => $program, 
-            'periode' => $periode
+            // 'periode' => $periode
         ]);
     }
 }
