@@ -15,22 +15,22 @@ class GuruSeeder extends Seeder
     {
         Guru::insert([
             [
-                'nama' => 'Muhamad Citra Hidayat',
+                'nama' => strtoupper('Muhamad Citra Hidayat'),
                 'nip' => '123456789',
                 'sebagai' => 'Pendamping',
                 'telepon' => '089513886227',
             ], [
-                'nama' => 'Yasser Aziz Alfalah',
+                'nama' => strtoupper('Yasser Aziz Alfalah'),
                 'nip' => '123456789',
                 'sebagai' => 'Walikelas',
                 'telepon' => '08987654321',
             ], [
-                'nama' => 'Surya Nata Ardhana',
+                'nama' => strtoupper('Surya Nata Ardhana'),
                 'nip' => '123456789',
                 'sebagai' => 'Pendamping',
                 'telepon' => '08123456789',
             ], [
-                'nama' => 'Arnold Darmawan',
+                'nama' => strtoupper('Arnold Darmawan'),
                 'nip' => '123456789',
                 'sebagai' => 'Pendamping',
                 'telepon' => '08123456789',

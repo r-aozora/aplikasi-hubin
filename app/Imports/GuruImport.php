@@ -3,22 +3,22 @@
 namespace App\Imports;
 
 use App\Models\Guru;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class GuruImport implements ToModel
+class GuruImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Guru([
-            'nama' => $row[0],
-            'nip' => $row[1],
-            'sebagai' => $row[2],
-            'telepon' => $row[3],
-        ]);
+        foreach ($rows as $row) 
+        {
+            Guru::create([
+                'nama' => $row['nama'],
+                'nip' => $row['nip'],
+                'sebagai' => $row['sebagai'],
+                'telepon' => $row['telepon'],
+            ]);
+        }
     }
 }
