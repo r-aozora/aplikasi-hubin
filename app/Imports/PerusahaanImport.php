@@ -3,24 +3,27 @@
 namespace App\Imports;
 
 use App\Models\Perusahaan;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PerusahaanImport implements ToModel
+class PerusahaanImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Perusahaan([
-            'nama' => $row[0],
-            'alamat' => $row[1],
-            'kecamatan' => $row[2],
-            'kota' => $row[3],
-            'provinsi' => $row[4],
-            'telepon' => $row[5],
-        ]);
+        foreach ($rows as $row)
+        {
+            Perusahaan::create([
+                'nama' => $row['nama_perusahaan'],
+                'alamat' => $row['alamat'],
+                'penerima' => $row['penerima_surat'],
+                'kecamatan' => $row['kecamatan'],
+                'kota' => $row['kotakabupaten'],
+                'provinsi' => $row['provinsi'],
+                'lokasi' => $row['lokasi'],
+                'telepon' => $row['telepon'],
+                'koordinat' => $row['koordinat'],
+            ]);
+        }
     }
 }

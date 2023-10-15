@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('kota');
             $table->string('provinsi');
             $table->string('lokasi')->nullable();
-            $table->string('telepon');
+            $table->string('telepon')->nullable();
             $table->text('koordinat')->nullable();
             $table->timestamps();
         });
