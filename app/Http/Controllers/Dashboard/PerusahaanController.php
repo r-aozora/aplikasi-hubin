@@ -117,9 +117,14 @@ class PerusahaanController extends Controller
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
 
-        Excel::import(new PerusahaanImport(), $request->file('file'));
-
-        toast('Data berhasil diimpor!', 'success');
+        try {
+            Excel::import(new PerusahaanImport(), $request->file('file'));
+    
+            toast('Data berhasil diimpor!', 'success');
+        } catch(\Exception $e) {
+            toast('Data gagal diimpor!', 'danger');
+        }
+        
         return redirect()->back();
     }
 

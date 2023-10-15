@@ -87,10 +87,15 @@ class GuruController extends Controller
         $request->validate([
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
-        
-        Excel::import(new GuruImport(), $request->file('file'));
 
-        toast('Data berhasil diimpor!', 'success');
+        try {
+            Excel::import(new GuruImport(), $request->file('file'));
+    
+            toast('Data berhasil diimpor!', 'success');
+        } catch(\Exception $e) {
+            toast('Data gagal diimpor!', 'danger');
+        }
+
         return redirect()->back();
     }
 
