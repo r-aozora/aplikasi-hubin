@@ -10,7 +10,7 @@
                 <div id="auth-left">
                     <div class="auth-logo">
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('assets/img/logo_sekolah.png') }}" alt="Logo Sekolah">
+                            <img src="{{ asset('images/logo_sekolah.png') }}" alt="Logo Sekolah">
                         </a>
                     </div>
                     <h3 class="auth-title">Sistem Pendataan Administrasi Prakerin</h3>
