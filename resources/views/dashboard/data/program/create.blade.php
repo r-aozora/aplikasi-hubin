@@ -1,15 +1,15 @@
-<div class="modal fade" id="tambahProgram" tabindex="-1" role="dialog" aria-labelledby="tambahProgramTitle" aria-hidden="true">
+<div class="modal fade" id="tambahProgram" tabindex="-1" role="dialog" aria-labelledby="tambahProgram" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahProgramTitle">
+                <h5 class="modal-title" id="tambahProgram">
                     Tambah Data Program Keahlian
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/program') }}" method="post">
+            <form class="form form-vertical" action="{{ route('program.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-body">

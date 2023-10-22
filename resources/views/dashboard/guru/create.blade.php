@@ -9,7 +9,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/guru') }}" method="post">
+            <form class="form form-vertical" action="{{ route('guru.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-body">

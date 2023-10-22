@@ -1,15 +1,15 @@
-<div class="modal fade" id="tambahAngkatan" tabindex="-1" role="dialog" aria-labelledby="tambahAngkatanTitle" aria-hidden="true">
+<div class="modal fade" id="tambahAngkatan" tabindex="-1" role="dialog" aria-labelledby="tambahAngkatan" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahAngkatanTitle">
+                <h5 class="modal-title" id="tambahAngkatan">
                     Tambah Data Angkatan
                 </h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/angkatan') }}" method="post">
+            <form class="form form-vertical" action="{{ route('angkatan.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="form-body">

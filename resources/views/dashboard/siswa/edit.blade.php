@@ -38,16 +38,8 @@
                                 <div class="form-group">
                                     <label for="jkel">Jenis Kelamin</label>
                                     <select class="form-select" id="jkel" name="jkel">
-                                        <option value="L"
-                                            @if ($item->jenis_kelamin === 'L')
-                                                selected
-                                            @endif
-                                        >Laki-Laki</option>
-                                        <option value="P"
-                                            @if ($item->jenis_kelamin === 'P')
-                                                selected
-                                            @endif
-                                        >Perempuan</option>
+                                        <option value="L" {{ $item->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki-Laki</option>
+                                        <option value="P" {{ $item->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan</option>
                                     </select>
                                 </div>
                             </div>

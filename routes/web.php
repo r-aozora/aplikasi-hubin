@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/dashboard', function () {
         return view('dashboard');
-    });
+    })->name('dashboard');
 
     Route::resource('/guru', GuruController::class);
     Route::post('/guru/import', [GuruController::class, 'import'])
@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/program', ProgramKeahlianController::class);
 
-    Route::resource('/angkatan/{angkatan}/kelas', KelasController::class);
+    Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)
+        ->parameters(['kelas' => 'kelas']);
 
     Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
 
@@ -64,7 +65,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/jadwal', JadwalPrakerinController::class);
 
-    Route::resource('/periode', PeriodePrakerinController::class);
+    // Route::resource('/periode', App\Http\Controllers\PeriodePrakerinController::class);
 
-    Route::get('/data', [DataController::class, 'index']);
+    Route::get('/data', [DataController::class, 'index'])->name('data.index');
 });

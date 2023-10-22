@@ -9,7 +9,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/angkatan/'.$item->id) }}" method="post">
+            <form class="form form-vertical" action="{{ route('angkatan.update', $item->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">

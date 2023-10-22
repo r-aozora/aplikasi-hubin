@@ -9,12 +9,12 @@
             <div class="col-lg-4 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ route('login') }}">
                             <img src="{{ asset('images/logo_sekolah.png') }}" alt="Logo Sekolah">
                         </a>
                     </div>
                     <h3 class="auth-title">Sistem Pendataan Administrasi Prakerin</h3>
-                    <form action="{{ url('/login') }}" method="POST">
+                    <form action="{{ route('login.store') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" name="username" value="{{ Session::get('username') }}" placeholder="Username">

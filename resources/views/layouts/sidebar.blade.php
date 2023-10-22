@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="{{ url('/dashboard') }}">
+                    <a href="{{ route('dashboard') }}">
                         HUBIN
                     </a>
                 </div>
@@ -36,7 +36,7 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-item">
-                <a href="{{ url('/dashboard') }}" class="sidebar-link">
+                <a href="{{ route('dashboard') }}" class="sidebar-link">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>
@@ -53,7 +53,7 @@
                             <ul class="submenu submenu-level-2">
                                 @foreach ($item->kelas as $kelas)
                                     <li class="submenu-item">
-                                        <a href="{{ url('/angkatan/'.$item->id.'/kelas/'.$kelas->id) }}" class="submenu-link">{{ $kelas->nama }}</a>
+                                        <a href="{{ route('kelas.show', [$item->id, $kelas->id]) }}" class="submenu-link">{{ $kelas->nama }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -62,13 +62,13 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="{{ url('/guru') }}" class="sidebar-link">
+                <a href="{{ route('guru.index') }}" class="sidebar-link">
                     <i class="bi bi-people"></i>
                     <span>Data Guru</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="{{ url('/jadwal') }}" class="sidebar-link">
+                <a href="{{ route('jadwal.index') }}" class="sidebar-link">
                     <i class="bi bi-calendar-event"></i>
                     <span>Jadwal Prakerin</span>
                 </a>
@@ -83,15 +83,15 @@
                         <a href="#" class="submenu-link">Surat Pengajuan</a>
                         <ul class="submenu submenu-level-2">
                             <li class="submenu-item">
-                                <a href="{{ url('/pengajuan') }}" class="submenu-link">Pengajuan</a>
+                                <a href="#" class="submenu-link">Pengajuan</a>
                             </li>
                             <li class="submenu-item">
-                                <a href="{{ url('/tidak-diterima') }}" class="submenu-link">Tidak Diterima</a>
+                                <a href="#" class="submenu-link">Tidak Diterima</a>
                             </li>
                         </ul>
                     </li>
                     <li class="submenu-item">
-                        <a href="{{ url('/pengantar') }}" class="submenu-link">Surat Pengantar</a>
+                        <a href="#" class="submenu-link">Surat Pengantar</a>
                     </li>
                 </ul>
             </li>
@@ -123,19 +123,19 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="{{ url('/perusahaan') }}" class="sidebar-link">
+                <a href="{{ route('perusahaan.index') }}" class="sidebar-link">
                     <i class="bi bi-buildings"></i>
                     <span>Data Perusahaan</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="{{ url('/data') }}" class="sidebar-link">
+                <a href="{{ route('data.index') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola Data</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="{{ url('/user') }}" class="sidebar-link">
+                <a href="{{ route('user.index') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola User</span>
                 </a>

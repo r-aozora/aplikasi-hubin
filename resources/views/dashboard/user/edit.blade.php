@@ -9,7 +9,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ url('/user/'.$item->id) }}" method="post">
+            <form class="form form-vertical" action="{{ route('user.update', $item->id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -36,16 +36,10 @@
                                 <fieldset class="form-group">
                                     <label for="level">level</label>
                                     <select class="form-select" id="level" name="level">
-                                        <option value="Admin" 
-                                            @if ($item->level === 'Admin') 
-                                                selected 
-                                            @endif>
+                                        <option value="Admin" {{ $item->level === 'Admin' ? 'selected' : '' }}>
                                             Admin
                                         </option>
-                                        <option value="Guru" 
-                                            @if ($item->level === 'Guru') 
-                                                selected 
-                                            @endif>
+                                        <option value="Guru" {{ $item->level === 'Guru' ? 'selected' : '' }}>
                                             Guru
                                         </option>
                                     </select>
