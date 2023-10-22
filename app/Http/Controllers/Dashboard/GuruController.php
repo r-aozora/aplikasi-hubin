@@ -22,7 +22,7 @@ class GuruController extends Controller
         confirmDelete('Hapus Data!', 'Hapus data Guru?');
 
         return view('dashboard.guru.index')
-            ->with(['guru' => $guru]);
+            ->with(['active' => 'Guru', 'subActive' => null, 'triActive' => null, 'guru' => $guru]);
     }
 
     /**

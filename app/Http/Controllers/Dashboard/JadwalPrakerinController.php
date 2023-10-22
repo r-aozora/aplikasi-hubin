@@ -21,7 +21,7 @@ class JadwalPrakerinController extends Controller
             ->get();
 
         return view('dashboard.jadwal.index')
-            ->with(['jadwal' => $jadwal, 'periode' => $periode]);
+            ->with(['active' => 'Jadwal', 'subActive' => null, 'triActive' => null, 'jadwal' => $jadwal, 'periode' => $periode]);
     }
 
     /**

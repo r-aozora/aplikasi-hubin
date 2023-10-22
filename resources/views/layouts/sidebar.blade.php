@@ -35,24 +35,24 @@
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'Dashboard' ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="sidebar-link">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-item has-sub">
+            <li class="sidebar-item has-sub {{ $active === 'Siswa' ? 'active' : '' }}">
                 <a href="#" class="sidebar-link">
                     <i class="bi bi-people"></i>
                     <span>Data Siswa</span>
                 </a>  
                 <ul class="submenu">
                     @foreach ($angkatan as $item)
-                        <li class="submenu-item has-sub">
+                        <li class="submenu-item has-sub {{ $subActive === $item->id ? 'active' : '' }}">
                             <a href="#" class="submenu-link">{{ $item->nama }}</a>
                             <ul class="submenu submenu-level-2">
                                 @foreach ($item->kelas as $kelas)
-                                    <li class="submenu-item">
+                                    <li class="submenu-item {{ $triActive === $kelas->id ? 'active' : '' }}">
                                         <a href="{{ route('kelas.show', [$item->id, $kelas->id]) }}" class="submenu-link">{{ $kelas->nama }}</a>
                                     </li>
                                 @endforeach
@@ -61,19 +61,19 @@
                     @endforeach
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'Guru' ? 'active' : '' }}">
                 <a href="{{ route('guru.index') }}" class="sidebar-link">
                     <i class="bi bi-people"></i>
                     <span>Data Guru</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'Jadwal' ? 'active' : '' }}">
                 <a href="{{ route('jadwal.index') }}" class="sidebar-link">
                     <i class="bi bi-calendar-event"></i>
                     <span>Jadwal Prakerin</span>
                 </a>
             </li>
-            <li class="sidebar-item has-sub">
+            <li class="sidebar-item has-sub {{ $active === 'Surat' ? 'active' : '' }}">
                 <a href="#" class="sidebar-link">
                     <i class="bi bi-file-earmark-text"></i>
                     <span>Surat-surat</span>
@@ -95,7 +95,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item has-sub">
+            <li class="sidebar-item has-sub {{ $active === 'Monitoring' ? 'active' : '' }}">
                 <a href="#" class="sidebar-link">
                     <i class="bi bi-clipboard-data"></i>
                     <span>Monitoring</span>
@@ -122,19 +122,19 @@
                     </li>
                 </ul>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'Perusahaan' ? 'active' : '' }}">
                 <a href="{{ route('perusahaan.index') }}" class="sidebar-link">
                     <i class="bi bi-buildings"></i>
                     <span>Data Perusahaan</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'Data' ? 'active' : '' }}">
                 <a href="{{ route('data.index') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola Data</span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item {{ $active === 'User' ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}" class="sidebar-link">
                     <i class="bi bi-gear"></i>
                     <span>Kelola User</span>

@@ -60,7 +60,14 @@ class KelasController extends Controller
         confirmDelete('Hapus Data!', 'Hapus data Siswa/i?');
         
         return view('dashboard.data.kelas.detail')
-            ->with(['kelas' => $getKelas, 'id_angkatan' => $angkatan, 'siswa' => $siswa]);
+            ->with([
+                'active' => 'Siswa', 
+                'subActive' => intval($angkatan), 
+                'triActive' => $getKelas->id, 
+                'kelas' => $getKelas, 
+                'id_angkatan' => $angkatan, 
+                'siswa' => $siswa
+            ]);
     }
 
     /**

@@ -27,6 +27,9 @@ class DataController extends Controller
         confirmDelete('Hapus Data?', 'Data akan dihapus.');
 
         return view('dashboard.data.index')->with([
+            'active' => 'Data',
+            'subActive' => null,
+            'triActive' => null,
             // 'guru' => $guru, 
             'angkatan' => $angkatan, 
             'program' => $program, 

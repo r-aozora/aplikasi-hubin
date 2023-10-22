@@ -25,7 +25,7 @@ class UserController extends Controller
         confirmDelete('Hapus Data!', 'Hapus data User?');
 
         return view('dashboard.user.index')
-            ->with(['user' => $user, 'notUser' => $notUser]);
+            ->with(['active' => 'User', 'subActive' => null, 'triActive' => null, 'user' => $user, 'notUser' => $notUser]);
     }
 
     /**

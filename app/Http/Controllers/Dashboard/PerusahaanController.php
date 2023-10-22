@@ -22,7 +22,7 @@ class PerusahaanController extends Controller
         confirmDelete('Hapus Data!', 'Hapus data Perusahaan?');
 
         return view('dashboard.perusahaan.index')
-            ->with(['perusahaan' => $perusahaan]);
+            ->with(['active' => 'Perusahaan', 'subActive' => null, 'triActive' => null, 'perusahaan' => $perusahaan]);
     }
 
     /**
