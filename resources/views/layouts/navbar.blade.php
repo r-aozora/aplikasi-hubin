@@ -18,7 +18,7 @@
                             </div>
                             <div class="user-img d-flex align-items-center">
                                 <div class="avatar avatar-md">
-                                    <img src="{{ url('assets/compiled/jpg/1.jpg') }}">
+                                    <img src="{{ url('images/profile.png') }}">
                                 </div>
                             </div>
                         </div>

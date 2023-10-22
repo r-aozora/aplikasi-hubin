@@ -13,7 +13,11 @@
                 <div class="form-body">
                     <div class="row">
                         <div class="col-md-4 col-12">
-                            <img src="" alt="">
+                            @if ($item->jenis_kelamin === 'L')
+                                <img src="{{ asset('images/siswa.png') }}" alt="" style="width: 250px; height: 250px">
+                            @elseif ($item->jenis_kelamin === 'P')
+                                <img src="{{ asset('images/siswi.png') }}" alt="" style="width: 250px; height: 250px">
+                            @endif
                         </div>
                         <div class="col-md-8 col-12">
                             <div class="row mb-3">
@@ -41,7 +45,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12 label font-bold">Email</div>
-                                <div class="col-12">{{ $item->enail }}</div>
+                                <div class="col-12">{{ $item->email }}</div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12 label font-bold">Alamat</div>
