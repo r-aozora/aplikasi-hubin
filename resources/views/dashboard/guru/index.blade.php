@@ -1,90 +1,106 @@
 @extends('layouts.app')
 
+@section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
+@endsection
+
 @section('content')
-    <div class="page-heading">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Data Guru</h3>
-                </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Guru</li>
-                        </ol>
-                    </nav>
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <h1>{{ $title }}</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item">Data Guru</div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="page-content">
-        <section class="section">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-title">
-                                Data Guru
-                            </h5>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahGuru">
-                                <i class="bi bi-plus-circle"></i>
-                                Tambah Guru
-                            </button>
+            <div class="section-body">
+                <h2 class="section-title">Kelola {{ $title }}</h2>
+                <p class="section-lead">
+                    We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ $title }}</h4>
+                                <div class="card-header-action">
+                                    <a href="{{ route('guru.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Tambah Data Guru">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                    <a href="{{ route('guru.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Download Data Guru">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-info" id="btn-import" data-toggle="tooltip" data-placement="top" title="Impor Data Guru">
+                                        <i class="fas fa-upload"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">NO</th>
+                                                <th>NAMA GURU</th>
+                                                <th>NIP</th>
+                                                <th>SEBAGAI</th>
+                                                <th>TELEPON</th>
+                                                <th>OPSI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($guru as $item)
+                                                <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->nama }}</td>
+                                                    <td>{{ $item->nip }}</td>
+                                                    <td>{{ $item->sebagai }}</td>
+                                                    <td>{{ $item->telepon }}</td>
+                                                    @if ($item->nama !== Auth::user()->guru->nama)
+                                                        <td>
+                                                            <a href="{{ route('guru.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Guru">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                            <a href="{{ route('guru.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Guru">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Guru">
+                                                                <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click()";></i>
+                                                            </a>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped" id="table1">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>NAMA</th>
-                                <th>NIP</th>
-                                <th>SEBAGAI</th>
-                                <th>TELEPON</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1 ?>
-                            @foreach ($guru as $item)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->nip }}</td>
-                                    <td>{{ $item->sebagai }}</td>
-                                    <td>{{ $item->telepon }}</td>
-                                    <td>
-                                        <div class="btn-group mb-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle me-1" type="button" id="option" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bi bi-error-circle me-50"></i>
-                                                    Opsi
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="option">
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editGuru{{ $item->id }}">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        Edit
-                                                    </button>
-                                                    <a href="{{ route('guru.destroy', $item->id) }}" class="dropdown-item" data-confirm-delete="true">
-                                                        <i class="bi bi-trash"></i>
-                                                        Hapus
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @include('dashboard.guru.edit')
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </section>
     </div>
-    @include('dashboard.guru.create')
+
+    @include('dashboard.guru.import')
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/modules/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script>
+        document.getElementById('btn-import').addEventListener('click', function () {
+            $('#importGuru').modal('show');
+        });
+    </script>
 @endsection

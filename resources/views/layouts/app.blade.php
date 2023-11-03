@@ -33,6 +33,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
     <div id="app">
         <div class="main-wrapper">
             <div class="navbar-bg"></div>
