@@ -3,16 +3,13 @@
         <div class="sidebar-brand">
             <a href="{{ route('dashboard') }}">HUBIN</a>
         </div>
-        {{-- <div class="sidebar-brand sidebar-brand-sm"></div> --}}
         <ul class="sidebar-menu">
-            {{-- <li class="menu-header">Dashboard</li> --}}
             <li class="dropdown">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            {{-- <li class="menu-header">Data</li> --}}
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-users"></i>
