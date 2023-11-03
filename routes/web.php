@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
     
     Route::get('/dashboard', function () {
-        return view('dashboard')->with(['active' => 'Dashboard', 'subActive' => null, 'triActive' => null]);
+        return view('dashboard')->with(['title' => 'Dashboard', 'active' => 'Dashboard', 'subActive' => null, 'triActive' => null]);
     })->name('dashboard');
 
     Route::resource('/guru', GuruController::class);
