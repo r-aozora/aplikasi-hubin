@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('angkatan', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
+            $table->string('slug')
+                ->unique();
             $table->string('nama');
             $table->timestamps();
         });

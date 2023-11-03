@@ -15,7 +15,12 @@ class Guru extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['nama', 'nip', 'sebagai', 'telepon'];
+    protected $fillable = ['slug', 'nama', 'nip', 'sebagai', 'telepon'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function user(){
         return $this->hasOne(User::class, 'id_guru');

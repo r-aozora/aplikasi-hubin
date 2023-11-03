@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('periode_prakerin', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->date('awal');
-            $table->date('akhir');
+            $table->string('nama');
+            $table->string('awal');
+            $table->string('akhir');
             $table->timestamps();
         });
     }

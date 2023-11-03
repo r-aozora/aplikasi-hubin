@@ -18,63 +18,61 @@ class KelasSeeder extends Seeder
     {
         ProgramKeahlian::insert([
             [
-                'kode' => ' PK01',
+                'slug' => 'rekayasa-perangkat-lunak',
                 'nama' => 'Rekayasa Perangkat Lunak',
             ], [
-                'kode' => 'PK02',
+                'slug' => 'teknik-geomatika',
                 'nama' => 'Teknik Geomatika',
             ], [
-                'kode' => 'PK03',
+                'slug' => 'desain-pemodelan-dan-info-bangunan',
                 'nama' => 'Desain Pemodelan dan Info Bangunan',
             ], [
-                'kode' => 'PK04',
+                'slug' => 'nisnis-kontruksi-dan-properti',
                 'nama' => 'Bisnis Kontruksi dan Properti',
             ], [
-                'kode' => 'PK05',
+                'slug' => 'teknik-instalasi-tenaga-listrik',
                 'nama' => 'Teknik Instalasi Tenaga Listrik',
             ], [
-                'kode' => 'PK06',
+                'slug' => 'teknik-pemesinan',
                 'nama' => 'Teknik Pemesinan',
             ], [
-                'kode' => 'PK07',
+                'slug' => 'teknik-mekanik-industri',
                 'nama' => 'Teknik Mekanik Industri',
             ], [
-                'kode' => 'PK08',
+                'slug' => 'desain-gambar-masin',
                 'nama' => 'Desain Gambar Mesin',
             ], [
-                'kode' => 'PK09',
+                'slug' => 'teknik-perawatan-gedung',
                 'nama' => 'Teknik Perawatan Gedung',
             ], [
-                'kode' => 'PK10',
+                'slug' => 'teknik-otomasi-industri',
                 'nama' => 'Teknik Otomasi Industri',
             ]
         ]);
 
         Angkatan::insert([
             [
-                'kode' => '2223',
+                'slug' => '2022-2023',
                 'nama' => '2022/2023',
             ], [
-                'kode' => '2324',
+                'slug' => '2023-2024',
                 'nama' => '2023/2024',
             ]
         ]);
 
         Kelas::insert([
             [
-                'kode' => 'RPL23',
+                'slug' => 'xii-rpl',
                 'nama' => 'XII RPL',
-                'id_angkatan' => 2,
                 'id_guru' => 1,
+                'id_angkatan' => 2,
                 'id_program' => 1,
-                'id_periode' => null,
             ], [
-                'kode' => '1RPL22',
+                'slug' => 'xi-rpl-1',
                 'nama' => 'XI RPL 1',
-                'id_angkatan' => 1,
                 'id_guru' => 3,
+                'id_angkatan' => 1,
                 'id_program' => 1,
-                'id_periode' => null,
             ]
         ]);
     }

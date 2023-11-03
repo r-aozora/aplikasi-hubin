@@ -15,7 +15,12 @@ class Kelas extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['kode', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
+    protected $fillable = ['slug', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function angkatan(){
         return $this->belongsTo(Angkatan::class, 'id_angkatan');
@@ -27,10 +32,6 @@ class Kelas extends Model
 
     public function program(){
         return $this->belongsTo(ProgramKeahlian::class, 'id_program');
-    }
-
-    public function periode(){
-        return $this->belongsTo(PeriodePrakerin::class, 'id_periode');
     }
 
     public function siswa(){

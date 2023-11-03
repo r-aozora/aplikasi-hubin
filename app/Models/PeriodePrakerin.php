@@ -15,11 +15,7 @@ class PeriodePrakerin extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['kode', 'awal', 'akhir'];
-
-    public function kelas(){
-        return $this->hasMany(Kelas::class, 'id_periode');
-    }
+    protected $fillable = ['nama', 'awal', 'akhir'];
 
     public function jadwal(){
         return $this->hasMany(JadwalPrakerin::class, 'id_periode');

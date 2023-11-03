@@ -13,15 +13,21 @@ return new class extends Migration
     {
         Schema::create('perusahaan', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')
+                ->unique();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('penerima')->nullable();
+            $table->string('penerima')
+                ->nullable();
             $table->string('kecamatan');
             $table->string('kota');
             $table->string('provinsi');
-            $table->string('lokasi')->nullable();
-            $table->string('telepon')->nullable();
-            $table->text('koordinat')->nullable();
+            $table->string('lokasi')
+                ->nullable();
+            $table->string('telepon')
+                ->nullable();
+            $table->text('koordinat')
+                ->nullable();
             $table->timestamps();
         });
     }

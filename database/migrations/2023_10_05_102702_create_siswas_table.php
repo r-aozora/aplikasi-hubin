@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')
+                ->unique();
             $table->string('nama');
             $table->string('nis');
             $table->string('nisn');
@@ -22,7 +24,11 @@ return new class extends Migration
             $table->string('email');
             $table->text('alamat');
             $table->unsignedBigInteger('id_kelas');
-            $table->foreign('id_kelas')->references('id')->on('kelas');
+            $table->foreign('id_kelas')
+                ->references('id')
+                ->on('kelas')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

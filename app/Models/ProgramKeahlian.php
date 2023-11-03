@@ -15,7 +15,12 @@ class ProgramKeahlian extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['kode', 'nama'];
+    protected $fillable = ['slug', 'nama'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function kelas(){
         return $this->hasMany(Kelas::class, 'id_program');

@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('password');
-            $table->enum('level', ['Admin', 'Guru'])->default('Guru');
+            $table->enum('level', ['Admin', 'Guru']);
             $table->unsignedBigInteger('id_guru');
-            $table->foreign('id_guru')->references('id')->on('guru');
+            $table->foreign('id_guru')
+                ->references('id')
+                ->on('guru')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

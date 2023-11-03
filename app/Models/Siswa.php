@@ -15,7 +15,12 @@ class Siswa extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['nama', 'nis', 'nisn', 'jenis_kelamin', 'telepon', 'telepon_ortu', 'email', 'alamat', 'id_kelas'];
+    protected $fillable = ['slug', 'nama', 'nis', 'nisn', 'jenis_kelamin', 'telepon', 'telepon_ortu', 'email', 'alamat', 'id_kelas'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'id_kelas');

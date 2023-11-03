@@ -15,5 +15,10 @@ class Perusahaan extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['nama', 'alamat', 'penerima', 'kecamatan', 'kota', 'provinsi', 'lokasi', 'telepon', 'koordinat'];
+    protected $fillable = ['slug', 'nama', 'alamat', 'penerima', 'kecamatan', 'kota', 'provinsi', 'lokasi', 'telepon', 'koordinat'];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
