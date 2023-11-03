@@ -36,36 +36,38 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'destroy'])
         ->name('logout');
     
-    Route::get('/dashboard', function () {
-        return view('dashboard')->with(['title' => 'Dashboard', 'active' => 'Dashboard', 'subActive' => null, 'triActive' => null]);
-    })->name('dashboard');
-
-    Route::resource('/guru', GuruController::class);
-    Route::post('/guru/import', [GuruController::class, 'import'])
-        ->name('guru.import');
-    Route::get('/guru/export/to-excel', [GuruController::class, 'export'])
-        ->name('guru.export');
-
-    Route::resource('/user', UserController::class);
-
-    Route::resource('/angkatan', AngkatanController::class);
-
-    Route::resource('/program', ProgramKeahlianController::class);
-
-    Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)
-        ->parameters(['kelas' => 'kelas']);
-
-    Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
-
-    Route::resource('/perusahaan', PerusahaanController::class);
-    Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
-        ->name('perusahaan.import');
-    Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
-        ->name('perusahaan.export');
-
-    Route::resource('/jadwal', JadwalPrakerinController::class);
-
-    // Route::resource('/periode', App\Http\Controllers\PeriodePrakerinController::class);
-
-    Route::get('/data', [DataController::class, 'index'])->name('data.index');
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', function () {
+            return view('dashboard')->with(['title' => 'Dashboard', 'active' => 'Dashboard', 'subActive' => null, 'triActive' => null]);
+        })->name('dashboard');
+    
+        Route::resource('/guru', GuruController::class);
+        Route::post('/guru/import', [GuruController::class, 'import'])
+            ->name('guru.import');
+        Route::get('/guru/export/to-excel', [GuruController::class, 'export'])
+            ->name('guru.export');
+    
+        Route::resource('/user', UserController::class);
+    
+        Route::resource('/angkatan', AngkatanController::class);
+    
+        Route::resource('/program', ProgramKeahlianController::class);
+    
+        Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)
+            ->parameters(['kelas' => 'kelas']);
+    
+        Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
+    
+        Route::resource('/perusahaan', PerusahaanController::class);
+        Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
+            ->name('perusahaan.import');
+        Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
+            ->name('perusahaan.export');
+    
+        Route::resource('/jadwal', JadwalPrakerinController::class);
+    
+        // Route::resource('/periode', App\Http\Controllers\PeriodePrakerinController::class);
+    
+        Route::get('/data', [DataController::class, 'index'])->name('data.index');
+    });
 });
