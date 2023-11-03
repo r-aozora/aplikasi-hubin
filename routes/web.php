@@ -38,7 +38,12 @@ Route::middleware('auth')->group(function () {
     
     Route::prefix('dashboard')->group(function () {
         Route::get('/', function () {
-            return view('dashboard')->with(['title' => 'Dashboard', 'active' => 'Dashboard', 'subActive' => null, 'triActive' => null]);
+            return view('dashboard')->with([
+                'title' => 'Dashboard', 
+                'active' => 'Dashboard', 
+                'subActive' => null, 
+                'triActive' => null,
+            ]);
         })->name('dashboard');
     
         Route::resource('/guru', GuruController::class);
