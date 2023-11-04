@@ -7,6 +7,7 @@ use App\Models\Guru;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -18,14 +19,35 @@ class UserController extends Controller
         $user = User::with('guru')
             ->get();
 
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data User?');
+
+        return view('dashboard.user.index')
+            ->with([
+                'title' => 'Data User',
+                'active' => 'User',
+                'subActive' => null,
+                'triActive' => null,
+                'user' => $user,
+            ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
         $notUser = Guru::whereDoesntHave('user')
             ->orderBy('nama', 'asc')
             ->get();
 
-        confirmDelete('Hapus Data!', 'Hapus data User?');
-
-        return view('dashboard.user.index')
-            ->with(['active' => 'User', 'subActive' => null, 'triActive' => null, 'user' => $user, 'notUser' => $notUser]);
+        return view('dashboard.user.create')
+            ->with([
+                'title'=> 'Tambah Data User',
+                'active' => 'User',
+                'subActive' => null,
+                'triActive' => null,
+                'notUser' => $notUser,
+            ]);
     }
 
     /**
@@ -33,6 +55,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Session::flash('username', $request->input('username'));
+
         $request->validate([
             'nama' => 'required',
             'username' => 'required',
@@ -40,15 +64,42 @@ class UserController extends Controller
             'level' => 'required',
         ]);
 
-        User::create([
-            'username' => $request->input('username'),
-            'password' => Hash::make($request->input('password')),
-            'level' => $request->input('level'),
-            'id_guru' => $request->input('nama'),
-        ]);
+        try {
+            User::create([
+                'username' => $request->input('username'),
+                'password' => Hash::make($request->input('password')),
+                'level' => $request->input('level'),
+                'id_guru' => $request->input('nama'),
+            ]);
+            
+            toast('Data User berhasil ditambahkan!', 'success');
 
-        toast('Data berhasil ditambahkan!','success');
-        return redirect('/user');
+            return redirect()->route('user.index');
+        } catch (\Exception $e) {
+            toast('Data User gagal ditambahkan.', 'warning');
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        $notUser = Guru::whereDoesntHave('user')
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        return view('dashboard.user.edit')
+            ->with([
+                'title' => 'Edit Data User',
+                'active' => 'User',
+                'subActive' => null, 
+                'triActive' => null,
+                'user' => $user,
+                'notUser' => $notUser,
+            ]);
     }
 
     /**
@@ -62,14 +113,21 @@ class UserController extends Controller
             'level' => 'required',
         ]);
 
-        $user->update([
-            'username' => $request->input('username'),
-            'level' => $request->input('level'),
-            'id_guru' => $request->input('nama'),
-        ]);
+        try {
+            $user->update([
+                'username' => $request->input('username'),
+                'level' => $request->input('level'),
+                'id_guru' => $request->input('nama'),
+            ]);
+    
+            toast('Data User berhasil diedit!', 'success');
 
-        toast('Data berhasil di edit!','success');
-        return redirect('/user');
+            return redirect()->route('user.index');
+        } catch (\Exception $e) {
+            toast('Data User gagal diedit.', 'warning');
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -79,7 +137,8 @@ class UserController extends Controller
     {
         $user->delete();
 
-        toast('Data berhasil dihapus!','success');
-        return redirect('/user');
+        toast('Data User berhasil dihapus.', 'success');
+
+        return redirect()->back();
     }
 }
