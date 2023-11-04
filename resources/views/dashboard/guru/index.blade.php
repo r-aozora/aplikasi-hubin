@@ -61,19 +61,19 @@
                                                     <td>{{ $item->nip }}</td>
                                                     <td>{{ $item->sebagai }}</td>
                                                     <td>{{ $item->telepon }}</td>
-                                                    @if ($item->nama !== Auth::user()->guru->nama)
-                                                        <td>
-                                                            <a href="{{ route('guru.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Guru">
+                                                    <td>
+                                                        @if ($item->nama !== Auth::user()->guru->nama)
+                                                            {{-- <a href="{{ route('guru.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Guru">
                                                                 <i class="fas fa-eye"></i>
-                                                            </a>
+                                                            </a> --}}
                                                             <a href="{{ route('guru.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Guru">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Guru">
                                                                 <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click()";></i>
                                                             </a>
-                                                        </td>
-                                                    @endif
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
