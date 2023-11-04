@@ -148,9 +148,9 @@ class GuruController extends Controller
     {
         $guru->delete();
 
-        toast('Data Guru berhasil dihapus.','success');
+        toast('Data Guru berhasil dihapus.', 'success');
 
-        return redirect()->route('guru.index');
+        return redirect()->back();
     }
 
     public function import(Request $request)

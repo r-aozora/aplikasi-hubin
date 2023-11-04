@@ -62,7 +62,7 @@
                                                     <td>{{ $item->sebagai }}</td>
                                                     <td>{{ $item->telepon }}</td>
                                                     <td>
-                                                        @if ($item->nama !== Auth::user()->guru->nama)
+                                                        @if ($item->id !== Auth::id())
                                                             {{-- <a href="{{ route('guru.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Guru">
                                                                 <i class="fas fa-eye"></i>
                                                             </a> --}}
@@ -70,7 +70,7 @@
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Guru">
-                                                                <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click()";></i>
+                                                                <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
                                                             </a>
                                                         @endif
                                                     </td>

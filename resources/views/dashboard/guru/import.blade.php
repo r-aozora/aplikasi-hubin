@@ -13,8 +13,6 @@
                     <div class="custom-file">
                         <label class="custom-file-label" for="customFile">Pilih File</label>
                         <input type="file" class="form-control custom-file-input" id="customFile" name="file">
-                        {{-- <label for="file">Pilih File</label>
-                        <input type="file" class="form-control" id="file" name="file"> --}}
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
