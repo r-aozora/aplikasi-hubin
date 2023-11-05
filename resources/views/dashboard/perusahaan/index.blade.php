@@ -59,7 +59,7 @@
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->nama }}</td>
                                                     <td>{{ $item->alamat . ', Kec. ' . $item->kecamatan . ', ' . $item->kota . ', ' . $item->provinsi }}</td>
-                                                    <td>{{ $item->lokasi }} Kota</td>
+                                                    <td>{{ $item->lokasi }}</td>
                                                     <td>{{ $item->telepon }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

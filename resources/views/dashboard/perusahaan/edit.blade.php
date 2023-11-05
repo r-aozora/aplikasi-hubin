@@ -79,8 +79,8 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lokasi</label>
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control selectric" name="lokasi" required>
-                                                <option value="Dalam" {{ $perusahaan->lokasi === 'Dalam' ? 'selected' : '' }}>Dalam Kota</option>
-                                                <option value="Luar" {{ $perusahaan->lokasi === 'Luar' ? 'selected' : '' }}>Luar Kota</option>
+                                                <option value="Dalam Kota" {{ $perusahaan->lokasi === 'Dalam Kota' ? 'selected' : '' }}>Dalam Kota</option>
+                                                <option value="Luar Kota" {{ $perusahaan->lokasi === 'Luar Kota' ? 'selected' : '' }}>Luar Kota</option>
                                             </select>
                                         </div>
                                     </div>

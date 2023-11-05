@@ -79,8 +79,8 @@
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control selectric" name="lokasi" required>
                                                 <option selected disabled>Lokasi</option>
-                                                <option value="Dalam">Dalam Kota</option>
-                                                <option value="Luar">Luar Kota</option>
+                                                <option value="Dalam Kota">Dalam Kota</option>
+                                                <option value="Luar Kota">Luar Kota</option>
                                             </select>
                                         </div>
                                     </div>
