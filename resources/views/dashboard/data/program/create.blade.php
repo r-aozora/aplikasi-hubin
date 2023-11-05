@@ -1,43 +1,21 @@
-<div class="modal fade" id="tambahProgram" tabindex="-1" role="dialog" aria-labelledby="tambahProgram" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="tambahProgram">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahProgram">
-                    Tambah Data Program Keahlian
-                </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
+                <h5 class="modal-title">Tambah Program Keahlian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form class="form form-vertical" action="{{ route('program.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="kode">Kode Program Keahlian</label>
-                                    <input type="text" id="kode" class="form-control" name="kode">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="nama">Nama Program Keahlian</label>
-                                    <input type="text" id="nama" class="form-control" name="nama">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <label>Program Keahlian</label>
+                    <input type="text" class="form-control" name="nama">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-sm ms-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Tambah Data</span>
-                    </button>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Tambah Data</button>
                 </div>
             </form>
         </div>

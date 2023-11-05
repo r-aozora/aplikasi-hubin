@@ -14,17 +14,24 @@ class AngkatanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required',
             'nama' => 'required',
         ]);
 
-        Angkatan::create([
-            'kode' => $request->input('kode'),
-            'nama' => $request->input('nama'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = strtolower(str_replace(' ', '-', $nama));
 
-        toast('Angkatan berhasil ditambahkan!', 'success');
-        return redirect('/data');
+        try {
+            Angkatan::create([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+            ]);
+
+            toast('Data Angkatan berhasil ditambahkan!', 'success');
+        } catch (\Exception $e) {
+            toast('Data Angkatan gagal ditambahkan.', 'warning');            
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -33,17 +40,24 @@ class AngkatanController extends Controller
     public function update(Request $request, Angkatan $angkatan)
     {
         $request->validate([
-            'kode' => 'required',
             'nama' => 'required',
         ]);
 
-        $angkatan->update([
-            'kode' => $request->input('kode'),
-            'nama' => $request->input('nama'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = strtolower(str_replace(' ', '-', $nama));
 
-        toast('Angkatan berhasil diedit!');
-        return redirect('/data');
+        try {
+            $angkatan->update([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+            ]);
+    
+            toast('Data Angkatan berhasil diedit!', 'success');
+        } catch (\Exception $e) {
+            toast('Data Angkatan gagal diedit!', 'warning');
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -53,7 +67,8 @@ class AngkatanController extends Controller
     {
         $angkatan->delete();
 
-        toast('Angkatan berhasil dihapus!');
-        return redirect('/data');
+        toast('Data Angkatan berhasil dihapus.', 'success');
+
+        return redirect()->back();
     }
 }
