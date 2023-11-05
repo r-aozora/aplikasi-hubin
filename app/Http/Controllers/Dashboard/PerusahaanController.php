@@ -200,11 +200,13 @@ class PerusahaanController extends Controller
             Excel::import(new PerusahaanImport, $request->file('file'));
     
             toast('Data Perusahaan berhasil diimpor!', 'success');
+
+            return redirect()->route('perusahaan.index');
         } catch(\Exception $e) {
             toast('Data Perusahaan gagal diimpor.', 'warning');
+
+            return redirect()->back();
         }
-        
-        return redirect()->back();
     }
 
     public function export()

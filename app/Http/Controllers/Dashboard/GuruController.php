@@ -163,11 +163,13 @@ class GuruController extends Controller
             Excel::import(new GuruImport, $request->file('file'));
     
             toast('Data Guru berhasil diimpor!', 'success');
+
+            return redirect()->route('guru.index');
         } catch(\Exception $e) {
             toast('Data Guru gagal diimpor.', 'warning');
-        }
 
-        return redirect()->back();
+            return redirect()->back();
+        }
     }
 
     public function export()
