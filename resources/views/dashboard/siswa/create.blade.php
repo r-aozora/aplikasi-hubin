@@ -1,86 +1,117 @@
-<div class="modal fade" id="tambahSiswa" tabindex="-1" role="dialog" aria-labelledby="tambahSiswa" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahSiswa">
-                    Tambah Data Siswa/i
-                </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
-                </button>
+@extends('layouts.app')
+
+@section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
+@endsection
+
+@section('content')
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <div class="section-header-back">
+                    <a href="{{ route('kelas.show', [$angkatan, $kelas]) }}" class="btn btn-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <h1>{{ $title }}</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('angkatan.show', $angkatan) }}">Angkatan {{ $angkatan->nama }}</a>
+                    </div>
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('kelas.show', [$angkatan, $kelas]) }}">Kelas {{ $kelas->nama }}</a>
+                    </div>
+                    <div class="breadcrumb-item">{{ $title }}</div>
+                </div>
             </div>
-            <form class="form form-vertical" action="{{ route('siswa.store', [$id_angkatan, $kelas->id]) }}" method="post">
-                @csrf
-                <div class="modal-body">
-                    <div class="form-body">
-                        <div class="row">
-                            <input type="hidden" name="id_kelas" value="{{ $kelas->id }}">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="nama">Nama Siswa</label>
-                                    <input type="text" id="nama" class="form-control" name="nama">
-                                </div>
+            <div class="section-body">
+                <h2 class="section-title">{{ $title }}</h2>
+                <p class="section-lead">
+                    On this page you can create a new post and fill in all fields.
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ $title }}</h4>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="nis">NIS Siswa</label>
-                                    <input type="text" id="nis" class="form-control" name="nis">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="nisn">NISN Siswa</label>
-                                    <input type="text" id="nisn" class="form-control" name="nisn">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="jkel">Jenis Kelamin</label>
-                                    <select class="form-select" id="jkel" name="jkel">
-                                        <option selected disabled>Pilih</option>
-                                        <option value="L">Laki-Laki</option>
-                                        <option value="P">Perempuan</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="telepon">Telepon Siswa</label>
-                                    <input type="text" id="telepon" class="form-control" name="telepon">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="telepon_ortu">Telepon Orang Tua/Wali</label>
-                                    <input type="text" id="telepon_ortu" class="form-control" name="telepon_ortu">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="email">Email Siswa</label>
-                                    <input type="text" id="email" class="form-control" name="email">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="alamat" class="form-label">Alamat Siswa</label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
-                                </div>
+                            <div class="card-body">
+                                <form action="{{ route('siswa.store', [$angkatan, $kelas]) }}" method="post">
+                                    @csrf
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Siswa</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="nama" value="{{ Session::get('nama') }}" required autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NIS</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="nis" value="{{ Session::get('nis') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NISN</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="nisn" value="{{ Session::get('nisn') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Kelamin</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select class="form-control selectric" name="jkel" required>
+                                                <option selected disabled>Jenis Kelamin</option>
+                                                <option value="L">Laki-laki</option>
+                                                <option value="P">Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon Siswa</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="telepon" value="{{ Session::get('telepon') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon Orang Tua</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="telepon_ortu" value="{{ Session::get('telepon_ortu') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="email" value="{{ Session::get('email') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <textarea class="form-control" name="alamat" rows="5" required>{{ Session::get('alamat') }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-sm ms-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Tambah Data</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+        </section>
     </div>
-</div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/features-post-create.js') }}"></script>
+@endsection

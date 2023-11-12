@@ -11,7 +11,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ route('angkatan.show', $angkatan) }}" class="btn btn-icon">
+                    <a href="{{ route('angkatan.show', $angkatan->slug) }}" class="btn btn-icon">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
@@ -20,7 +20,10 @@
                     <div class="breadcrumb-item active">
                         <a href="{{ route('dashboard') }}">Dashboard</a>
                     </div>
-                    <div class="breadcrumb-item">Data Siswa</div>
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('angkatan.show', $angkatan->slug) }}">Angkatan {{ $angkatan->nama }}</a>
+                    </div>
+                    <div class="breadcrumb-item active">Kelas {{ $kelas->nama }}</div>
                 </div>
             </div>
             <div class="section-body">
