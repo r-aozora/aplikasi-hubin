@@ -15,7 +15,7 @@
                     <div class="breadcrumb-item active">
                         <a href="{{ route('dashboard') }}">Dashboard</a>
                     </div>
-                    <div class="breadcrumb-item">Data Kelas</div>
+                    <div class="breadcrumb-item">Angkatan {{ $angkatan->nama }}</div>
                 </div>
             </div>
             <div class="section-body">

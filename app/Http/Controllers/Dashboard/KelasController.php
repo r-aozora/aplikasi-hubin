@@ -64,7 +64,7 @@ class KelasController extends Controller
     
             toast('Data Kelas berhasil ditambahkan!', 'success');
 
-            return redirect()->route('angkatan.show', $angkatan->slug);
+            return redirect()->route('angkatan.show', $angkatan);
         } catch (\Exception $e) {
             toast('Data Kelas gagal ditambahkan.', 'warning');
 
@@ -161,6 +161,6 @@ class KelasController extends Controller
 
         toast('Data Kelas berhasil dihapus.', 'success');
 
-        return redirect()->route('angkatan.show', $angkatan);
+        return redirect()->back();
     }
 }
