@@ -16,7 +16,7 @@
                     <span>Data Siswa</span>
                 </a>
                 <ul class="dropdown-menu">
-                    @foreach ($angkatan as $item)
+                    @foreach ($dataAngkatan as $item)
                         <li class="nav-item dropdown {{ $subActive === $item->slug ? 'active' : '' }}">
                             <a href="{{ route('angkatan.show', $item->slug) }}" class="nav-link has-dropdown">{{ $item->nama }}</a>
                             <ul class="dropdown-menu">

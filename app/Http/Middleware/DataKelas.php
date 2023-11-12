@@ -21,7 +21,7 @@ class DataKelas
             ->orderBy('nama', 'asc')
             ->get();
 
-        View::share(['angkatan' => $angkatan]);
+        View::share(['dataAngkatan' => $angkatan]);
 
         return $next($request);
     }

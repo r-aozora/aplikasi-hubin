@@ -169,6 +169,9 @@
                                                     <td>{{ $item->nama }}</td>
                                                     <td>{{ $item->kelas_count }}</td>
                                                     <td>
+                                                        <a href="{{ route('angkatan.show', $item->slug) }}" class="btn btn-sm btn-secondary"  data-toggle="tooltip" data-placement="top" title="Lihat Data">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
                                                         <button class="btn btn-sm btn-warning btn-edit-angkatan" data-modal-id="{{ $item->slug }}" data-toggle="tooltip" data-placement="top" title="Edit Data">
                                                             <i class="fas fa-edit"></i>
                                                         </button>

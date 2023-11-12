@@ -35,6 +35,24 @@ class AngkatanController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Angkatan $angkatan)
+    {
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya?');
+        
+        return view('dashboard.data.angkatan.detail')
+            ->with([
+                'title' => 'Data Kelas',
+                'active' => 'Siswa', 
+                'subActive' => $angkatan->slug,
+                'triActive' => null,
+                'angkatan' => $angkatan,
+                'kelas' => $angkatan->kelas,
+            ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Angkatan $angkatan)
