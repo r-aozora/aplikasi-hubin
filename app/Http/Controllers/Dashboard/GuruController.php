@@ -89,7 +89,14 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        return redirect()->back();
+        return view('dashboard.guru.detail')
+            ->with([
+                'title' => 'Detail Guru',
+                'active' => 'Guru',
+                'subActive' => null,
+                'triActive' => null,
+                'guru' => $guru,
+            ]);
     }
 
     /**

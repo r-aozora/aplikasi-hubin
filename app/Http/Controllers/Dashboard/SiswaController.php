@@ -82,6 +82,23 @@ class SiswaController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
+    {
+        return view('dashboard.Siswa.detail')
+            ->with([
+                'title' => 'Detail Siswa',
+                'active' => 'Siswa',
+                'subActive' => $angkatan->slug,
+                'triActive' => $kelas->slug,
+                'angkatan' => $angkatan,
+                'kelas' => $kelas,
+                'siswa' => $siswa,
+            ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
