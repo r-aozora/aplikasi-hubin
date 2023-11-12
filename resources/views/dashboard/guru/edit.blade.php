@@ -1,65 +1,90 @@
-<div class="modal fade" id="editGuru{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editGuru{{ $item->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editGuru{{ $item->id }}">
-                    Edit Data Guru
-                </h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <i data-feather="x"></i>
-                </button>
+@extends('layouts.app')
+
+@section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
+@endsection
+
+@section('content')
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <div class="section-header-back">
+                    <a href="{{ route('guru.index') }}" class="btn btn-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <h1>{{ $title }}</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item">
+                        <a href="{{ route('guru.index') }}">Data Guru</a>
+                    </div>
+                    <div class="breadcrumb-item">Edit Data</div>
+                </div>
             </div>
-            <form class="form form-vertical" action="{{ route('guru.update', $item->id) }}" method="post">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="form-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="nama">Nama Guru</label>
-                                    <input type="text" id="nama" class="form-control" name="nama" value="{{ $item->nama }}">
-                                </div>
+            <div class="section-body">
+                <h2 class="section-title">{{ $title }}</h2>
+                <p class="section-lead">
+                    On this page you can create a new post and fill in all fields.
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ $title }}</h4>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="nip">NIP</label>
-                                    <input type="text" id="nip" class="form-control" name="nip" value="{{ $item->nip }}">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <fieldset class="form-group">
-                                    <label for="sebagai">Sebagai</label>
-                                    <select class="form-select" id="sebagai" name="sebagai">
-                                        <option value="Walikelas" {{ $item->sebagai === 'Walikelas' ? 'selected' : '' }}>
-                                            Wali Kelas
-                                        </option>
-                                        <option value="Pendamping" {{ $item->sebagai === 'Pendamping' ? 'selected' : '' }}>
-                                            Guru Pendamping
-                                        </option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="telepon">Telepon</label>
-                                    <input type="text" id="telepon" class="form-control" name="telepon" value="{{ $item->telepon }}">
-                                </div>
+                            <div class="card-body">
+                                <form action="{{ route('guru.update', $guru->slug) }}" method="post">
+                                    @csrf
+                                    @method('put')
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="nama" value="{{ $guru->nama }}" required autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NIP</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="nip" value="{{ $guru->nip }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Sebagai</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select class="form-control selectric" name="sebagai" required>
+                                                <option value="Walikelas" {{ $guru->sebagai === 'Walikelas' ? 'selected' : '' }}>Wali Kelas</option>
+                                                <option value="Pendamping" {{ $guru->sebagai === 'Pendamping' ? 'selected' : '' }}>Guru Pendamping</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <input type="text" class="form-control" name="telepon" value="{{ $guru->telepon }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <button type="submit" class="btn btn-primary">Edit Data</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Batal</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-sm ms-1" data-bs-dismiss="modal">
-                        <i class="bx bx-check d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Edit Data</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+        </section>
     </div>
-</div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/features-post-create.js') }}"></script>
+@endsection

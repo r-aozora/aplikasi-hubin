@@ -14,17 +14,24 @@ class ProgramKeahlianController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required',
             'nama' => 'required',
         ]);
 
-        ProgramKeahlian::create([
-            'kode' => $request->input('kode'),
-            'nama' => $request->input('nama'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = strtolower(str_replace(' ', '-', $nama));
 
-        toast('Program Keahlian berhasil ditambahkan!', 'success');
-        return redirect('/data');
+        try {
+            ProgramKeahlian::create([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+            ]);
+    
+            toast('Program Keahlian berhasil ditambahkan!', 'success');
+        } catch (\Exception $e) {
+            toast('Program Keahlian gagal ditambahkan.', 'warning');
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -33,17 +40,24 @@ class ProgramKeahlianController extends Controller
     public function update(Request $request, ProgramKeahlian $program)
     {
         $request->validate([
-            'kode' => 'required',
             'nama' => 'required',
         ]);
 
-        $program->update([
-            'kode' => $request->input('kode'),
-            'nama' => $request->input('nama'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = strtolower(str_replace(' ', '-', $nama));
 
-        toast('Program Keahlian berhasil diedit!');
-        return redirect('/data');
+        try {
+            $program->update([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+            ]);
+    
+            toast('Program Keahlian berhasil diedit!', 'success');
+        } catch (\Exception $e) {
+            toast('Program Keahlian gagal diedit.', 'warning');
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -53,7 +67,8 @@ class ProgramKeahlianController extends Controller
     {
         $program->delete();
 
-        toast('Program Keahlian berhasil dihapus!');
-        return redirect('/data');
+        toast('Program Keahlian berhasil dihapus.', 'success');
+        
+        return redirect()->back();
     }
 }

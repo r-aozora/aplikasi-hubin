@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\GuruImport;
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
@@ -19,10 +20,30 @@ class GuruController extends Controller
         $guru = Guru::orderBy('nama', 'asc')
             ->get();
 
-        confirmDelete('Hapus Data!', 'Hapus data Guru?');
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Guru?');
 
         return view('dashboard.guru.index')
-            ->with(['active' => 'Guru', 'subActive' => null, 'triActive' => null, 'guru' => $guru]);
+            ->with([
+                'title' => 'Data Guru',
+                'active' => 'Guru', 
+                'subActive' => null, 
+                'triActive' => null, 
+                'guru' => $guru
+            ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('dashboard.guru.create')
+            ->with([
+                'title'=> 'Tambah Data Guru',
+                'active' => 'Guru',
+                'subActive' => null,
+                'triActive' => null,
+            ]);
     }
 
     /**
@@ -30,6 +51,10 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
+        Session::flash('nama', $request->input('nama'));
+        Session::flash('nip', $request->input('nip'));
+        Session::flash('telepon', $request->input('telepon'));
+
         $request->validate([
             'nama' => 'required',
             'nip' => 'required',
@@ -37,15 +62,56 @@ class GuruController extends Controller
             'telepon' => 'required',
         ]);
 
-        Guru::create([
-            'nama' => $request->input('nama'),
-            'nip' => $request->input('nip'),
-            'sebagai' => $request->input('sebagai'),
-            'telepon' => $request->input('telepon'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = rtrim(strtolower(str_replace(' ', '-', $nama)), '-');
 
-        toast('Data berhasil ditambahkan!','success');
-        return redirect('/guru');
+        try {
+            Guru::create([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+                'nip' => $request->input('nip'),
+                'sebagai' => $request->input('sebagai'),
+                'telepon' => $request->input('telepon'),
+            ]);
+
+            toast('Data Guru berhasil ditambahkan!', 'success');
+
+            return redirect()->route('guru.index');
+        } catch (\Exception $e) {
+            toast('Data Guru gagal ditambahkan.', 'warning');
+
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Guru $guru)
+    {
+        return view('dashboard.guru.detail')
+            ->with([
+                'title' => 'Detail Guru',
+                'active' => 'Guru',
+                'subActive' => null,
+                'triActive' => null,
+                'guru' => $guru,
+            ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Guru $guru)
+    {
+        return view('dashboard.guru.edit')
+            ->with([
+                'title' => 'Edit Data Guru',
+                'active' => 'Guru',
+                'subActive' => null, 
+                'triActive' => null,
+                'guru' => $guru,
+            ]);
     }
 
     /**
@@ -60,15 +126,26 @@ class GuruController extends Controller
             'telepon' => 'required',
         ]);
 
-        $guru->update([
-            'nama' => $request->input('nama'),
-            'nip' => $request->input('nip'),
-            'sebagai' => $request->input('sebagai'),
-            'telepon' => $request->input('telepon'),
-        ]);
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
+        $slug = rtrim(strtolower(str_replace(' ', '-', $nama)), '-');
 
-        toast('Data berhasil di edit!','success');
-        return redirect('/guru');
+        try {
+            $guru->update([
+                'slug' => $slug,
+                'nama' => $request->input('nama'),
+                'nip' => $request->input('nip'),
+                'sebagai' => $request->input('sebagai'),
+                'telepon' => $request->input('telepon'),
+            ]);
+
+            toast('Data Guru berhasil diedit!', 'success');
+
+            return redirect()->route('guru.index');
+        } catch (\Exception $e) {
+            toast('Data Guru gagal diedit.', 'warning');
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -78,8 +155,9 @@ class GuruController extends Controller
     {
         $guru->delete();
 
-        toast('Data berhasil dihapus!','success');
-        return redirect('/guru');
+        toast('Data Guru berhasil dihapus.', 'success');
+
+        return redirect()->back();
     }
 
     public function import(Request $request)
@@ -89,18 +167,20 @@ class GuruController extends Controller
         ]);
 
         try {
-            Excel::import(new GuruImport(), $request->file('file'));
+            Excel::import(new GuruImport, $request->file('file'));
     
-            toast('Data berhasil diimpor!', 'success');
-        } catch(\Exception $e) {
-            toast('Data gagal diimpor!', 'danger');
-        }
+            toast('Data Guru berhasil diimpor!', 'success');
 
-        return redirect()->back();
+            return redirect()->route('guru.index');
+        } catch(\Exception $e) {
+            toast('Data Guru gagal diimpor.', 'warning');
+
+            return redirect()->back();
+        }
     }
 
     public function export()
     {
-        return Excel::download(new GuruExport(), 'Data Guru.xlsx');
+        return Excel::download(new GuruExport, 'Data Guru.xlsx');
     }
 }

@@ -13,7 +13,11 @@ class GuruImport implements ToCollection, WithHeadingRow
     {
         foreach ($rows as $row) 
         {
-            Guru::create([
+            $nama = preg_replace('/[^a-z0-9]+/i', ' ', $row['nama']);
+            $slug = rtrim(strtolower(str_replace(' ', '-', $nama)), '-');
+
+            Guru::insert([
+                'slug' => $slug,
                 'nama' => $row['nama'],
                 'nip' => $row['nip'],
                 'sebagai' => $row['sebagai'],

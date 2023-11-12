@@ -1,40 +1,100 @@
-@extends('layouts.guest')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div id="auth">
-        <div class="row h-100">
-            <div class="col-lg-1">
-                <div id="auth-right"></div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <div id="auth-left">
-                    <div class="auth-logo">
-                        <a href="{{ route('login') }}">
-                            <img src="{{ asset('images/logo_sekolah.png') }}" alt="Logo Sekolah">
-                        </a>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Login | {{ config('app.name', 'Sistem Pendataan Administrasi Prakerin') }}</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-social/bootstrap-social.css') }}">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+
+    <!-- Start GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-94034622-3');
+    </script>
+    <!-- /END GA -->
+</head>
+
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                        <div class="login-brand">
+                            <img src="{{ asset('images/logo_sekolah.png') }}" alt="Logo Sekolah" width="100">
+                        </div>
+                        <div class="card card-primary">
+                            <div class="card-header text-center">
+                                <h4>Login</h4>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{ route('login.store') }}" method="post" class="needs-validation" novalidate="">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input id="username" type="text" class="form-control" name="username" tabindex="1" value="{{ Session::get('username') }}" placeholder="Username" required autofocus>
+                                        <div class="invalid-feedback">
+                                            Masukkan Username yang valid.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="control-label">Password</label>
+                                        <input id="password" type="password" class="form-control" name="password" tabindex="2" placeholder="Password" required>
+                                        <div class="invalid-feedback">
+                                            Masukkan Password yang valid.
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                                            Login
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="simple-footer">
+                            Copyright &copy; Aplikasi HUBIN 2023
+                        </div>
                     </div>
-                    <h3 class="auth-title">Sistem Pendataan Administrasi Prakerin</h3>
-                    <form action="{{ route('login.store') }}" method="POST">
-                        @csrf
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" name="username" value="{{ Session::get('username') }}" placeholder="Username">
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
-                            </div>
-                        </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" class="form-control form-control-xl" name="password" placeholder="Password">
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
-                    </form>
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right"></div>
-            </div>
-        </div>
+        </section>
     </div>
-@endsection
+
+    <!-- General JS Scripts -->
+    <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/popper.js') }}"></script>
+    <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
+    <script src="{{ asset('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/stisla.js') }}"></script>
+
+    <!-- JS Libraies -->
+
+    <!-- Page Specific JS File -->
+
+    <!-- Template JS File -->
+    <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.js') }}"></script>
+</body>
+
+</html>

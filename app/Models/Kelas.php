@@ -15,7 +15,7 @@ class Kelas extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['slug', 'nama', 'id_angkatan', 'id_guru', 'id_program', 'id_periode'];
+    protected $fillable = ['slug', 'nama', 'id_guru', 'id_program', 'id_angkatan'];
 
     public function getRouteKeyName()
     {

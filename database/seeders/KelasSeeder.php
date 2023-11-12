@@ -27,7 +27,7 @@ class KelasSeeder extends Seeder
                 'slug' => 'desain-pemodelan-dan-info-bangunan',
                 'nama' => 'Desain Pemodelan dan Info Bangunan',
             ], [
-                'slug' => 'nisnis-kontruksi-dan-properti',
+                'slug' => 'bisnis-kontruksi-dan-properti',
                 'nama' => 'Bisnis Kontruksi dan Properti',
             ], [
                 'slug' => 'teknik-instalasi-tenaga-listrik',
