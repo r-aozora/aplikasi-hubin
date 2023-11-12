@@ -1955,7 +1955,8 @@ body {
   background-color: #fafdfb;
   font-size: 14px;
   font-weight: 400;
-  font-family: 'Nunito', 'Segoe UI', arial;
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Nunito', 'Segoe UI', arial; */
   color: #6c757d; }
 
 a.bb {
