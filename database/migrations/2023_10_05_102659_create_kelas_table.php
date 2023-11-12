@@ -17,21 +17,21 @@ return new class extends Migration
                 ->unique();
             $table->string('nama');
             $table->unsignedBigInteger('id_guru');
-            $table->unsignedBigInteger('id_angkatan');
             $table->unsignedBigInteger('id_program');
+            $table->unsignedBigInteger('id_angkatan');
             $table->foreign('id_guru')
                 ->references('id')
                 ->on('guru')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('id_angkatan')
-                ->references('id')
-                ->on('angkatan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->foreign('id_program')
                 ->references('id')
                 ->on('program_keahlian')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('id_angkatan')
+                ->references('id')
+                ->on('angkatan')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();

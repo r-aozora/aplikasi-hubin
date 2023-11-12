@@ -1,102 +1,113 @@
 @extends('layouts.app')
 
+@section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}">
+@endsection
+
 @section('content')
-    <div class="page-heading">
-        <div class="page-title">
-            <div class="row">
-                <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Data Siswa</h3>
+    <div class="main-content">
+        <section class="section">
+            <div class="section-header">
+                <div class="section-header-back">
+                    <a href="{{ route('angkatan.show', $angkatan) }}" class="btn btn-icon">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
                 </div>
-                <div class="col-12 col-md-6 order-md-2 order-first">
-                    <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Siswa</li>
-                        </ol>
-                    </nav>
+                <h1>{{ $title }} {{ $kelas->nama }}</h1>
+                <div class="section-header-breadcrumb">
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item">Data Siswa</div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="page-content">
-        <section class="section">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-title">
-                                {{ $kelas->nama }} - {{ strtoupper($kelas->guru->nama) }}
-                            </h5>
-                            <p>
-                                {{ strtoupper($kelas->program->nama) }} - TAHUN AJARAN {{ $kelas->angkatan->nama }}
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tambahSiswa">
-                                <i class="bi bi-plus-circle"></i>
-                                Tambah Siswa
-                            </button>
+            <div class="section-body">
+                <h2 class="section-title">Detail {{ $kelas->nama }}</h2>
+                <p class="section-lead">
+                    {{ $kelas->nama }} - {{ $kelas->guru->nama }} <br>
+                    TAHUN AJARAN {{ $kelas->angkatan->nama }}
+                </p>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>{{ $title }}</h4>
+                                <div class="card-header-action">
+                                    <a href="{{ route('siswa.create', [$angkatan, $kelas]) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-plus"></i>
+                                        Tambah Siswa
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="table-1">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">NO</th>
+                                                <th>NAMA</th>
+                                                <th>NIS</th>
+                                                <th>NISN</th>
+                                                <th>JENIS KELAMIN</th>
+                                                <th>TELEPON</th>
+                                                <th>ANGKATAN</th>
+                                                <th>OPTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($siswa as $item)
+                                                <tr>
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->nama }}</td>
+                                                    <td>{{ $item->nis }}</td>
+                                                    <td>{{ $item->nisn }}</td>
+                                                    <td>
+                                                        @if ($item->jenis_kelamin === 'L')
+                                                            Laki-laki
+                                                        @elseif ($item->jenis_kelamin === 'P')
+                                                            Perempuan
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $item->telepon }}</td>
+                                                    <td>{{ $kelas->angkatan->nama }}</td>
+                                                    <td>
+                                                        <a href="{{ route('siswa.show', [$angkatan, $kelas, $item->slug]) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Siswa">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{ route('siswa.edit', [$angkatan, $kelas, $item->slug]) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Siswa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <a href="{{ route('siswa.destroy', [$angkatan, $kelas, $item->slug]) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Siswa">
+                                                            <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped" id="table1">
-                        <thead>
-                            <tr>
-                                <th>NO</th>
-                                <th>NAMA</th>
-                                <th>NISN</th>
-                                <th>NIS</th>
-                                <th>JENIS KELAMIN</th>
-                                <th>TELEPON</th>
-                                <th>ANGKATAN</th>
-                                <th>ACTION</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1 ?>
-                            @foreach ($siswa as $item)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ strtoupper($item->nama) }}</td>
-                                    <td>{{ $item->nisn }}</td>
-                                    <td>{{ $item->nis }}</td>
-                                    <td>{{ $item->jenis_kelamin }}</td>
-                                    <td>{{ $item->telepon }}</td>
-                                    <td>{{ $kelas->angkatan->nama }}</td>
-                                    <td>
-                                        <div class="btn-group mb-1">
-                                            <div class="dropdown">
-                                                <button class="btn btn-secondary btn-sm dropdown-toggle me-1" type="button" id="option" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bi bi-error-circle me-50"></i>
-                                                    Opsi
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="option">
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#detailSiswa{{ $item->id }}">
-                                                        <i class="bi bi-file-person"></i>
-                                                        Detail
-                                                    </button>
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editSiswa{{ $item->id }}">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                        Edit
-                                                    </button>
-                                                    <a href="{{ route('siswa.destroy', [$id_angkatan, $kelas->id, $item->id]) }}" class="dropdown-item" data-confirm-delete="true">
-                                                        <i class="bi bi-trash"></i>
-                                                        Hapus
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @include('dashboard.siswa.detail')
-                                        @include('dashboard.siswa.edit')
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </section>
     </div>
-    @include('dashboard.siswa.create')
+@endsection
+
+@section('script')
+    <script src="{{ asset('assets/modules/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
+
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script>
+        document.getElementById('btn-import').addEventListener('click', function () {
+            $('#importSiswa').modal('show');
+        });
+    </script>
 @endsection

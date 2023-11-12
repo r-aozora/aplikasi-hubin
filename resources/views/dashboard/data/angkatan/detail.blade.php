@@ -29,9 +29,9 @@
                             <div class="card-header">
                                 <h4>{{ $title }}</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('kelas.create', $angkatan) }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Tambah Data Siswa">
+                                    <a href="{{ route('kelas.create', $angkatan) }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-plus"></i>
-                                        Tambah Data
+                                        Tambah Kelas
                                     </a>
                                 </div>
                             </div>

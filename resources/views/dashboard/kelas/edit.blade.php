@@ -21,7 +21,7 @@
                     <div class="breadcrumb-item">
                         <a href="{{ route('angkatan.show', $angkatan) }}">Data Kelas</a>
                     </div>
-                    <div class="breadcrumb-item">Tambah Data</div>
+                    <div class="breadcrumb-item">Edit Data</div>
                 </div>
             </div>
             <div class="section-body">
@@ -36,21 +36,21 @@
                                 <h4>{{ $title }}</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kelas.store', $angkatan->slug) }}" method="post">
+                                <form action="{{ route('kelas.update', [$angkatan->slug, $kelas->slug]) }}" method="post">
                                     @csrf
+                                    @method('put')
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Kelas</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nama" value="{{ Session::get('nama') }}" required autofocus>
+                                            <input type="text" class="form-control" name="nama" value="{{ $kelas->nama }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Wali Kelas</label>
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control select2" name="guru" required>
-                                                <option selected disabled>Nama Guru</option>
                                                 @foreach ($guru as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                    <option value="{{ $item->id }}" {{ $item->id === $kelas->id_guru ? 'selected' : '' }}>{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -59,9 +59,8 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Program Keahlian</label>
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control select2" name="program" required>
-                                                <option selected disabled>Program Keahlian</option>
                                                 @foreach ($program as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                    <option value="{{ $item->id }}" {{ $item->id === $kelas->id_program ? 'selected' : '' }}>{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -70,9 +69,8 @@
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tahun Angkatan</label>
                                         <div class="col-sm-12 col-md-7">
                                             <select class="form-control select2" name="angkatan" required>
-                                                <option selected disabled>Tahun Angkatan</option>
                                                 @foreach ($dataAngkatan as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                    <option value="{{ $item->id }}" {{ $item->id === $kelas->id_angkatan ? 'selected' : '' }}>{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -80,7 +78,7 @@
                                     <div class="form-group row mb-4">
                                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                         <div class="col-sm-12 col-md-7">
-                                            <button type="submit" class="btn btn-primary">Tambah Data</button>
+                                            <button type="submit" class="btn btn-primary">Edit Data</button>
                                         </div>
                                     </div>
                                 </form>
