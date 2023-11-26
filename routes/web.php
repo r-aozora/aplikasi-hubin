@@ -8,7 +8,7 @@ use App\Http\Controllers\Dashboard\KelasController;
 use App\Http\Controllers\Dashboard\SiswaController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
-use App\Http\Controllers\Dashboard\ProgramKeahlianController;
+use App\Http\Controllers\Dashboard\ProgramController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/user', UserController::class);
 
-        Route::resource('/program', ProgramKeahlianController::class);
+        Route::resource('/program', ProgramController::class);
         
         Route::resource('/angkatan', AngkatanController::class);
 

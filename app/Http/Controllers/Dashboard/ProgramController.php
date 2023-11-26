@@ -3,11 +3,29 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProgramKeahlian;
+use App\Models\Program;
 use Illuminate\Http\Request;
 
-class ProgramKeahlianController extends Controller
+class ProgramController extends Controller
 {
+    public function index()
+    {
+        $program = Program::orderBy('nama', 'asc')
+            ->withCount('kelas')
+            ->get();
+
+        confirmDelete('Hapus Data?', 'Yakin ingin menghapus Program Keahlian?');
+
+        return view('dashboard.program.index')
+            ->with([
+                'title' => 'Data Program Keahlian',
+                'active' => 'Siswa',
+                'subActive' => 'Program',
+                'triActive' => null,
+                'program' => $program
+            ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -21,7 +39,7 @@ class ProgramKeahlianController extends Controller
         $slug = strtolower(str_replace(' ', '-', $nama));
 
         try {
-            ProgramKeahlian::create([
+            Program::create([
                 'slug' => $slug,
                 'nama' => $request->input('nama'),
             ]);
@@ -37,7 +55,7 @@ class ProgramKeahlianController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProgramKeahlian $program)
+    public function update(Request $request, Program $program)
     {
         $request->validate([
             'nama' => 'required',
@@ -63,7 +81,7 @@ class ProgramKeahlianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgramKeahlian $program)
+    public function destroy(Program $program)
     {
         $program->delete();
 
