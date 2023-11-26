@@ -15,10 +15,13 @@
                 <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->guru->nama }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <a href="{{ route('logout') }}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </form>
             </div>
         </li>
     </ul>
