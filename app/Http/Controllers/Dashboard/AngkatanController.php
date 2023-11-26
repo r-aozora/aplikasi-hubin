@@ -8,6 +8,24 @@ use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
 {
+    public function index()
+    {
+        $angkatan = Angkatan::withCount('kelas')
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Angkatan beserta Kelas didalamnya??');
+
+        return view('dashboard.angkatan.index')
+            ->with([
+                'title' => 'Data Angkatan',
+                'active' => 'Siswa',
+                'subActive' => 'Angkatan',
+                'triActive' => null,
+                'angkatan' => $angkatan,
+            ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -41,11 +59,11 @@ class AngkatanController extends Controller
     {
         confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya?');
         
-        return view('dashboard.data.angkatan.detail')
+        return view('dashboard.angkatan.detail')
             ->with([
                 'title' => 'Data Kelas',
                 'active' => 'Siswa', 
-                'subActive' => $angkatan->slug,
+                'subActive' => 'Kelas',
                 'triActive' => null,
                 'angkatan' => $angkatan,
                 'kelas' => $angkatan->kelas,
