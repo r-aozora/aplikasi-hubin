@@ -4,36 +4,45 @@
             <a href="{{ route('dashboard') }}">HUBIN</a>
         </div>
         <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
             <li class="dropdown {{ $active === 'Dashboard' ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="menu-header">Menu</li>
             <li class="nav-item dropdown {{ $active === 'Siswa' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fas fa-users"></i>
                     <span>Data Siswa</span>
                 </a>
                 <ul class="dropdown-menu">
-                    @foreach ($dataAngkatan as $item)
-                        <li class="nav-item dropdown {{ $subActive === $item->slug ? 'active' : '' }}">
-                            <a href="{{ route('angkatan.show', $item->slug) }}" class="nav-link has-dropdown">{{ $item->nama }}</a>
-                            <ul class="dropdown-menu">
-                                @foreach ($item->kelas as $kelas)
-                                    <li class="nav-item" {{ $triActive === $kelas->slug ? 'active' : '' }}>
-                                        <a href="{{ route('kelas.show', [$item->slug, $kelas->slug]) }}" class="nav-link">{{ $kelas->nama }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endforeach
+                    <li class="nav-item dropdown {{ $subActive === 'Angkatan' ? 'active' : '' }}">
+                        <a href="{{ route('angkatan.index') }}" class="nav-link">Data Angkatan</a>
+                    </li>
+                    <li class="nav-item dropdown {{ $subActive === 'Kelas' ? 'active' : '' }}">
+                        <a href="{{ route('kelas.get') }}" class="nav-link">Data Kelas</a>
+                    </li>
+                    <li class="nav-item dropdown {{ $subActive === 'Siswa' ? 'active' : '' }}">
+                        <a href="{{ route('siswa.get') }}" class="nav-link">Data Siswa</a>
+                    </li>
+                    <li class="nav-item dropdown {{ $subActive === 'Program' ? 'active' : '' }}">
+                        <a href="{{ route('program.index') }}" class="nav-link">Data Program Keahlian</a>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown {{ $active === 'Guru' ? 'active' : '' }}">
                 <a href="{{ route('guru.index') }}" class="nav-link">
                     <i class="fas fa-user-friends"></i>
                     <span>Data Guru</span>
+                </a>
+            </li>
+            <li class="menu-header">Prakerin</li>
+            <li class="dropdown {{ $active === 'Perusahaan' ? 'active' : '' }}">
+                <a href="{{ route('perusahaan.index') }}" class="nav-link">
+                    <i class="fas fa-building"></i>
+                    <span>Data Perusahaan</span>
                 </a>
             </li>
             <li class="dropdown {{ $active === 'Jadwal' ? 'active' : '' }}">
@@ -88,22 +97,17 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown {{ $active === 'Perusahaan' ? 'active' : '' }}">
-                <a href="{{ route('perusahaan.index') }}" class="nav-link">
-                    <i class="fas fa-building"></i>
-                    <span>Data Perusahaan</span>
+            <li class="menu-header">Pengaturan</li>
+            <li class="dropdown {{ $active === 'User' ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" class="nav-link">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Kelola User</span>
                 </a>
             </li>
             <li class="dropdown {{ $active === 'Data' ? 'active' : '' }}">
                 <a href="{{ route('data.index') }}" class="nav-link">
                     <i class="fas fa-cogs"></i>
                     <span>Kelola Data</span>
-                </a>
-            </li>
-            <li class="dropdown {{ $active === 'User' ? 'active' : '' }}">
-                <a href="{{ route('user.index') }}" class="nav-link">
-                    <i class="fas fa-user-cog"></i>
-                    <span>Kelola User</span>
                 </a>
             </li>
         </ul>

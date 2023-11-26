@@ -39,27 +39,24 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::resource('/guru', GuruController::class);
-        Route::post('/guru/import', [GuruController::class, 'import'])
-            ->name('guru.import');
-        Route::get('/guru/export/to-excel', [GuruController::class, 'export'])
-            ->name('guru.export');
+        Route::post('/guru/import', [GuruController::class, 'import'])->name('guru.import');
+        Route::get('/guru/export/to-excel', [GuruController::class, 'export'])->name('guru.export');
 
         Route::resource('/user', UserController::class);
 
+        Route::resource('/program', ProgramKeahlianController::class);
+        
         Route::resource('/angkatan', AngkatanController::class);
 
-        Route::resource('/program', ProgramKeahlianController::class);
+        Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.get');
+        Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
 
-        Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)
-            ->parameters(['kelas' => 'kelas']);
-
+        Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.get');
         Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
 
         Route::resource('/perusahaan', PerusahaanController::class);
-        Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
-            ->name('perusahaan.import');
-        Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
-            ->name('perusahaan.export');
+        Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])->name('perusahaan.import');
+        Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])->name('perusahaan.export');
 
         Route::resource('/jadwal', JadwalPrakerinController::class);
 
