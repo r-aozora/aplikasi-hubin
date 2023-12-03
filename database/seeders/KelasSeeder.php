@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Angkatan;
 use App\Models\Kelas;
-use App\Models\ProgramKeahlian;
-use App\Models\Siswa;
+use App\Models\Program;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +15,7 @@ class KelasSeeder extends Seeder
      */
     public function run(): void
     {
-        ProgramKeahlian::insert([
+        Program::insert([
             [
                 'slug' => 'rekayasa-perangkat-lunak',
                 'nama' => 'Rekayasa Perangkat Lunak',

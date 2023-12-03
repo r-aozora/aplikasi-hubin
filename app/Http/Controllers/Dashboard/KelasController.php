@@ -6,65 +6,90 @@ use App\Http\Controllers\Controller;
 use App\Models\Angkatan;
 use App\Models\Guru;
 use App\Models\Kelas;
-use App\Models\ProgramKeahlian;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class KelasController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Angkatan $angkatan)
+    public function index(Request $request)
+    {
+        $id_angkatan = $request->id_angkatan;
+
+        $kelas = Kelas::with(['angkatan', 'program'])
+            ->when(strlen($id_angkatan), function ($query) use ($id_angkatan) {
+                return $query->where('id_angkatan', $id_angkatan);
+            })
+            ->withCount('siswa')
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        $angkatan = Angkatan::orderBy('nama', 'asc')->get();
+
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya??');
+
+        return view('dashboard.kelas.index')
+            ->with([
+                'title'     => 'Data Kelas',
+                'active'    => 'Siswa',
+                'subActive' => 'Kelas',
+                'triActive' => null,
+                'kelas'     => $kelas,
+                'angkatan'  => $angkatan,
+            ]);
+    }
+
+    public function create()
     {
         $guru = Guru::whereDoesntHave('kelas')
             ->orderBy('nama', 'asc')
             ->get();
 
-        $program = ProgramKeahlian::orderBy('nama', 'asc')
+        $program = Program::orderBy('nama', 'asc')
+            ->get();
+
+        $angkatan = Angkatan::orderBy('nama', 'asc')
             ->get();
 
         return view('dashboard.kelas.create')
             ->with([
-                'title' => 'Tambah Data Kelas',
-                'active' => 'Siswa', 
-                'subActive' => $angkatan->slug,
+                'title'     => 'Tambah Data Kelas',
+                'active'    => 'Siswa', 
+                'subActive' => 'Kelas',
                 'triActive' => null,
-                'angkatan' => $angkatan,
-                'guru' => $guru,
-                'program' => $program,
+                'guru'      => $guru,
+                'program'   => $program,
+                'angkatan'  => $angkatan,
             ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request, Angkatan $angkatan)
+    public function store(Request $request, )
     {
-        Session::flash('nama', $request->input('nama'));
+        Session::flash('nama_kelas', $request->input('nama_kelas'));
         
         $request->validate([
-            'nama' => 'required',
-            'guru' => 'required',
-            'program' => 'required',
-            'angkatan' => 'required',
+            'nama_kelas' => 'required',
+            'guru'       => 'required',
+            'program'    => 'required',
+            'angkatan'   => 'required',
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
+        $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_kelas'));
+        $slug = $angkatan->slug . '-' . strtolower(str_replace(' ', '-', $nama));
 
         try {
             Kelas::create([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
-                'id_guru' => $request->input('guru'),
-                'id_angkatan' => $request->input('angkatan'),
-                'id_program' => $request->input('program'),
+                'slug'        => $slug,
+                'nama'        => $request->input('nama_kelas'),
+                'id_guru'     => $request->input('guru'),
+                'id_program'  => $request->input('program'),
+                'id_angkatan' => $angkatan->id,
             ]);
     
             toast('Data Kelas berhasil ditambahkan!', 'success');
 
-            return redirect()->route('angkatan.show', $angkatan);
+            return redirect()->route('kelas.index');
         } catch (\Exception $e) {
             toast('Data Kelas gagal ditambahkan.', 'warning');
 
@@ -72,29 +97,8 @@ class KelasController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Angkatan $angkatan, Kelas $kelas)
-    {
-        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Siswa/i?');
-        
-        return view('dashboard.kelas.detail')
-            ->with([
-                'title' => 'Data Siswa',
-                'active' => 'Siswa', 
-                'subActive' => $angkatan->slug,
-                'triActive' => $kelas->slug,
-                'kelas' => $kelas, 
-                'angkatan' => $angkatan, 
-                'siswa' => $kelas->siswa,
-            ]);
-    }
 
-     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Angkatan $angkatan, Kelas $kelas)
+    public function edit(Kelas $kelas)
     {
         $guru = Guru::whereDoesntHave('kelas')
             ->orWhere(function ($query) use ($kelas) {
@@ -103,48 +107,50 @@ class KelasController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
-        $program = ProgramKeahlian::get();
+        $program = Program::orderBy('nama', 'asc')
+            ->get();
+
+        $angkatan = Angkatan::orderBy('nama', 'asc')
+            ->get();
 
         return view('dashboard.kelas.edit')
             ->with([
-                'title' => 'Edit Data Kelas',
-                'active' => 'Siswa', 
-                'subActive' => $angkatan->slug,
-                'triActive' => $kelas->slug,
-                'angkatan' => $angkatan,
-                'guru' => $guru,
-                'program' => $program,
-                'kelas' => $kelas,
+                'title'     => 'Edit Data Kelas',
+                'active'    => 'Siswa', 
+                'subActive' => 'Kelas',
+                'triActive' => null,
+                'guru'      => $guru,
+                'program'   => $program,
+                'angkatan'  => $angkatan,
+                'kelas'     => $kelas,
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Angkatan $angkatan, Kelas $kelas)
+    public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'nama' => 'required',
-            'angkatan' => 'required',
-            'guru' => 'required',
-            'program' => 'required',
+            'nama_kelas' => 'required',
+            'guru'       => 'required',
+            'program'    => 'required',
+            'angkatan'   => 'required',
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
+        $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
+        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_kelas'));
+        $slug = $angkatan->slug . '-' . strtolower(str_replace(' ', '-', $nama));
 
         try {
             $kelas->update([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
-                'id_guru' => $request->input('guru'),
-                'id_program' => $request->input('program'),
-                'id_angkatan' => $request->input('angkatan'),
+                'slug'        => $slug,
+                'nama'        => $request->input('nama_kelas'),
+                'id_guru'     => $request->input('guru'),
+                'id_program'  => $request->input('program'),
+                'id_angkatan' => $angkatan->id,
             ]);
     
             toast('Data Kelas berhasil diedit!', 'success');
 
-            return redirect()->route('angkatan.show', $angkatan);
+            return redirect()->route('kelas.index');
         } catch (\Exception $e) {
             toast('Data Kelas gagal diedit.', 'warning');
 
@@ -152,10 +158,7 @@ class KelasController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Angkatan $angkatan, Kelas $kelas)
+    public function destroy(Kelas $kelas)
     {
         $kelas->delete();
 

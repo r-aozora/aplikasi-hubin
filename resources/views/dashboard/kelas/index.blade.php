@@ -10,18 +10,16 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>{{ $title }} - {{ $angkatan->nama }}</h1>
+                <h1>{{ $title }}</h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active">
-                        <a href="{{ route('dashboard') }}">Dashboard</a>
-                    </div>
-                    <div class="breadcrumb-item">Angkatan {{ $angkatan->nama }}</div>
+                    <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
+                    <div class="breadcrumb-item">{{ $title }}</div>
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">{{ $title }} - {{ $angkatan->nama }}</h2>
+                <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, beatae.
+                    Organize and adjust all settings about this site.
                 </p>
                 <div class="row">
                     <div class="col-12">
@@ -29,20 +27,24 @@
                             <div class="card-header">
                                 <h4>{{ $title }}</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('kelas.create', $angkatan) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('kelas.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
-                                        Tambah Kelas
                                     </a>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Filter Kelas" onclick="$('#filterKelas').modal('show');">
+                                        <i class="fas fa-filter"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="table-1">
+                                    <table class="table table-striped" id="table-2">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">NO</th>
-                                                <th>NAMA</th>
+                                                <th class="text-center">#</th>
+                                                <th>NAMA KELAS</th>
+                                                <th>TAHUN ANGKATAN</th>
                                                 <th>PROGRAM KEAHLIAN</th>
+                                                <th>JUMLAH SISWA</th>
                                                 <th>OPTION</th>
                                             </tr>
                                         </thead>
@@ -51,15 +53,14 @@
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->nama }}</td>
+                                                    <td>{{ $item->angkatan->nama }}</td>
                                                     <td>{{ $item->program->nama }}</td>
+                                                    <td>{{ $item->siswa_count }}</td>
                                                     <td>
-                                                        <a href="{{ route('kelas.show', [$angkatan, $item->slug]) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Kelas">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                        <a href="{{ route('kelas.edit', [$angkatan, $item->slug]) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Kelas">
+                                                        <a href="{{ route('kelas.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit Data">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
-                                                        <a href="{{ route('kelas.destroy', [$angkatan, $item->slug]) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Kelas">
+                                                        <a href="{{ route('kelas.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" title="Hapus Data">
                                                             <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
                                                         </a>
                                                     </td>
@@ -74,6 +75,7 @@
                 </div>
             </div>
         </section>
+        @include('dashboard.kelas.filter')
     </div>
 @endsection
 
