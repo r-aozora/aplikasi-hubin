@@ -27,8 +27,7 @@
                             <div class="card-header">
                                 <h4>Data Angkatan</h4>
                                 <div class="card-header-action">
-                                    <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#tambahAngkatan">
+                                    <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#tambahAngkatan">
                                         <i class="fas fa-plus"></i>
                                         Tambah Data
                                     </button>
@@ -52,9 +51,6 @@
                                                     <td>{{ $item->nama }}</td>
                                                     <td>{{ $item->kelas_count }}</td>
                                                     <td>
-                                                        <a href="{{ route('angkatan.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Lihat Data">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
                                                         <button class="btn btn-sm btn-warning btn-edit-angkatan" data-modal-id="{{ $item->slug }}" data-toggle="tooltip" title="Edit Data">
                                                             <i class="fas fa-edit"></i>
                                                         </button>

@@ -8,13 +8,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form form-vertical" action="{{ route('angkatan.update', $item->slug) }}" method="post">
+                <form action="{{ route('angkatan.update', $item->slug) }}" method="post" novalidate>
                     @csrf
                     @method('put')
                     <div class="modal-body">
-                        <div class="custom-file">
-                            <label>Tahun Angkatan</label>
-                            <input type="text" class="form-control" name="nama" value="{{ $item->nama }}">
+                        <div class="form-group">
+                            <label for="tahun_angkatan">Tahun Angkatan</label>
+                            <input type="text" class="form-control @error('tahun_angkatan') is-invalid @enderror" id="tahun_angkatan" name="tahun_angkatan" value="{{ $item->nama }}" required>
+                            @error('tahun_angkatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">
