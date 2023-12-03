@@ -48,11 +48,9 @@ Route::middleware('auth')->group(function () {
         
         Route::resource('/angkatan', AngkatanController::class);
 
-        Route::get('/kelas', [KelasController::class, 'index'])->name('kelas.get');
-        Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
+        Route::resource('/kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
 
-        Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.get');
-        Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
+        Route::resource('/siswa', SiswaController::class);
 
         Route::resource('/perusahaan', PerusahaanController::class);
         Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])->name('perusahaan.import');

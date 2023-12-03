@@ -26,7 +26,7 @@ class KelasController extends Controller
 
         $angkatan = Angkatan::orderBy('nama', 'asc')->get();
 
-        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya??');
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya?');
 
         return view('dashboard.kelas.index')
             ->with([

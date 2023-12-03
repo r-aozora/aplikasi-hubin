@@ -22,10 +22,10 @@
                         <a href="{{ route('angkatan.index') }}" class="nav-link">Data Angkatan</a>
                     </li>
                     <li class="nav-item dropdown {{ $subActive === 'Kelas' ? 'active' : '' }}">
-                        <a href="{{ route('kelas.get') }}" class="nav-link">Data Kelas</a>
+                        <a href="{{ route('kelas.index') }}" class="nav-link">Data Kelas</a>
                     </li>
                     <li class="nav-item dropdown {{ $subActive === 'Siswa' ? 'active' : '' }}">
-                        <a href="{{ route('siswa.get') }}" class="nav-link">Data Siswa</a>
+                        <a href="{{ route('siswa.index') }}" class="nav-link">Data Siswa</a>
                     </li>
                     <li class="nav-item dropdown {{ $subActive === 'Program' ? 'active' : '' }}">
                         <a href="{{ route('program.index') }}" class="nav-link">Data Program Keahlian</a>
