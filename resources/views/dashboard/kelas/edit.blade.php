@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/choices.js/public/assets/styles/choices.css') }}">
 @endsection
 
 @section('content')
@@ -94,4 +95,6 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('assets/modules/choices.js/public/assets/scripts/choices.js') }}"></script>
+    <script src="{{ asset('assets/js/page/modules-choices.js')}}"></script>
 @endsection
