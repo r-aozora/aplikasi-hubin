@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AngkatanController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DataController;
 use App\Http\Controllers\Dashboard\GuruController;
 use App\Http\Controllers\Dashboard\JadwalPrakerinController;
@@ -27,14 +28,8 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard')->with([
-        'title' => 'Dashboard',
-        'active' => 'Dashboard',
-        'subActive' => null,
-        'triActive' => null,
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('dashboard')->group(function () {
@@ -58,12 +53,14 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('/jadwal', JadwalPrakerinController::class);
 
-        Route::get('/data', [DataController::class, 'index'])->name('data.index');
+        Route::get('/panduan', [DashboardController::class, 'help'])->name('help');
+        Route::get('/pengaturan', [DashboardController::class, 'setting'])->name('setting');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';
