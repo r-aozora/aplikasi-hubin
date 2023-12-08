@@ -16,18 +16,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('guru')
-            ->get();
+        $user = User::with('guru')->get();
 
         confirmDelete('Hapus Data?', 'Yakin ingin hapus Data User?');
 
         return view('dashboard.user.index')
             ->with([
-                'title' => 'Data User',
-                'active' => 'User',
+                'title'     => 'Data User',
+                'active'    => 'User',
                 'subActive' => null,
                 'triActive' => null,
-                'user' => $user,
+                'user'      => $user,
             ]);
     }
 
@@ -42,11 +41,11 @@ class UserController extends Controller
 
         return view('dashboard.user.create')
             ->with([
-                'title'=> 'Tambah Data User',
-                'active' => 'User',
+                'title'     => 'Tambah Data User',
+                'active'    => 'User',
                 'subActive' => null,
                 'triActive' => null,
-                'notUser' => $notUser,
+                'notUser'   => $notUser,
             ]);
     }
 
@@ -58,18 +57,20 @@ class UserController extends Controller
         Session::flash('username', $request->input('username'));
 
         $request->validate([
-            'nama' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'level' => 'required',
+            'nama_guru' => 'required',
+            'email'     => 'required',
+            'username'  => 'required',
+            'password'  => 'required',
+            'level'     => 'required',
         ]);
 
         try {
             User::create([
+                'email'    => $request->input('email'),
                 'username' => $request->input('username'),
                 'password' => Hash::make($request->input('password')),
-                'level' => $request->input('level'),
-                'id_guru' => $request->input('nama'),
+                'level'    => $request->input('level'),
+                'id_guru'  => $request->input('nama_guru'),
             ]);
             
             toast('Data User berhasil ditambahkan!', 'success');
@@ -93,12 +94,12 @@ class UserController extends Controller
 
         return view('dashboard.user.edit')
             ->with([
-                'title' => 'Edit Data User',
-                'active' => 'User',
+                'title'     => 'Edit Data User',
+                'active'    => 'User',
                 'subActive' => null, 
                 'triActive' => null,
-                'user' => $user,
-                'notUser' => $notUser,
+                'user'      => $user,
+                'notUser'   => $notUser,
             ]);
     }
 
@@ -108,16 +109,18 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'nama' => 'required',
-            'username' => 'required',
-            'level' => 'required',
+            'nama_guru' => 'required',
+            'email'     => 'required',
+            'username'  => 'required',
+            'level'     => 'required',
         ]);
 
         try {
             $user->update([
+                'email'    => $request->input('email'),
                 'username' => $request->input('username'),
-                'level' => $request->input('level'),
-                'id_guru' => $request->input('nama'),
+                'level'    => $request->input('level'),
+                'id_guru'  => $request->input('nama_guru'),
             ]);
     
             toast('Data User berhasil diedit!', 'success');

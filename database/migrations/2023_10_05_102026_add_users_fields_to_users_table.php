@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('username')
                 ->unique()
                 ->nullable()
-                ->after('id');
-            $table->enum('level', ['Admin', 'Guru'])
+                ->after('email');
+            $table->enum('level', ['admin', 'guru'])
                 ->after('password');
             $table->unsignedBigInteger('id_guru')
                 ->after('level');

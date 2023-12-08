@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('link')
-    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/choices.js/public/assets/styles/choices.css') }}">
 @endsection
 
 @section('content')
@@ -36,12 +37,12 @@
                                 <h4>{{ $title }}</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('user.store') }}" method="post">
+                                <form action="{{ route('user.store') }}" method="post" class="needs-validation">
                                     @csrf
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
+                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="nama" required>
+                                            <select class="form-control choices" id="nama_guru" name="nama_guru" required>
                                                 <option selected disabled>Nama Guru</option>
                                                 @foreach ($notUser as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -50,30 +51,31 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
+                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="username" value="{{ Session::get('username') }}" required autofocus>
+                                            <input type="text" class="form-control" id="email" name="email" value="{{ Session::get('email') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
+                                        <label for="username" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="password" class="form-control" name="password" required>
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ Session::get('username') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Level</label>
+                                        <label for="password" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <div class="selectgroup selectgroup-pills">
-                                                <label class="selectgroup-item">
-                                                    <input type="radio" name="level" value="Admin" class="selectgroup-input">
-                                                    <span class="selectgroup-button">Admin</span>
-                                                </label>
-                                                <label class="selectgroup-item">
-                                                    <input type="radio" name="level" value="Guru" class="selectgroup-input">
-                                                    <span class="selectgroup-button">Guru</span>
-                                                </label>
-                                            </div>
+                                            <input type="password" class="form-control" id="password" name="password" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label for="level" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Level</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select class="form-control selectric" id="level" name="level" required>
+                                                <option selected disabled>Level</option>
+                                                <option value="guru">Guru</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -93,8 +95,10 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/choices.js/public/assets/scripts/choices.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-choices.js')}}"></script>
     <script src="{{ asset('assets/js/page/features-post-create.js') }}"></script>
 @endsection

@@ -42,6 +42,7 @@
                                             <tr>
                                                 <th class="text-center">NO</th>
                                                 <th>NAMA</th>
+                                                <th>EMAIL</th>
                                                 <th>USERNAME</th>
                                                 <th>LEVEL</th>
                                                 <th>OPSI</th>
@@ -52,8 +53,9 @@
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->guru->nama }}</td>
+                                                    <td>{{ $item->email }}</td>
                                                     <td>{{ $item->username }}</td>
-                                                    <td>{{ $item->level }}</td>
+                                                    <td>{{ ucfirst($item->level) }}</td>
                                                     <td>
                                                         @if ($item->id !== Auth::id())
                                                             <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data user">

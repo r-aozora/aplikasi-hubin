@@ -18,7 +18,7 @@ class User extends Authenticatable
 
     protected $primaryKey = 'id';
 
-    protected $fillable = ['username', 'password', 'level', 'id_guru'];
+    protected $fillable = ['email', 'username', 'password', 'level', 'id_guru'];
 
     public function guru(){
         return $this->belongsTo(Guru::class, 'id_guru');

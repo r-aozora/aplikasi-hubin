@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
 @section('link')
-    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
-@endsection
-
+    <link rel="stylesheet" href="{{ asset('assets/modules/jquery-selectric/selectric.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/choices.js/public/assets/styles/choices.css') }}">@endsection
 @section('content')
     <div class="main-content">
         <section class="section">
@@ -36,13 +35,13 @@
                                 <h4>{{ $title }}</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('user.update', $user->id) }}" method="post">
+                                <form action="{{ route('user.update', $user->id) }}" method="post" class="needs-validation">
                                     @csrf
                                     @method('put')
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
+                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="nama" required>
+                                            <select class="form-control choices" id="nama_guru" name="nama_guru" required>
                                                 <option value="{{ $user->guru->id }}" selected>{{ $user->guru->nama }}</option>
                                                 @foreach ($notUser as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -51,24 +50,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
+                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="username" value="{{ $user->username }}" required autofocus>
+                                            <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Level</label>
+                                        <label for="username" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
                                         <div class="col-sm-12 col-md-7">
-                                            <div class="selectgroup selectgroup-pills">
-                                                <label class="selectgroup-item">
-                                                    <input type="radio" name="level" value="Admin" class="selectgroup-input" {{ $user->level === 'Admin' ? 'checked' : '' }}>
-                                                    <span class="selectgroup-button">Admin</span>
-                                                </label>
-                                                <label class="selectgroup-item">
-                                                    <input type="radio" name="level" value="Guru" class="selectgroup-input" {{ $user->level === 'Guru' ? 'checked' : '' }}>
-                                                    <span class="selectgroup-button">Guru</span>
-                                                </label>
-                                            </div>
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-4">
+                                        <label for="level" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Level</label>
+                                        <div class="col-sm-12 col-md-7">
+                                            <select class="form-control selectric" id="level" name="level">
+                                                <option value="guru" {{ $user->level === 'guru' ? 'selected' : '' }}>Guru</option>
+                                                <option value="admin" {{ $user->level === 'admin' ? 'selected' : '' }}>Admin</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -88,8 +87,10 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/choices.js/public/assets/scripts/choices.js') }}"></script>
 
     <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-choices.js')}}"></script>
     <script src="{{ asset('assets/js/page/features-post-create.js') }}"></script>
 @endsection
