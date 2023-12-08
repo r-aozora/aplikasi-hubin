@@ -12,7 +12,13 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img alt="image" src="{{ asset('images/profile.png') }}" class="rounded-circle mr-1">
-                <div class="d-sm-none d-lg-inline-block">{{ substr(Auth::user()->guru->nama, 0, 15). '...' }}</div>
+                <div class="d-sm-none d-lg-inline-block">
+                    @if (strlen(Auth::user()->guru->nama) > 15)
+                        {{ substr(Auth::user()->guru->nama, 0, 15). '...' }}
+                    @else
+                        {{ Auth::user()->guru->nama }}
+                    @endif
+                </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="{{ route('profile.edit') }}" class="dropdown-item has-icon">

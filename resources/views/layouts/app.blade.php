@@ -49,7 +49,11 @@
             <div class="navbar-bg"></div>
             @include('layouts.navbar')
 
-            @include('layouts.sidebar')
+            @if (Auth::user()->level === 'admin')
+                @include('layouts.sidebar-admin')
+            @elseif (Auth::user()->level === 'guru')
+                @include('layouts.sidebar-guru')
+            @endif
 
             @yield('content')
 

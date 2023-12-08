@@ -83,7 +83,7 @@
             <li class="dropdown {{ $active === 'User' ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}" class="nav-link">
                     <i class="fas fa-user-cog"></i>
-                    <span>Kelola User</span>
+                    <span>Data User</span>
                 </a>
             </li>
             <li class="dropdown {{ $active === 'Profile' ? 'active' : '' }}">
