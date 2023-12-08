@@ -74,28 +74,10 @@
                 </ul>
             </li>
             <li class="nav-item dropdown {{ $active === 'Monitoring' ? 'active' : '' }}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                <a href="#" class="nav-link">
                     <i class="fas fa-tv"></i>
                     <span>Monitoring</span>
                 </a>
-                <ul class="dropdown-menu">
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link has-dropdown">2022/2023</a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">XII RPL</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link has-dropdown">2023/2024</a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">XII RPL</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </li>
             <li class="menu-header">Pengaturan</li>
             <li class="dropdown {{ $active === 'User' ? 'active' : '' }}">
@@ -104,18 +86,30 @@
                     <span>Kelola User</span>
                 </a>
             </li>
-            <li class="dropdown {{ $active === 'Data' ? 'active' : '' }}">
-                <a href="{{ route('data.index') }}" class="nav-link">
+            <li class="dropdown {{ $active === 'Profile' ? 'active' : '' }}">
+                <a href="{{ route('profile.edit') }}" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li class="dropdown {{ $active === 'Panduan' ? 'active' : '' }}">
+                <a href="{{ route('help') }}" class="nav-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Panduan</span>
+                </a>
+            </li>
+            <li class="dropdown {{ $active === 'Pengaturan' ? 'active' : '' }}">
+                <a href="{{ route('setting') }}" class="nav-link">
                     <i class="fas fa-cogs"></i>
-                    <span>Kelola Data</span>
+                    <span>Pengaturan</span>
                 </a>
             </li>
         </ul>
-        <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+        {{-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
                 <i class="fas fa-rocket"></i>
                 Main Page
             </a>
-        </div>
+        </div> --}}
     </aside>
 </div>
