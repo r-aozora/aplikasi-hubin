@@ -94,7 +94,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil ditambahkan!', 'success');
             
-            return redirect()->route('siswa.index');
+            return redirect('/dashboard/siswa?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal ditambahkan.', 'warning');
 
@@ -164,7 +164,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil diedit!', 'success');
             
-            return redirect()->route('siswa.index');
+            return redirect('/dashboard/siswa?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal diedit.', 'warning');
 

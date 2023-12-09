@@ -89,7 +89,7 @@ class KelasController extends Controller
     
             toast('Data Kelas berhasil ditambahkan!', 'success');
 
-            return redirect()->route('kelas.index');
+            return redirect('/dashboard/kelas?id_angkatan=' . $angkatan->id);
         } catch (\Exception $e) {
             toast('Data Kelas gagal ditambahkan.', 'warning');
 
@@ -150,7 +150,7 @@ class KelasController extends Controller
     
             toast('Data Kelas berhasil diedit!', 'success');
 
-            return redirect()->route('kelas.index');
+            return redirect('/dashboard/kelas?id_angkatan=' . $angkatan->id);
         } catch (\Exception $e) {
             toast('Data Kelas gagal diedit.', 'warning');
 
