@@ -62,7 +62,8 @@ Route::middleware(['auth', 'checkLevel:admin,auru'])->group(function () {
         Route::get('/pengaturan', [DashboardController::class, 'setting'])->name('setting');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile/{user}', [ProfileController::class, 'update_profile'])->name('profile.update_profile');
+        Route::patch('/profile', [ProfileController::class, 'update_account'])->name('profile.update_account');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
