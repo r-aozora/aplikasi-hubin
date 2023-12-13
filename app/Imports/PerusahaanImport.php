@@ -5,9 +5,10 @@ namespace App\Imports;
 use App\Models\Perusahaan;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PerusahaanImport implements ToCollection, WithHeadingRow
+class PerusahaanImport implements ToCollection, WithHeadingRow, WithCalculatedFormulas
 {
     public function collection(Collection $rows)
     {

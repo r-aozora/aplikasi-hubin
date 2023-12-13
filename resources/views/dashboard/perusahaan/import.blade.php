@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="importPerusahaan">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Impor Data Perusahaan</h5>
@@ -16,6 +16,9 @@
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <div class="mr-auto">
+                        <a href="{{ asset('download/Data Perusahaan Prakerin.xlsx') }}">Download Template</a>
+                    </div>
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-sm btn-primary">Impor Data</button>
                 </div>
