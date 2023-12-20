@@ -79,7 +79,7 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 }
 
 .bg-primary {
-    background-color: #6777ef !important;
+    background-color: #448ecd !important;
 }
 
 .bg-secondary {
@@ -114,7 +114,7 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 .text-primary-all *,
 .text-primary-all *:before,
 .text-primary-all *:after {
-    color: #6777ef !important;
+    color: #448ecd !important;
 }
 
 .text-secondary,
@@ -676,7 +676,7 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .list-group-item-primary {
-    background-color: #6777ef;
+    background-color: #448ecd;
     color: #fff;
 }
 
@@ -755,7 +755,7 @@ select.form-control:not([size]):not([multiple]) {
     color: #fff;
 }
 .alert.alert-primary {
-    background-color: #6777ef;
+    background-color: #448ecd;
 }
 .alert.alert-secondary {
     background-color: #cdd3d8;
@@ -966,7 +966,7 @@ select.form-control:not([size]):not([multiple]) {
     background-position: center;
 }
 .card.card-primary {
-    border-top: 2px solid #6777ef;
+    border-top: 2px solid #448ecd;
 }
 .card.card-secondary {
     border-top: 2px solid #34395e;
@@ -1468,7 +1468,7 @@ table tr:hover .table-links {
     color: #fff;
 }
 .badge.badge-primary {
-    background-color: #6777ef;
+    background-color: #448ecd;
 }
 .badge.badge-secondary {
     background-color: #34395e;
@@ -1847,8 +1847,8 @@ h6 .badge {
 .btn-primary,
 .btn-primary.disabled {
     box-shadow: 0 2px 6px #acb5f6;
-    background-color: #6777ef;
-    border-color: #6777ef;
+    background-color: #448ecd;
+    border-color: #448ecd;
 }
 .btn-primary:focus,
 .btn-primary.disabled:focus {
@@ -1867,8 +1867,8 @@ h6 .badge {
 
 .btn-outline-primary,
 .btn-outline-primary.disabled {
-    border-color: #6777ef;
-    color: #6777ef;
+    border-color: #448ecd;
+    color: #448ecd;
 }
 .btn-outline-primary:hover,
 .btn-outline-primary:focus,
@@ -1876,7 +1876,7 @@ h6 .badge {
 .btn-outline-primary.disabled:hover,
 .btn-outline-primary.disabled:focus,
 .btn-outline-primary.disabled:active {
-    background-color: #6777ef !important;
+    background-color: #448ecd !important;
     color: #fff;
 }
 
@@ -2931,8 +2931,8 @@ pre {
     text-align: center;
 }
 .circle-step .circle.circle-primary {
-    border-color: #6777ef;
-    color: #6777ef;
+    border-color: #448ecd;
+    color: #448ecd;
 }
 
 .pe-none {
