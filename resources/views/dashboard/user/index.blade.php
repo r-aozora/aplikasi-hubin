@@ -59,7 +59,7 @@
                                                     <td>
                                                         @if ($item->id !== Auth::id())
                                                             <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data user">
-                                                                <i class="fas fa-edit"></i>
+                                                                <i class="fas fa-pen"></i>
                                                             </a>
                                                             <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data user">
                                                                 <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click()";></i>

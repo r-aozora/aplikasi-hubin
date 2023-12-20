@@ -52,7 +52,7 @@
                                                     <td>{{ $item->kelas_count }}</td>
                                                     <td>
                                                         <button class="btn btn-sm btn-warning btn-edit-program" data-modal-id="{{ $item->slug }}" data-toggle="tooltip" title="Edit Data">
-                                                            <i class="fas fa-edit"></i>
+                                                            <i class="fas fa-pen"></i>
                                                         </button>
                                                         <a href="{{ route('program.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" title="Hapus Data">
                                                             <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>

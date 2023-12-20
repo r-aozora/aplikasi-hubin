@@ -71,7 +71,7 @@
                                                                 Detail
                                                             </a>
                                                             <a class="dropdown-item has-icon" href="{{ route('perusahaan.edit', $item->slug) }}">
-                                                                <i class="fas fa-edit"></i>
+                                                                <i class="fas fa-pen"></i>
                                                                 Edit
                                                             </a>
                                                             <div class="dropdown-divider"></div>

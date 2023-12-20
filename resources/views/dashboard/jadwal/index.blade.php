@@ -57,7 +57,7 @@
                                                     <td>{{ $item->angkatan->nama }}</td>
                                                     <td>
                                                         <a href="#" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data">
-                                                            <i class="fas fa-edit"></i>
+                                                            <i class="fas fa-pen"></i>
                                                         </a>
                                                         <a href="#" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" data-placement="top" title="Hapus Data">
                                                             <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>

@@ -67,7 +67,7 @@
                                                                 <i class="fas fa-eye"></i>
                                                             </a> --}}
                                                             <a href="{{ route('guru.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Guru">
-                                                                <i class="fas fa-edit"></i>
+                                                                <i class="fas fa-pen"></i>
                                                             </a>
                                                             <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Guru">
                                                                 <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
