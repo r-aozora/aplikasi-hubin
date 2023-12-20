@@ -28,7 +28,7 @@
                         <a href="{{ route('siswa.index') }}" class="nav-link">Data Siswa</a>
                     </li>
                     <li class="nav-item dropdown {{ $subActive === 'Program' ? 'active' : '' }}">
-                        <a href="{{ route('program.index') }}" class="nav-link">Data Program Keahlian</a>
+                        <a href="{{ route('program.index') }}" class="nav-link">Program Keahlian</a>
                     </li>
                 </ul>
             </li>

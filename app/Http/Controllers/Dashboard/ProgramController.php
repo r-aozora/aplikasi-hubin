@@ -18,7 +18,7 @@ class ProgramController extends Controller
 
         return view('dashboard.program.index')
             ->with([
-                'title' => 'Data Program Keahlian',
+                'title' => 'Program Keahlian',
                 'active' => 'Siswa',
                 'subActive' => 'Program',
                 'triActive' => null,

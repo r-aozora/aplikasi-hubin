@@ -1,5 +1,5 @@
 @foreach ($program as $item)
-    <div class="modal fade" tabindex="-1" role="dialog" id="editProgram{{ $item->slug }}">
+    <div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ $item->slug }}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -8,13 +8,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="form form-vertical" action="{{ route('program.update', $item->slug) }}" method="post">
+                <form action="{{ route('program.update', $item->slug) }}" method="post" class="needs-validation" novalidate>
                     @csrf
                     @method('put')
                     <div class="modal-body">
                         <div class="custom-file">
-                            <label>Program Keahlian</label>
-                            <input type="text" class="form-control" name="nama" value="{{ $item->nama }}">
+                            <label for="nama">Program Keahlian</label>
+                            <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}" required>
                         </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">
