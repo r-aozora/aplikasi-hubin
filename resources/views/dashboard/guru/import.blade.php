@@ -1,5 +1,5 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="importGuru">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" tabindex="-1" role="dialog" id="import-guru">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Impor Data Guru</h5>
@@ -7,15 +7,18 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ route('guru.import') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('guru.import') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="custom-file">
-                        <label class="custom-file-label" for="customFile">Pilih File</label>
-                        <input type="file" class="form-control custom-file-input" id="customFile" name="file">
+                        <label for="file">Pilih File</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
+                    <div class="mr-auto">
+                        <a href="{{ asset('download/Data Guru.xlsx') }}">Download Template</a>
+                    </div>
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-sm btn-primary">Impor Data</button>
                 </div>

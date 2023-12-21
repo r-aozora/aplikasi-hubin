@@ -15,13 +15,13 @@
                     <div class="breadcrumb-item active">
                         <a href="{{ route('dashboard') }}">Dashboard</a>
                     </div>
-                    <div class="breadcrumb-item">Data Guru</div>
+                    <div class="breadcrumb-item">{{ $title }}</div>
                 </div>
             </div>
             <div class="section-body">
                 <h2 class="section-title">Kelola {{ $title }}</h2>
                 <p class="section-lead">
-                    We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+                    Anda dapat mengelola semua {{ $title }}, seperti mengedit, menghapus, dan lainnya.
                 </p>
                 <div class="row">
                     <div class="col-12">
@@ -29,13 +29,13 @@
                             <div class="card-header">
                                 <h4>{{ $title }}</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('guru.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Tambah Data Guru">
+                                    <a href="{{ route('guru.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ route('guru.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Download Data Guru">
+                                    <a href="{{ route('guru.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data">
                                         <i class="fas fa-download"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info" id="btn-import" data-toggle="tooltip" data-placement="top" title="Impor Data Guru">
+                                    <button class="btn btn-sm btn-info btn-import" data-toggle="tooltip" title="Impor Data">
                                         <i class="fas fa-upload"></i>
                                     </button>
                                 </div>
@@ -50,7 +50,7 @@
                                                 <th>NIP</th>
                                                 <th>SEBAGAI</th>
                                                 <th>TELEPON</th>
-                                                <th>OPSI</th>
+                                                <th>AKSI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,14 +63,15 @@
                                                     <td>{{ $item->telepon }}</td>
                                                     <td>
                                                         @if ($item->id !== Auth::id())
-                                                            {{-- <a href="{{ route('guru.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Lihat Data Guru">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a> --}}
-                                                            <a href="{{ route('guru.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data Guru">
+                                                            <a href="{{ route('guru.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit Data">
                                                                 <i class="fas fa-pen"></i>
                                                             </a>
-                                                            <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data Guru">
+                                                            <a href="{{ route('guru.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" title="Hapus Data">
                                                                 <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-info" data-toggle="tooltip" title="Ke Profil">
+                                                                <i class="fas fa-external-link-alt"></i>
                                                             </a>
                                                         @endif
                                                     </td>
@@ -99,8 +100,8 @@
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
     <script>
-        document.getElementById('btn-import').addEventListener('click', function () {
-            $('#importGuru').modal('show');
+        $('.btn-import').click(function() {
+            $('#import-guru').modal('show');
         });
     </script>
 @endsection
