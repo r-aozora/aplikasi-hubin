@@ -54,6 +54,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Session::flash('email', $request->input('email'));
         Session::flash('username', $request->input('username'));
 
         $request->validate([

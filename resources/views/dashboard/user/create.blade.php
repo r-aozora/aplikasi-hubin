@@ -28,20 +28,20 @@
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat membuat Data User baru dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('user.store') }}" method="post" class="needs-validation">
+                                <form action="{{ route('user.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
-                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3">Nama Guru</label>
+                                        <div class="col-12 col-md-7">
                                             <select class="form-control choices" id="nama_guru" name="nama_guru" required>
                                                 <option selected disabled>Nama Guru</option>
                                                 @foreach ($notUser as $item)
@@ -51,26 +51,26 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3">Email</label>
+                                        <div class="col-12 col-md-7">
                                             <input type="text" class="form-control" id="email" name="email" value="{{ Session::get('email') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="username" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Username</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="username" class="col-form-label text-md-right col-12 col-md-3">Username</label>
+                                        <div class="col-12 col-md-7">
                                             <input type="text" class="form-control" id="username" name="username" value="{{ Session::get('username') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="password" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="password" class="col-form-label text-md-right col-12 col-md-3">Password</label>
+                                        <div class="col-12 col-md-7">
                                             <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="level" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Level</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="level" class="col-form-label text-md-right col-12 col-md-3">Level</label>
+                                        <div class="col-12 col-md-7">
                                             <select class="form-control selectric" id="level" name="level" required>
                                                 <option selected disabled>Level</option>
                                                 <option value="guru">Guru</option>
@@ -79,8 +79,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Tambah Data</button>
                                         </div>
                                     </div>
