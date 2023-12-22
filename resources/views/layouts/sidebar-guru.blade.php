@@ -3,7 +3,7 @@
         <div class="sidebar-brand">
             <a href="{{ route('dashboard') }}">HUBIN</a>
         </div>
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu mb-5">
             <li class="menu-header">Dashboard</li>
             <li class="dropdown {{ $active === 'Dashboard' ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="nav-link">
