@@ -15,15 +15,15 @@ class AngkatanController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
-        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Angkatan beserta Kelas didalamnya??');
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Angkatan beserta Kelas didalamnya?');
 
         return view('dashboard.angkatan.index')
             ->with([
-                'title' => 'Data Angkatan',
-                'active' => 'Siswa',
+                'title'     => 'Data Angkatan',
+                'active'    => 'Siswa',
                 'subActive' => 'Angkatan',
                 'triActive' => null,
-                'angkatan' => $angkatan,
+                'angkatan'  => $angkatan,
             ]);
     }
 
