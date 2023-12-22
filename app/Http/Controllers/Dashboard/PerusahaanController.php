@@ -78,7 +78,7 @@ class PerusahaanController extends Controller
 
         $perusahaan = [
             'slug' => $slug,
-            'nama' => $request->input('nama'),
+            'nama' => strtoupper($request->input('nama')),
             'alamat' => $request->input('alamat'),
             'penerima' => $request->input('penerima'),
             'kecamatan' => $request->input('kecamatan'),
@@ -113,7 +113,7 @@ class PerusahaanController extends Controller
                 'active' => 'Perusahaan',
                 'subActive' => null,
                 'triActive' => null,
-                'item' => $perusahaan,
+                'perusahaan' => $perusahaan,
             ]);
     }
 
@@ -154,7 +154,7 @@ class PerusahaanController extends Controller
 
         $update = [
             'slug' => $slug,
-            'nama' => $request->input('nama'),
+            'nama' => strtoupper($request->input('nama')),
             'alamat' => $request->input('alamat'),
             'penerima' => $request->input('penerima'),
             'kecamatan' => $request->input('kecamatan'),
@@ -200,13 +200,11 @@ class PerusahaanController extends Controller
             Excel::import(new PerusahaanImport, $request->file('file'));
     
             toast('Data Perusahaan berhasil diimpor!', 'success');
-
-            return redirect()->route('perusahaan.index');
         } catch(\Exception $e) {
             toast('Data Perusahaan gagal diimpor.', 'warning');
-
-            return redirect()->back();
         }
+
+        return redirect()->back();
     }
 
     public function export()

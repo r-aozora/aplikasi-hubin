@@ -21,7 +21,7 @@
             <div class="section-body">
                 <h2 class="section-title">Kelola {{ $title }}</h2>
                 <p class="section-lead">
-                    We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+                    Anda dapat mengelola semua {{ $title }}, seperti mengedit, menghapus, dan lainnya.
                 </p>
                 <div class="row">
                     <div class="col-12">
@@ -29,13 +29,13 @@
                             <div class="card-header">
                                 <h4>{{ $title }}</h4>
                                 <div class="card-header-action">
-                                    <a href="{{ route('perusahaan.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Tambah Data Perusahaan">
+                                    <a href="{{ route('perusahaan.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ route('perusahaan.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Download Data Perusahaan">
+                                    <a href="{{ route('perusahaan.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data">
                                         <i class="fas fa-download"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info" id="btn-import" data-toggle="tooltip" data-placement="top" title="Impor Data Perusahaan">
+                                    <button class="btn btn-sm btn-info btn-import" data-toggle="tooltip" title="Impor Data">
                                         <i class="fas fa-upload"></i>
                                     </button>
                                 </div>
@@ -62,7 +62,7 @@
                                                     <td>{{ $item->lokasi }}</td>
                                                     <td>{{ $item->telepon }}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             OPSI
                                                         </button>
                                                         <div class="dropdown-menu dropleft">
@@ -106,8 +106,8 @@
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
     <script>
-        document.getElementById('btn-import').addEventListener('click', function () {
-            $('#importPerusahaan').modal('show');
+        $('.btn-import').click(function() {
+            $('#import-perusahaan').modal('show');
         });
     </script>
 @endsection

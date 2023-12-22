@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="importPerusahaan">
+<div class="modal fade" tabindex="-1" role="dialog" id="import-perusahaan">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,12 +7,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form class="form form-vertical" action="{{ route('perusahaan.import') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('perusahaan.import') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
                     <div class="custom-file">
-                        <label class="custom-file-label" for="customFile">Pilih File</label>
-                        <input type="file" class="form-control custom-file-input" id="customFile" name="file">
+                        <label for="file">Pilih File</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">

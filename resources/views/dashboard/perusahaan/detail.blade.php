@@ -20,13 +20,13 @@
                     <div class="breadcrumb-item">
                         <a href="{{ route('perusahaan.index') }}">Data Perusahaan</a>
                     </div>
-                    <div class="breadcrumb-item">Tambah Data</div>
+                    <div class="breadcrumb-item">Detail Data</div>
                 </div>
             </div>
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Berikut adalah detail dari {{ $perusahaan->nama }}.
                 </p>
             </div>
         </section>

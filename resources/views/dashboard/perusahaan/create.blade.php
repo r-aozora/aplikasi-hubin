@@ -27,57 +27,57 @@
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat membuat Data Perusahaan baru dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('perusahaan.store') }}" method="post">
+                                <form action="{{ route('perusahaan.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nama" value="{{ Session::get('nama') }}" required autofocus>
+                                        <label for="nama" class="col-form-label text-md-right col-12 col-md-3">Nama Perusahaan</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="nama" name="nama" value="{{ Session::get('nama') }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Penerima Surat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="penerima" value="{{ Session::get('penerima') }}">
+                                        <label for="penerima" class="col-form-label text-md-right col-12 col-md-3">Penerima Surat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="penerima" name="penerima" value="{{ Session::get('penerima') }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="alamat" value="{{ Session::get('alamat') }}" required>
+                                        <label for="alamat" class="col-form-label text-md-right col-12 col-md-3">Alamat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="alamat" name="alamat" value="{{ Session::get('alamat') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kecamatan</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="kecamatan" value="{{ Session::get('kecamatan') }}" required>
+                                        <label for="kecamatan" class="col-form-label text-md-right col-12 col-md-3">Kecamatan</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ Session::get('kecamatan') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kota/Kabupaten</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="kota" value="{{ Session::get('kota') }}" required>
+                                        <label for="kota" class="col-form-label text-md-right col-12 col-md-3">Kota/Kabupaten</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="kota" name="kota" value="{{ Session::get('kota') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Provinsi</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="provinsi" value="{{ Session::get('provinsi') }}" required>
+                                        <label for="provinsi" class="col-form-label text-md-right col-12 col-md-3">Provinsi</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="provinsi" name="provinsi" value="{{ Session::get('provinsi') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lokasi</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="lokasi" required>
+                                        <label for="lokasi" class="col-form-label text-md-right col-12 col-md-3">Lokasi</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control selectric" id="lokasi" name="lokasi" required>
                                                 <option selected disabled>Lokasi</option>
                                                 <option value="Dalam Kota">Dalam Kota</option>
                                                 <option value="Luar Kota">Luar Kota</option>
@@ -85,20 +85,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="telepon" value="{{ Session::get('telepon') }}">
+                                        <label for="telepon" class="col-form-label text-md-right col-12 col-md-3">No. Telepon</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ Session::get('telepon') }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Koordinat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="koordinat" value="{{ Session::get('koordinat') }}">
+                                        <label for="koordinat" class="col-form-label text-md-right col-12 col-md-3">Koordinat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control" id="koordinat" name="koordinat" value="{{ Session::get('koordinat') }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Tambah Data</button>
                                         </div>
                                     </div>
