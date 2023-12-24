@@ -24,7 +24,10 @@ class KelasController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
-        $angkatan = Angkatan::orderBy('nama', 'asc')->get();
+        $angkatan = [
+            'data' => Angkatan::orderBy('nama', 'asc')->get(),
+            'search' => $id_angkatan ? Angkatan::where('id', $id_angkatan)->first() : null
+        ];
 
         confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya?');
 
@@ -68,10 +71,10 @@ class KelasController extends Controller
         Session::flash('nama_kelas', $request->input('nama_kelas'));
         
         $request->validate([
-            'nama_kelas' => 'required',
-            'guru'       => 'required',
-            'program'    => 'required',
-            'angkatan'   => 'required',
+            'nama_kelas' => ['required', 'string'],
+            'guru'       => ['required'],
+            'program'    => ['required'],
+            'angkatan'   => ['required'],
         ]);
 
         $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
@@ -89,7 +92,7 @@ class KelasController extends Controller
     
             toast('Data Kelas berhasil ditambahkan!', 'success');
 
-            return redirect('/dashboard/kelas?id_angkatan=' . $angkatan->id);
+            return redirect()->route('angkatan.index', '?id_angkatan=' . $angkatan->id);
         } catch (\Exception $e) {
             toast('Data Kelas gagal ditambahkan.', 'warning');
 
@@ -129,10 +132,10 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'nama_kelas' => 'required',
-            'guru'       => 'required',
-            'program'    => 'required',
-            'angkatan'   => 'required',
+            'nama_kelas' => ['required', 'string'],
+            'guru'       => ['required'],
+            'program'    => ['required'],
+            'angkatan'   => ['required'],
         ]);
 
         $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
@@ -150,7 +153,7 @@ class KelasController extends Controller
     
             toast('Data Kelas berhasil diedit!', 'success');
 
-            return redirect('/dashboard/kelas?id_angkatan=' . $angkatan->id);
+            return redirect()->route('angkatan.index', '?id_angkatan=' . $angkatan->id);
         } catch (\Exception $e) {
             toast('Data Kelas gagal diedit.', 'warning');
 

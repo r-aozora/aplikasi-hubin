@@ -11,27 +11,35 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>{{ $title }}</h1>
+                <h1>
+                    @if ($angkatan['search'] !== null)
+                        {{ $title . ' Tahun Angkatan ' . $angkatan['search']->nama }}
+                    @else
+                        {{ $title }}
+                    @endif
+                </h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item">{{ $title }}</div>
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item">Data Kelas</div>
                 </div>
             </div>
             <div class="section-body">
-                <h2 class="section-title">{{ $title }}</h2>
+                <h2 class="section-title">Kelola {{ $title }}</h2>
                 <p class="section-lead">
-                    Organize and adjust all settings about this site.
+                    Anda dapat mengelola semua {{ $title }}, seperti mengedit, menghapus, dan lainnya.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Data Kelas</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('kelas.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Filter Kelas" onclick="$('#filterKelas').modal('show');">
+                                    <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Filter Data" onclick="$('#filter-kelas').modal('show');">
                                         <i class="fas fa-filter"></i>
                                     </button>
                                 </div>
@@ -41,12 +49,12 @@
                                     <table class="table table-striped" id="table-2">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">#</th>
+                                                <th class="text-center">NO</th>
                                                 <th>NAMA KELAS</th>
                                                 <th>TAHUN ANGKATAN</th>
                                                 <th>PROGRAM KEAHLIAN</th>
                                                 <th>JUMLAH SISWA</th>
-                                                <th>OPTION</th>
+                                                <th>OPSI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -58,8 +66,14 @@
                                                     <td>{{ $item->program->nama }}</td>
                                                     <td>{{ $item->siswa_count }}</td>
                                                     <td>
+                                                        <form action="{{ route('siswa.index') }}" method="get" class="d-inline">
+                                                            <input type="hidden" name="id_kelas" value="{{ $item->id }}">
+                                                            <button type="submit" class="btn btn-sm btn-info" data-toggle="tooltip" title="Detail Data">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                        </form>
                                                         <a href="{{ route('kelas.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit Data">
-                                                            <i class="fas fa-edit"></i>
+                                                            <i class="fas fa-pen"></i>
                                                         </a>
                                                         <a href="{{ route('kelas.destroy', $item->slug) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" title="Hapus Data">
                                                             <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click();"></i>
