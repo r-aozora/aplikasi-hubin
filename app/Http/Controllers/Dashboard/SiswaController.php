@@ -21,7 +21,12 @@ class SiswaController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
-        $kelas = Kelas::orderBy('nama', 'asc')->get();
+        $kelas = [
+            'data' => Kelas::with('angkatan')
+                ->orderBy('nama', 'asc')
+                ->get(),
+            'search' => $id_kelas ? Kelas::where('id', $id_kelas)->first() : null
+        ];
 
         confirmDelete('Hapus Data?', 'Yakin ingin hapus data Siswa/i?');
 
@@ -38,7 +43,9 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $kelas = Kelas::orderBy('nama', 'asc')->get();
+        $kelas = Kelas::with('angkatan')
+            ->orderBy('nama', 'asc')
+            ->get();
 
         return view('dashboard.siswa.create')
             ->with([
@@ -62,15 +69,15 @@ class SiswaController extends Controller
         Session::flash('alamat', $request->input('alamat'));
 
         $request->validate([
-            'nama_siswa'        => 'required|string|max:255',
-            'nis'               => 'required|unique:siswa,nis|max:255',
-            'nisn'              => 'required|unique:siswa,nisn|max:10',
-            'jenis_kelamin'     => 'required',
-            'telepon_siswa'     => 'required',
-            'telepon_orang_tua' => 'required',
-            'email'             => 'required|email|unique:siswa,email',
-            'alamat'            => 'required',
-            'kelas'             => 'required',
+            'nama_siswa'        => ['required', 'string', 'unique:siswa,nama' ,'max:255'],
+            'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
+            'nisn'              => ['required', 'string', 'unique:siswa,nisn', 'digits:10'],
+            'jenis_kelamin'     => ['required'],
+            'telepon_siswa'     => ['required', 'string', 'max:13'],
+            'telepon_orang_tua' => ['required', 'string', 'max:13'],
+            'email'             => ['required', 'email', 'unique:siswa,email'],
+            'alamat'            => ['required'],
+            'kelas'             => ['required'],
         ]);
 
         $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_siswa'));
@@ -94,7 +101,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil ditambahkan!', 'success');
             
-            return redirect('/dashboard/siswa?id_kelas=' . $request->input('kelas'));
+            return redirect()->route('siswa.index', '?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal ditambahkan.', 'warning');
 
@@ -106,7 +113,7 @@ class SiswaController extends Controller
     {
         return view('dashboard.siswa.detail')
             ->with([
-                'title'     => 'Detail Siswa',
+                'title'     => 'Detail Data Siswa',
                 'active'    => 'Siswa',
                 'subActive' => 'Siswa',
                 'triActive' => null,
@@ -116,7 +123,9 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {   
-        $kelas = Kelas::orderBy('nama', 'asc')->get();
+        $kelas = Kelas::with('angkatan')
+            ->orderBy('nama', 'asc')
+            ->get();
 
         return view('dashboard.siswa.edit')
             ->with([
@@ -132,15 +141,15 @@ class SiswaController extends Controller
     public function update(Request $request, Siswa $siswa)
     {
         $request->validate([
-            'nama_siswa'        => 'required|string|max:255',
-            'nis'               => 'required',
-            'nisn'              => 'required',
-            'jenis_kelamin'     => 'required',
-            'telepon_siswa'     => 'required',
-            'telepon_orang_tua' => 'required',
-            'email'             => 'required|email',
-            'alamat'            => 'required',
-            'kelas'             => 'required',
+            'nama_siswa'        => ['required', 'string', 'unique:siswa,nama', 'max:255'],
+            'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
+            'nisn'              => ['required', 'string', 'unique:siswa,nisn', 'digits:10'],
+            'jenis_kelamin'     => ['required'],
+            'telepon_siswa'     => ['required', 'string', 'max:13'],
+            'telepon_orang_tua' => ['required', 'string', 'max:13'],
+            'email'             => ['required', 'email', 'unique:siswa,email'],
+            'alamat'            => ['required'],
+            'kelas'             => ['required'],
         ]);
 
         $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_siswa'));
@@ -164,7 +173,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil diedit!', 'success');
             
-            return redirect('/dashboard/siswa?id_kelas=' . $request->input('kelas'));
+            return redirect()->route('siswa.index', '?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal diedit.', 'warning');
 

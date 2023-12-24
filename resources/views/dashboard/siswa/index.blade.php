@@ -11,44 +11,52 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>{{ $title }}</h1>
+                <h1>
+                    @if ($kelas['search'] !== null)
+                        {{ $title . ' Kelas ' . $kelas['search']->nama }}
+                    @else
+                        {{ $title }}
+                    @endif
+                </h1>
                 <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
-                    <div class="breadcrumb-item">{{ $title }}</div>
+                    <div class="breadcrumb-item active">
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
+                    </div>
+                    <div class="breadcrumb-item">Data Siswa</div>
                 </div>
             </div>
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    Organize and adjust all settings about this site.
+                    Anda dapat mengelola semua {{ $title }}, seperti mengedit, menghapus, dan lainnya.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Data Siswa</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Filter Siswa" onclick="$('#filterSiswa').modal('show');">
+                                    <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Filter Data" onclick="$('#filter-siswa').modal('show');">
                                         <i class="fas fa-filter"></i>
                                     </button>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="table-2">
+                                    <table class="table table-striped" id="table-1">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">#</th>
+                                                <th class="text-center">NO</th>
                                                 <th>NAMA SISWA</th>
                                                 <th>NIS</th>
                                                 <th>NISN</th>
                                                 <th>JENIS KELAMIN</th>
                                                 <th>TELEPON</th>
                                                 <th>KELAS</th>
-                                                <th>OPTION</th>
+                                                <th>OPSI</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -68,7 +76,7 @@
                                                     <td>{{ $item->telepon }}</td>
                                                     <td>{{ $item->kelas->nama }}</td>
                                                     <td>
-                                                        <a href="{{ route('siswa.show', $item->slug) }}" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Lihat Data">
+                                                        <a href="{{ route('siswa.show', $item->slug) }}" class="btn btn-sm btn-info" data-toggle="tooltip" title="Lihat Data">
                                                             <i class="fas fa-eye"></i>
                                                         </a>
                                                         <a href="{{ route('siswa.edit', $item->slug) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit Data">

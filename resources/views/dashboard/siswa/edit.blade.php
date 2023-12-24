@@ -10,7 +10,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ route('siswa.index') }}" class="btn btn-icon">
+                    <a href="{{ route('siswa.index', 'id_kelas=' . $siswa->kelas->id) }}" class="btn btn-icon">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
@@ -22,45 +22,54 @@
                     <div class="breadcrumb-item">
                         <a href="{{ route('siswa.index') }}">Data Siswa</a>
                     </div>
-                    <div class="breadcrumb-item">{{ $title }}</div>
+                    <div class="breadcrumb-item">Edit Data</div>
                 </div>
             </div>
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat mengedit Data Siswa dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Edit Data<h4>
                             </div>
                             <div class="card-body">
                                 <form action="{{ route('siswa.update', $siswa->slug) }}" method="post">
                                     @csrf
                                     @method('put')
                                     <div class="form-group row mb-4">
-                                        <label for="nama_siswa" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Siswa</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" value="{{ $siswa->nama }}" required autofocus>
+                                        <label for="nama_siswa" class="col-form-label text-md-right col-12 col-md-3">Nama Siswa</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror" id="nama_siswa" name="nama_siswa" value="{{ $siswa->nama }}" required autofocus>
+                                            @error('nama_siswa')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="nis" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NIS</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="nis" name="nis" value="{{ $siswa->nis }}" required>
+                                        <label for="nis" class="col-form-label text-md-right col-12 col-md-3">NIS</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ $siswa->nis }}" required>
+                                            @error('nis')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="nisn" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NISN</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="nisn" name="nisn" value="{{ $siswa->nisn }}" required>
+                                        <label for="nisn" class="col-form-label text-md-right col-12 col-md-3">NISN</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn" name="nisn" value="{{ $siswa->nisn }}" required>
+                                            @error('nisn')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="jenis_kelamin" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jenis Kelamin</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="jenis_kelamin" class="col-form-label text-md-right col-12 col-md-3">Jenis Kelamin</label>
+                                        <div class="col-12 col-md-7">
                                             <select class="form-control selectric" id="jenis_kelamin" name="jenis_kelamin" required>
                                                 <option value="L" {{ $siswa->jenis_kelamin === 'L' ? 'selected' : '' }}>Laki-laki</option>
                                                 <option value="P" {{ $siswa->jenis_kelamin === 'P' ? 'selected' : '' }}>Perempuan</option>
@@ -68,42 +77,54 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="kelas" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kelas</label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label for="kelas" class="col-form-label text-md-right col-12 col-md-3">Kelas</label>
+                                        <div class="col-12 col-md-7">
                                             <select class="form-control choices" id="kelas" name="kelas" required>
                                                 @foreach ($kelas as $item)
-                                                    <option value="{{ $item->id }}" {{ $siswa->id_kelas === $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                    <option value="{{ $item->id }}" {{ $siswa->kelas->id === $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="telepon_siswa" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon Siswa</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="telepon_siswa" name="telepon_siswa" value="{{ $siswa->telepon }}" required>
+                                        <label for="telepon_siswa" class="col-form-label text-md-right col-12 col-md-3">No. Telepon Siswa</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('telepon_siswa') is-invalid @enderror" id="telepon_siswa" name="telepon_siswa" value="{{ $siswa->telepon }}" required>
+                                            @error('telepon_siswa')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="telepon_orang_tua" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon Orang Tua</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="telepon_orang_tua" name="telepon_orang_tua" value="{{ $siswa->telepon_ortu }}" required>
+                                        <label for="telepon_orang_tua" class="col-form-label text-md-right col-12 col-md-3">No. Telepon Orang Tua</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('telepon_orang_tua') is-invalid @enderror" id="telepon_orang_tua" name="telepon_orang_tua" value="{{ $siswa->telepon_ortu }}" required>
+                                            @error('telepon_orang_tua')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" id="email" name="email" value="{{ $siswa->email }}" required>
+                                        <label for="email" class="col-form-label text-md-right col-12 col-md-3">Email</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $siswa->email }}" required>
+                                            @error('email')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label for="alamat" class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <textarea class="form-control" id="alamat" name="alamat" rows="5" required>{{ $siswa->alamat }}</textarea>
+                                        <label for="alamat" class="col-form-label text-md-right col-12 col-md-3">Alamat</label>
+                                        <div class="col-12 col-md-7">
+                                            <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="5" required>{{ $siswa->alamat }}</textarea>
+                                            @error('alamat')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Edit Data</button>
                                         </div>
                                     </div>

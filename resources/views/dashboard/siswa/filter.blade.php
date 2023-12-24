@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="filterSiswa">
+<div class="modal fade" tabindex="-1" role="dialog" id="filter-siswa">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,8 +13,8 @@
                         <label for="id_kelas">Kelas</label>
                         <select class="form-control choices" name="id_kelas" id="id_kelas">
                             <option disabled selected>Kelas</option>
-                            @foreach ($kelas as $item)
-                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @foreach ($kelas['data'] as $item)
+                                <option value="{{ $item->id }}" {{ $item->id === $kelas['search']?->id ? 'selected' : '' }}>{{ $item->nama . ' - ' . $item->angkatan->nama }}</option>
                             @endforeach
                         </select>
                     </div>
