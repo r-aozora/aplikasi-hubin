@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Dashboard\AngkatanController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\DataController;
 use App\Http\Controllers\Dashboard\GuruController;
 use App\Http\Controllers\Dashboard\JadwalPrakerinController;
 use App\Http\Controllers\Dashboard\KelasController;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Dashboard\SiswaController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
 use App\Http\Controllers\Dashboard\ProgramController;
+use App\Http\Controllers\Dashboard\PeriodePrakerinController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::redirect('/', '/dashboard', 301);
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])
     ->middleware(['auth', 'verified'])->name('dashboard');
@@ -46,6 +44,8 @@ Route::middleware(['auth', 'checkLevel:admin'])->group(function () {
         Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])->name('perusahaan.export');
 
         Route::resource('/jadwal', JadwalPrakerinController::class);
+
+        Route::resource('/periode', PeriodePrakerinController::class);
     });
 });
 
