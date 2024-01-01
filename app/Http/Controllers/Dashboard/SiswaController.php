@@ -7,65 +7,82 @@ use App\Models\Angkatan;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Angkatan $angkatan, Kelas $kelas)
+    public function index(Request $request)
     {
-        return view('dashboard.siswa.create')
+        $id_kelas = $request->id_kelas;
+
+        $siswa = Siswa::with('kelas')
+            ->when(strlen($id_kelas), function ($query) use ($id_kelas) {
+                return $query->where('id_kelas', $id_kelas);
+            })
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        $angkatan = Angkatan::with('kelas')
+                ->orderBy('nama', 'asc')
+                ->get();
+        
+        $kelas = $id_kelas ? Kelas::where('id', $id_kelas)->first() : null;
+
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus data Siswa/i?');
+
+        return view('dashboard.siswa.index')
             ->with([
-                'title'=> 'Tambah Data Siswa',
-                'active' => 'Siswa',
-                'subActive' => $angkatan->slug,
-                'triActive' => $kelas->slug,
-                'angkatan' => $angkatan,
-                'kelas' => $kelas,
+                'title'     => 'Data Siswa',
+                'active'    => 'Siswa',
+                'subActive' => 'Siswa',
+                'triActive' => null,
+                'siswa'     => $siswa,
+                'angkatan'  => $angkatan,
+                'kelas'     => $kelas,
             ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request, Angkatan $angkatan, Kelas $kelas)
+    public function create()
     {
-        Session::flash('nama', $request->input('nama'));
-        Session::flash('nis', $request->input('nis'));
-        Session::flash('nisn', $request->input('nisn'));
-        Session::flash('jkel', $request->input('jkel'));
-        Session::flash('telepon', $request->input('telepon'));
-        Session::flash('telepon_ortu', $request->input('telepon_ortu'));
-        Session::flash('email', $request->input('email'));
-        Session::flash('alamat', $request->input('alamat'));
+        $angkatan = Angkatan::with('kelas')
+            ->orderBy('nama', 'asc')
+            ->get();
 
+        return view('dashboard.siswa.create')
+            ->with([
+                'title'     => 'Tambah Data Siswa',
+                'active'    => 'Siswa',
+                'subActive' => 'Siswa',
+                'triActive' => null,
+                'angkatan'  => $angkatan,
+            ]);
+    }
+
+    public function store(Request $request)
+    {
         $request->validate([
-            'nama' => 'required',
-            'nis' => 'required',
-            'nisn' => 'required',
-            'jkel' => 'required',
-            'telepon' => 'required',
-            'telepon_ortu' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
+            'nama_siswa'        => ['required', 'string', 'unique:siswa,nama' ,'max:255'],
+            'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
+            'nisn'              => ['required', 'string', 'unique:siswa,nisn', 'digits:10'],
+            'jenis_kelamin'     => ['required'],
+            'telepon_siswa'     => ['required', 'string', 'max:13'],
+            'telepon_orang_tua' => ['required', 'string', 'max:13'],
+            'email'             => ['required', 'email', 'unique:siswa,email'],
+            'alamat'            => ['required'],
+            'kelas'             => ['required'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         $siswa = [
-            'slug' => $slug,
-            'nama' => $request->input('nama'),
-            'nis' => $request->input('nis'),
-            'nisn' => $request->input('nisn'),
-            'jenis_kelamin' => $request->input('jkel'),
-            'telepon' => $request->input('telepon'),
-            'telepon_ortu' => $request->input('telepon_ortu'),
-            'email' => $request->input('email'),
-            'alamat' => $request->input('alamat'),
-            'id_kelas' => $kelas->id,
+            'slug'         => Str::slug($request->input('nama_siswa')),
+            'nama'         => $request->input('nama_siswa'),
+            'nis'          => $request->input('nis'),
+            'nisn'         => $request->input('nisn'),
+            'jkel'         => $request->input('jenis_kelamin'),
+            'telepon'      => $request->input('telepon_siswa'),
+            'telepon_ortu' => $request->input('telepon_orang_tua'),
+            'email'        => $request->input('email'),
+            'alamat'       => $request->input('alamat'),
+            'id_kelas'     => $request->input('kelas'),
         ];
 
         try {
@@ -73,7 +90,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil ditambahkan!', 'success');
             
-            return redirect()->route('kelas.show', [$angkatan, $kelas]);
+            return redirect()->route('siswa.index', '?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal ditambahkan.', 'warning');
 
@@ -81,70 +98,60 @@ class SiswaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
+    public function show(Siswa $siswa)
     {
-        return view('dashboard.Siswa.detail')
+        return view('dashboard.siswa.detail')
             ->with([
-                'title' => 'Detail Siswa',
-                'active' => 'Siswa',
-                'subActive' => $angkatan->slug,
-                'triActive' => $kelas->slug,
-                'angkatan' => $angkatan,
-                'kelas' => $kelas,
-                'siswa' => $siswa,
+                'title'     => 'Detail Data Siswa',
+                'active'    => 'Siswa',
+                'subActive' => 'Siswa',
+                'triActive' => null,
+                'siswa'     => $siswa,
             ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
-    {
+    public function edit(Siswa $siswa)
+    {   
+        $angkatan = Angkatan::with('kelas')
+            ->orderBy('nama', 'asc')
+            ->get();
+
         return view('dashboard.siswa.edit')
             ->with([
-                'title' => 'Edit Data Siswa',
-                'active' => 'Siswa',
-                'subActive' => $angkatan->slug, 
-                'triActive' => $kelas->slug,
-                'angkatan' => $angkatan,
-                'kelas' => $kelas,
-                'siswa' => $siswa,
+                'title'     => 'Edit Data Siswa',
+                'active'    => 'Siswa',
+                'subActive' => 'Siswa', 
+                'triActive' => null,
+                'siswa'     => $siswa,
+                'angkatan'  => $angkatan,
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
+    public function update(Request $request, Siswa $siswa)
     {
         $request->validate([
-            'nama' => 'required',
-            'nis' => 'required',
-            'nisn' => 'required',
-            'jkel' => 'required',
-            'telepon' => 'required',
-            'telepon_ortu' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
+            'nama_siswa'        => ['required', 'string', 'unique:siswa,nama', 'max:255'],
+            'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
+            'nisn'              => ['required', 'string', 'unique:siswa,nisn', 'digits:10'],
+            'jenis_kelamin'     => ['required'],
+            'telepon_siswa'     => ['required', 'string', 'max:255'],
+            'telepon_orang_tua' => ['required', 'string', 'max:255'],
+            'email'             => ['required', 'email', 'unique:siswa,email'],
+            'alamat'            => ['required'],
+            'kelas'             => ['required'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         $update = [
-            'slug' => $slug,
-            'nama' => $request->input('nama'),
-            'nis' => $request->input('nis'),
-            'nisn' => $request->input('nisn'),
-            'jenis_kelamin' => $request->input('jkel'),
-            'telepon' => $request->input('telepon'),
-            'telepon_ortu' => $request->input('telepon_ortu'),
-            'email' => $request->input('email'),
-            'alamat' => $request->input('alamat'),
-            'id_kelas' => $kelas->id,
+            'slug'         => Str::slug($request->input('nama_siswa')),
+            'nama'         => $request->input('nama_siswa'),
+            'nis'          => $request->input('nis'),
+            'nisn'         => $request->input('nisn'),
+            'jkel'         => $request->input('jenis_kelamin'),
+            'telepon'      => $request->input('telepon_siswa'),
+            'telepon_ortu' => $request->input('telepon_orang_tua'),
+            'email'        => $request->input('email'),
+            'alamat'       => $request->input('alamat'),
+            'id_kelas'     => $request->input('kelas'),
         ];
 
         try {
@@ -152,7 +159,7 @@ class SiswaController extends Controller
     
             toast('Data Siswa berhasil diedit!', 'success');
             
-            return redirect()->route('kelas.show', [$angkatan, $kelas]);
+            return redirect()->route('siswa.index', '?id_kelas=' . $request->input('kelas'));
         } catch (\Exception $e) {
             toast('Data Siswa gagal diedit.', 'warning');
 
@@ -160,10 +167,7 @@ class SiswaController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Angkatan $angkatan, Kelas $kelas, Siswa $siswa)
+    public function destroy(Siswa $siswa)
     {
         $siswa->delete();
 

@@ -21,13 +21,13 @@
             <div class="section-body">
                 <h2 class="section-title">Kelola {{ $title }}</h2>
                 <p class="section-lead">
-                    We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+                    Anda dapat mengelola semua {{ $title }}, seperti mengedit, menghapus, dan lainnya.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Data User</h4>
                                 <div class="card-header-action">
                                     <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">
                                         <i class="fas fa-plus"></i> 
@@ -42,6 +42,7 @@
                                             <tr>
                                                 <th class="text-center">NO</th>
                                                 <th>NAMA</th>
+                                                <th>EMAIL</th>
                                                 <th>USERNAME</th>
                                                 <th>LEVEL</th>
                                                 <th>OPSI</th>
@@ -52,15 +53,20 @@
                                                 <tr>
                                                     <td class="text-center">{{ $loop->iteration }}</td>
                                                     <td>{{ $item->guru->nama }}</td>
+                                                    <td>{{ $item->email }}</td>
                                                     <td>{{ $item->username }}</td>
-                                                    <td>{{ $item->level }}</td>
+                                                    <td>{{ ucfirst($item->level) }}</td>
                                                     <td>
                                                         @if ($item->id !== Auth::id())
-                                                            <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Data user">
-                                                                <i class="fas fa-edit"></i>
+                                                            <a href="{{ route('user.edit', $item->id) }}" class="btn btn-sm btn-warning" data-toggle="tooltip" title="Edit Data">
+                                                                <i class="fas fa-pen"></i>
                                                             </a>
-                                                            <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true"  data-toggle="tooltip" data-placement="top" title="Hapus Data user">
+                                                            <a href="{{ route('user.destroy', $item->id) }}" class="btn btn-sm btn-danger" data-confirm-delete="true" data-toggle="tooltip" title="Hapus Data">
                                                                 <i class="fas fa-trash" onclick="event.preventDefault(); this.closest('a').click()";></i>
+                                                            </a>
+                                                        @else 
+                                                            <a href="{{ route('profile.edit') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Ke Profil">
+                                                                <i class="fas fa-external-link-alt"></i>
                                                             </a>
                                                         @endif
                                                     </td>

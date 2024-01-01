@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard\AngkatanController;
-use App\Http\Controllers\Dashboard\DataController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\GuruController;
 use App\Http\Controllers\Dashboard\JadwalPrakerinController;
 use App\Http\Controllers\Dashboard\KelasController;
-use App\Http\Controllers\Dashboard\PeriodePrakerinController;
 use App\Http\Controllers\Dashboard\SiswaController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Dashboard\PerusahaanController;
-use App\Http\Controllers\Dashboard\ProgramKeahlianController;
+use App\Http\Controllers\Dashboard\ProgramController;
+use App\Http\Controllers\Dashboard\PeriodePrakerinController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,55 +24,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->group(function () {
-    Route::get('/', [AuthController::class, 'create'])
-        ->name('login');
+Route::redirect('/', '/dashboard', 301);
 
-    Route::post('/login', [AuthController::class, 'store'])
-        ->name('login.store');
-});
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'destroy'])
-        ->name('logout');
-    
+Route::middleware(['auth', 'checkLevel:admin'])->group(function () {
     Route::prefix('dashboard')->group(function () {
-        Route::get('/', function () {
-            return view('dashboard')->with([
-                'title' => 'Dashboard', 
-                'active' => 'Dashboard', 
-                'subActive' => null, 
-                'triActive' => null,
-            ]);
-        })->name('dashboard');
-    
         Route::resource('/guru', GuruController::class);
-        Route::post('/guru/import', [GuruController::class, 'import'])
-            ->name('guru.import');
-        Route::get('/guru/export/to-excel', [GuruController::class, 'export'])
-            ->name('guru.export');
-    
+        Route::post('/guru/import', [GuruController::class, 'import'])->name('guru.import');
+        Route::get('/guru/export/to-excel', [GuruController::class, 'export'])->name('guru.export');
+
         Route::resource('/user', UserController::class);
-    
-        Route::resource('/angkatan', AngkatanController::class);
-    
-        Route::resource('/program', ProgramKeahlianController::class);
-    
-        Route::resource('/angkatan/{angkatan}/kelas', KelasController::class)
-            ->parameters(['kelas' => 'kelas']);
-    
-        Route::resource('/angkatan/{angkatan}/kelas/{kelas}/siswa', SiswaController::class);
-    
+
+        Route::resource('/program', ProgramController::class);
+
         Route::resource('/perusahaan', PerusahaanController::class);
-        Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])
-            ->name('perusahaan.import');
-        Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])
-            ->name('perusahaan.export');
-    
+        Route::post('/perusahaan/import', [PerusahaanController::class, 'import'])->name('perusahaan.import');
+        Route::get('/perusahaan/export/to-excel', [PerusahaanController::class, 'export'])->name('perusahaan.export');
+
         Route::resource('/jadwal', JadwalPrakerinController::class);
-    
-        // Route::resource('/periode', App\Http\Controllers\PeriodePrakerinController::class);
-    
-        Route::get('/data', [DataController::class, 'index'])->name('data.index');
+
+        Route::resource('/periode', PeriodePrakerinController::class);
     });
 });
+
+Route::middleware(['auth', 'checkLevel:admin,auru'])->group(function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::resource('/angkatan', AngkatanController::class);
+    
+        Route::resource('/kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
+    
+        Route::resource('/siswa', SiswaController::class);
+
+        Route::get('/panduan', [DashboardController::class, 'help'])->name('help');
+
+        Route::get('/pengaturan', [DashboardController::class, 'setting'])->name('setting');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/{user}', [ProfileController::class, 'update_profile'])->name('profile.update_profile');
+        Route::patch('/profile', [ProfileController::class, 'update_account'])->name('profile.update_account');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+});
+
+require __DIR__ . '/auth.php';

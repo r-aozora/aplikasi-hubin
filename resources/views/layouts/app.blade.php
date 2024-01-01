@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>{{ $title }} | {{ config('app.name', 'Sistem Pendataan Administrasi Prakerin') }}</title>
 
-    {{-- Favicon --}}
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('images/logo_sekolah.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('images/logo_sekolah.png') }}" type="image/png">
 
@@ -49,7 +49,11 @@
             <div class="navbar-bg"></div>
             @include('layouts.navbar')
 
-            @include('layouts.sidebar')
+            @if (Auth::user()->level === 'admin')
+                @include('layouts.sidebar-admin')
+            @elseif (Auth::user()->level === 'guru')
+                @include('layouts.sidebar-guru')
+            @endif
 
             @yield('content')
 

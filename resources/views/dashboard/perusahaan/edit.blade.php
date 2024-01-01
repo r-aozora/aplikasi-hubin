@@ -27,78 +27,83 @@
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat mengedit Data Perusahaan dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Edit Data</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('perusahaan.update', $perusahaan->slug) }}" method="post">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
+                                <form action="{{ route('perusahaan.update', $perusahaan->slug) }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     @method('put')
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nama" value="{{ $perusahaan->nama }}" required autofocus>
+                                        <label for="nama_perusahaan" class="col-form-label text-md-right col-12 col-md-3">Nama Perusahaan</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror" id="nama_perusahaan" name="nama_perusahaan" value="{{ $perusahaan->nama }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Penerima Surat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="penerima" value="{{ $perusahaan->penerima }}">
+                                        <label for="penerima_surat" class="col-form-label text-md-right col-12 col-md-3">Penerima_surat Surat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('penerima_surat') is-invalid @enderror" id="penerima_surat" name="penerima_surat" value="{{ $perusahaan->penerima }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alamat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="alamat" value="{{ $perusahaan->alamat }}" required>
+                                        <label for="alamat" class="col-form-label text-md-right col-12 col-md-3">Alamat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ $perusahaan->alamat }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kecamatan</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="kecamatan" value="{{ $perusahaan->kecamatan }}" required>
+                                        <label for="kecamatan" class="col-form-label text-md-right col-12 col-md-3">Kecamatan</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('kecamatan') is-invalid @enderror" id="kecamatan" name="kecamatan" value="{{ $perusahaan->kecamatan }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kota/Kabupaten</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="kota" value="{{ $perusahaan->kota }}" required>
+                                        <label for="kota/kabupaten" class="col-form-label text-md-right col-12 col-md-3">Kota/Kabupaten</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('kota/kabupaten') is-invalid @enderror" id="kota/kabupaten" name="kota/kabupaten" value="{{ $perusahaan->kota }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Provinsi</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="provinsi" value="{{ $perusahaan->provinsi }}" required>
+                                        <label for="provinsi" class="col-form-label text-md-right col-12 col-md-3">Provinsi</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" value="{{ $perusahaan->provinsi }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Lokasi</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="lokasi" required>
+                                        <label for="lokasi" class="col-form-label text-md-right col-12 col-md-3">Lokasi</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control selectric" id="lokasi" name="lokasi" required>
                                                 <option value="Dalam Kota" {{ $perusahaan->lokasi === 'Dalam Kota' ? 'selected' : '' }}>Dalam Kota</option>
                                                 <option value="Luar Kota" {{ $perusahaan->lokasi === 'Luar Kota' ? 'selected' : '' }}>Luar Kota</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="telepon" value="{{ $perusahaan->telepon }}">
+                                        <label for="telepon" class="col-form-label text-md-right col-12 col-md-3">No. Telepon</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" value="{{ $perusahaan->telepon }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Koordinat</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="koordinat" value="{{ $perusahaan->koordinat }}">
+                                        <label for="koordinat" class="col-form-label text-md-right col-12 col-md-3">Koordinat</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('koordinat') is-invalid @enderror" id="koordinat" name="koordinat" value="{{ $perusahaan->koordinat }}">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Edit Data</button>
                                         </div>
                                     </div>

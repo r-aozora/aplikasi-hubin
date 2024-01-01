@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('link')
-    <link rel="stylesheet" href="{{ asset('assets/modules/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/modules/choices.js/public/assets/styles/choices.css') }}">
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ route('angkatan.show', $angkatan) }}" class="btn btn-icon">
+                    <a href="{{ route('kelas.index') }}" class="btn btn-icon">
                         <i class="fas fa-arrow-left"></i>
                     </a>
                 </div>
@@ -19,7 +19,7 @@
                         <a href="{{ route('dashboard') }}">Dashboard</a>
                     </div>
                     <div class="breadcrumb-item">
-                        <a href="{{ route('angkatan.show', $angkatan) }}">Data Kelas</a>
+                        <a href="{{ route('kelas.index') }}">Data Kelas</a>
                     </div>
                     <div class="breadcrumb-item">Tambah Data</div>
                 </div>
@@ -27,27 +27,32 @@
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat membuat Data Kelas baru dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('kelas.store', $angkatan->slug) }}" method="post">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
+                                <form action="{{ route('kelas.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Kelas</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nama" value="{{ Session::get('nama') }}" required autofocus>
+                                        <label for="nama_kelas" class="col-form-label text-md-right col-12 col-md-3">Nama Kelas</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" name="nama_kelas" value="{{ old('nama_kelas') }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Wali Kelas</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="guru" required>
+                                        <label for="guru" class="col-form-label text-md-right col-12 col-md-3">Wali Kelas</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control choices" id="guru" name="guru" required>
                                                 <option selected disabled>Nama Guru</option>
                                                 @foreach ($guru as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -56,9 +61,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Program Keahlian</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="program" required>
+                                        <label for="program" class="col-form-label text-md-right col-12 col-md-3">Program Keahlian</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control choices" id="program" name="program" required>
                                                 <option selected disabled>Program Keahlian</option>
                                                 @foreach ($program as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -67,19 +72,19 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tahun Angkatan</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control select2" name="angkatan" required>
+                                        <label for="angkatan" class="col-form-label text-md-right col-12 col-md-3">Tahun Angkatan</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control choices" id="angkatan" name="angkatan" required>
                                                 <option selected disabled>Tahun Angkatan</option>
-                                                @foreach ($dataAngkatan as $item)
+                                                @foreach ($angkatan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Tambah Data</button>
                                         </div>
                                     </div>
@@ -94,5 +99,6 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/modules/choices.js/public/assets/scripts/choices.js') }}"></script>
+    <script src="{{ asset('assets/js/page/modules-choices.js')}}"></script>
 @endsection

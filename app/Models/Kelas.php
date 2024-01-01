@@ -31,7 +31,7 @@ class Kelas extends Model
     }
 
     public function program(){
-        return $this->belongsTo(ProgramKeahlian::class, 'id_program');
+        return $this->belongsTo(Program::class, 'id_program');
     }
 
     public function siswa(){

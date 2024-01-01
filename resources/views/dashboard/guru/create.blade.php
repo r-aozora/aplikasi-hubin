@@ -27,33 +27,38 @@
             <div class="section-body">
                 <h2 class="section-title">{{ $title }}</h2>
                 <p class="section-lead">
-                    On this page you can create a new post and fill in all fields.
+                    Di halaman ini Anda dapat membuat Data Guru baru dengan mengisi semua kolom.
                 </p>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>{{ $title }}</h4>
+                                <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('guru.store') }}" method="post">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
+                                <form action="{{ route('guru.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Guru</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nama" value="{{ Session::get('nama') }}" required autofocus>
+                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3">Nama Guru</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nama_guru') is-invalid @enderror" id="nama_guru" name="nama_guru" value="{{ old('nama_guru') }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">NIP</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="nip" value="{{ Session::get('nip') }}" required>
+                                        <label for="nip" class="col-form-label text-md-right col-12 col-md-3">NIP</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ old('nip') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Sebagai</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="sebagai" required>
+                                        <label for="sebagai" class="col-form-label text-md-right col-12 col-md-3">Sebagai</label>
+                                        <div class="col-12 col-md-7">
+                                            <select class="form-control selectric" id="sebagai" name="sebagai" required>
                                                 <option selected disabled>Sebagai</option>
                                                 <option value="Walikelas">Wali Kelas</option>
                                                 <option value="Pendamping">Guru Pendamping</option>
@@ -61,14 +66,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No. Telepon</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="telepon" value="{{ Session::get('telepon') }}" required>
+                                        <label for="telepon" class="col-form-label text-md-right col-12 col-md-3">No. Telepon</label>
+                                        <div class="col-12 col-md-7">
+                                            <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" value="{{ old('telepon') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
+                                        <label class="col-form-label text-md-right col-12 col-md-3"></label>
+                                        <div class="col-12 col-md-7">
                                             <button type="submit" class="btn btn-primary">Tambah Data</button>
                                         </div>
                                     </div>

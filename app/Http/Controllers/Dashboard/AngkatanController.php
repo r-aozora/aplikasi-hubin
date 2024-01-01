@@ -5,25 +5,38 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Angkatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AngkatanController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function index()
+    {
+        $angkatan = Angkatan::withCount('kelas')
+            ->orderBy('nama', 'asc')
+            ->get();
+
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Angkatan beserta Kelas didalamnya?');
+
+        return view('dashboard.angkatan.index')
+            ->with([
+                'title'     => 'Data Angkatan',
+                'active'    => 'Siswa',
+                'subActive' => 'Angkatan',
+                'triActive' => null,
+                'angkatan'  => $angkatan,
+            ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'tahun_angkatan' => ['required', 'unique:angkatan,nama'],
         ]);
-
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
 
         try {
             Angkatan::create([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
+                'slug' => Str::slug($request->input('tahun_angkatan')),
+                'nama' => $request->input('tahun_angkatan'),
             ]);
 
             toast('Data Angkatan berhasil ditambahkan!', 'success');
@@ -34,40 +47,16 @@ class AngkatanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Angkatan $angkatan)
-    {
-        confirmDelete('Hapus Data?', 'Yakin ingin hapus Data Kelas beserta Siswa/i didalamnya?');
-        
-        return view('dashboard.data.angkatan.detail')
-            ->with([
-                'title' => 'Data Kelas',
-                'active' => 'Siswa', 
-                'subActive' => $angkatan->slug,
-                'triActive' => null,
-                'angkatan' => $angkatan,
-                'kelas' => $angkatan->kelas,
-            ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Angkatan $angkatan)
     {
         $request->validate([
-            'nama' => 'required',
+            'tahun_angkatan' => ['required', 'unique:angkatan,nama'],
         ]);
-
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
 
         try {
             $angkatan->update([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
+                'slug' => Str::slug($request->input('tahun_angkatan')),
+                'nama' => $request->input('tahun_angkatan'),
             ]);
     
             toast('Data Angkatan berhasil diedit!', 'success');
@@ -78,9 +67,6 @@ class AngkatanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Angkatan $angkatan)
     {
         $angkatan->delete();

@@ -2,48 +2,63 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Angkatan;
 use App\Models\JadwalPrakerin;
 use App\Http\Controllers\Controller;
-use App\Models\Kelas;
 use App\Models\PeriodePrakerin;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class JadwalPrakerinController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = Kelas::orderBy('nama', 'asc')
+        $id_angkatan = $request->id_angkatan === null ? 'all' : $request->id_angkatan;
+        $id_periode = $request->id_periode === null ? 'all' : $request->id_periode;
+
+        $jadwal = JadwalPrakerin::with(['kelas', 'kelas.angkatan', 'periode'])
+            ->when($id_angkatan !== 'all', function ($query) use ($id_angkatan) {
+                return $query->whereHas('kelas', function ($query) use ($id_angkatan) {
+                    $query->whereHas('angkatan', function ($query) use ($id_angkatan) {
+                        $query->where('id', $id_angkatan);
+                    });
+                });
+            })
+            ->when($id_periode !== 'all', function ($query) use ($id_periode) {
+                return $query->whereHas('periode', function ($query) use ($id_periode) {
+                    $query->where('id', $id_periode);
+                });
+            })
             ->get();
 
-        $jadwal = JadwalPrakerin::with(['kelas', 'kelas.guru', 'kelas.angkatan', 'periode'])
+        $periode = PeriodePrakerin::orderBy('awal', 'asc')
             ->get();
 
-        $periode = PeriodePrakerin::orderBy('nama', 'asc')
+        $angkatan = Angkatan::with('kelas')
+            ->orderBy('nama', 'asc')
             ->get();
 
+        confirmDelete('Hapus Data?', 'Yakin ingin hapus data?');
+        
         return view('dashboard.jadwal.index')
             ->with([
-                'title' => 'Jadwal Prakerin',
-                'active' => 'Jadwal', 
+                'title'     => 'Jadwal & Periode Prakerin',
+                'active'    => 'Jadwal', 
                 'subActive' => null, 
                 'triActive' => null, 
-                'kelas' => $kelas,
-                'jadwal' => $jadwal, 
-                'periode' => $periode,
+                'jadwal'    => $jadwal, 
+                'periode'   => $periode,
+                'angkatan'  => $angkatan,
             ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'kelas' => 'required',
-            'periode' => 'required',
+            'kelas' => ['required', 'unique:jadwal_prakerin,id_kelas'],
+            'periode' => ['required'],
+        ], [
+            'kelas.unique' => ':Attribute telah terdaftar di Jadwal Prakerin.',
         ]);
 
         try {
@@ -60,15 +75,14 @@ class JadwalPrakerinController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, JadwalPrakerin $jadwal)
     {
-        $request->validate([
-            'kelas' => 'required',
-            'periode' => 'required',
-        ]);
+            $request->validate([
+                'kelas' => ['required', Rule::unique('jadwal_prakerin', 'id_kelas')->ignore($jadwal->id_kelas, 'id_kelas')],
+                'periode' => ['required'],
+            ], [
+                'kelas.unique' => ':Attribute telah terdaftar di Jadwal Prakerin.',
+            ]);
 
         try {
             $jadwal->update([
@@ -84,9 +98,6 @@ class JadwalPrakerinController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(JadwalPrakerin $jadwal)
     {
         $jadwal->delete();
