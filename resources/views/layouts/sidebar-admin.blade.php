@@ -48,7 +48,7 @@
             <li class="dropdown {{ $active === 'Jadwal' ? 'active' : '' }}">
                 <a href="{{ route('jadwal.index') }}" class="nav-link">
                     <i class="fas fa-calendar"></i>
-                    <span>Jadwal Prakerin</span>
+                    <span>Jadwal & Periode</span>
                 </a>
             </li>
             <li class="nav-item dropdown {{ $active === 'Surat' ? 'active' : '' }}">
