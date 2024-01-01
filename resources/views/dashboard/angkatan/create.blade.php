@@ -10,12 +10,14 @@
             <form action="{{ route('angkatan.store') }}" method="post" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    @endif
                     <div class="form-group">
                         <label for="tahun_angkatan">Tahun Angkatan</label>
-                        <input type="text" class="form-control @error('tahun_angkatan') is-invalid @enderror" id="tahun_angkatan" name="tahun_angkatan" value="{{ Session::get('tahun_angkatan') }}" required>
-                        @error('tahun_angkatan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <input type="text" class="form-control @error('tahun_angkatan') is-invalid @enderror" id="tahun_angkatan" name="tahun_angkatan" value="{{ old('tahun_angkatan') }}" required>
                     </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">

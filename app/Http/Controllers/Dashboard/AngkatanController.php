@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Angkatan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AngkatanController extends Controller
 {
@@ -29,18 +29,13 @@ class AngkatanController extends Controller
 
     public function store(Request $request)
     {
-        Session::flash('tahun_angkatan', $request->input('tahun_angkatan'));
-
         $request->validate([
             'tahun_angkatan' => ['required', 'unique:angkatan,nama'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('tahun_angkatan'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         try {
             Angkatan::create([
-                'slug' => $slug,
+                'slug' => Str::slug($request->input('tahun_angkatan')),
                 'nama' => $request->input('tahun_angkatan'),
             ]);
 
@@ -58,12 +53,9 @@ class AngkatanController extends Controller
             'tahun_angkatan' => ['required', 'unique:angkatan,nama'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('tahun_angkatan'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         try {
             $angkatan->update([
-                'slug' => $slug,
+                'slug' => Str::slug($request->input('tahun_angkatan')),
                 'nama' => $request->input('tahun_angkatan'),
             ]);
     

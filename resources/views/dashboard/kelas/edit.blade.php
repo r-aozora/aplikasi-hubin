@@ -36,6 +36,11 @@
                                 <h4>Edit Data</h4>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                                 <form action="{{ route('kelas.update', $kelas->slug) }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     @method('put')
@@ -43,9 +48,6 @@
                                         <label for="nama_kelas" class="col-form-label text-md-right col-12 col-md-3">Nama Kelas</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" name="nama_kelas" value="{{ $kelas->nama }}" required autofocus>
-                                            @error('nama_kelas')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

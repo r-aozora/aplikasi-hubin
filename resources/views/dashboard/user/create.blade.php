@@ -37,6 +37,11 @@
                                 <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                                 <form action="{{ route('user.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
@@ -53,19 +58,19 @@
                                     <div class="form-group row mb-4">
                                         <label for="email" class="col-form-label text-md-right col-12 col-md-3">Email</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" id="email" name="email" value="{{ Session::get('email') }}" required>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="username" class="col-form-label text-md-right col-12 col-md-3">Username</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" id="username" name="username" value="{{ Session::get('username') }}" required>
+                                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username') }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="password" class="col-form-label text-md-right col-12 col-md-3">Password</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

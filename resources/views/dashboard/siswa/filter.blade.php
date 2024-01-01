@@ -13,8 +13,12 @@
                         <label for="id_kelas">Kelas</label>
                         <select class="form-control choices" name="id_kelas" id="id_kelas">
                             <option disabled selected>Kelas</option>
-                            @foreach ($kelas['data'] as $item)
-                                <option value="{{ $item->id }}" {{ $item->id === $kelas['search']?->id ? 'selected' : '' }}>{{ $item->nama . ' - ' . $item->angkatan->nama }}</option>
+                            @foreach ($angkatan as $item)
+                                <optgroup label="Tahun Angkatan {{ $item->nama }}">
+                                    @foreach ($item->kelas as $kls)
+                                        <option value="{{ $kls->id }}" {{ $kls->id === $kelas?->id ? 'selected' : '' }}>{{ $kls->nama }}</option>
+                                    @endforeach
+                                </optgroup>
                             @endforeach
                         </select>
                     </div>

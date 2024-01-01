@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Angkatan;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
@@ -21,12 +22,11 @@ class SiswaController extends Controller
             ->orderBy('nama', 'asc')
             ->get();
 
-        $kelas = [
-            'data' => Kelas::with('angkatan')
+        $angkatan = Angkatan::with('kelas')
                 ->orderBy('nama', 'asc')
-                ->get(),
-            'search' => $id_kelas ? Kelas::where('id', $id_kelas)->first() : null
-        ];
+                ->get();
+        
+        $kelas = $id_kelas ? Kelas::where('id', $id_kelas)->first() : null;
 
         confirmDelete('Hapus Data?', 'Yakin ingin hapus data Siswa/i?');
 
@@ -37,13 +37,14 @@ class SiswaController extends Controller
                 'subActive' => 'Siswa',
                 'triActive' => null,
                 'siswa'     => $siswa,
+                'angkatan'  => $angkatan,
                 'kelas'     => $kelas,
             ]);
     }
 
     public function create()
     {
-        $kelas = Kelas::with('angkatan')
+        $angkatan = Angkatan::with('kelas')
             ->orderBy('nama', 'asc')
             ->get();
 
@@ -53,21 +54,12 @@ class SiswaController extends Controller
                 'active'    => 'Siswa',
                 'subActive' => 'Siswa',
                 'triActive' => null,
-                'kelas'     => $kelas,
+                'angkatan'  => $angkatan,
             ]);
     }
 
     public function store(Request $request)
     {
-        Session::flash('nama_siswa', $request->input('nama_siswa'));
-        Session::flash('nis', $request->input('nis'));
-        Session::flash('nisn', $request->input('nisn'));
-        Session::flash('jenis_kelamin', $request->input('jenis_kelamin'));
-        Session::flash('telepon_siswa', $request->input('telepon_siswa'));
-        Session::flash('telepon_orang_tua', $request->input('telepon_orang_tua'));
-        Session::flash('email', $request->input('email'));
-        Session::flash('alamat', $request->input('alamat'));
-
         $request->validate([
             'nama_siswa'        => ['required', 'string', 'unique:siswa,nama' ,'max:255'],
             'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
@@ -80,11 +72,8 @@ class SiswaController extends Controller
             'kelas'             => ['required'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_siswa'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         $siswa = [
-            'slug'         => $slug,
+            'slug'         => Str::slug($request->input('nama_siswa')),
             'nama'         => $request->input('nama_siswa'),
             'nis'          => $request->input('nis'),
             'nisn'         => $request->input('nisn'),
@@ -123,7 +112,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {   
-        $kelas = Kelas::with('angkatan')
+        $angkatan = Angkatan::with('kelas')
             ->orderBy('nama', 'asc')
             ->get();
 
@@ -134,7 +123,7 @@ class SiswaController extends Controller
                 'subActive' => 'Siswa', 
                 'triActive' => null,
                 'siswa'     => $siswa,
-                'kelas'     => $kelas,
+                'angkatan'  => $angkatan,
             ]);
     }
 
@@ -145,18 +134,15 @@ class SiswaController extends Controller
             'nis'               => ['required', 'string', 'unique:siswa,nis', 'max:255'],
             'nisn'              => ['required', 'string', 'unique:siswa,nisn', 'digits:10'],
             'jenis_kelamin'     => ['required'],
-            'telepon_siswa'     => ['required', 'string', 'max:13'],
-            'telepon_orang_tua' => ['required', 'string', 'max:13'],
+            'telepon_siswa'     => ['required', 'string', 'max:255'],
+            'telepon_orang_tua' => ['required', 'string', 'max:255'],
             'email'             => ['required', 'email', 'unique:siswa,email'],
             'alamat'            => ['required'],
             'kelas'             => ['required'],
         ]);
 
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_siswa'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
-
         $update = [
-            'slug'         => $slug,
+            'slug'         => Str::slug($request->input('nama_siswa')),
             'nama'         => $request->input('nama_siswa'),
             'nis'          => $request->input('nis'),
             'nisn'         => $request->input('nisn'),

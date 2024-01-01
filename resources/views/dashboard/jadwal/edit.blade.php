@@ -21,7 +21,7 @@
                             <label for="kelas">Kelas</label>
                             <select class="form-control choices" name="kelas" id="kelas">
                                 @foreach ($angkatan as $item)
-                                    <optgroup label="{{ $item->nama }}">
+                                    <optgroup label="Tahun Angkatan {{ $item->nama }}">
                                         @foreach ($item->kelas as $kelas)
                                             <option value="{{ $kelas->id }}" {{ $kelas->id === $jadwal->id_kelas ? 'selected' : '' }}>{{ $kelas->nama }}</option>
                                         @endforeach

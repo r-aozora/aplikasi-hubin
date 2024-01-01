@@ -12,8 +12,8 @@
         <section class="section">
             <div class="section-header">
                 <h1>
-                    @if ($kelas['search'] !== null)
-                        {{ $title . ' Kelas ' . $kelas['search']->nama }}
+                    @if ($kelas !== null)
+                        {{ $title . ' Kelas ' . $kelas->nama }}
                     @else
                         {{ $title }}
                     @endif

@@ -10,8 +10,15 @@
             <form action="{{ route('program.store') }}" method="post" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
-                    <label for="nama">Program Keahlian</label>
-                    <input type="text" class="form-control" id="nama" name="nama" required>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    @endif
+                    <div class="form-group">
+                        <label for="program_keahlian">Program Keahlian</label>
+                        <input type="text" class="form-control @error('program_keahlian') is-invalid @enderror" id="program_keahlian" name="program_keahlian" value="{{ old('program_keahlian') }}" required>
+                    </div>
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Batal</button>

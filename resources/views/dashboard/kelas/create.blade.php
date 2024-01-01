@@ -36,16 +36,18 @@
                                 <h4>Tambah Data</h4>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                                 <form action="{{ route('kelas.store') }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     <div class="form-group row mb-4">
                                         <label for="nama_kelas" class="col-form-label text-md-right col-12 col-md-3">Nama Kelas</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" name="nama_kelas" value="{{ Session::get('nama_kelas') }}" required autofocus>
+                                            <input type="text" class="form-control @error('nama_kelas') is-invalid @enderror" id="nama_kelas" name="nama_kelas" value="{{ old('nama_kelas') }}" required autofocus>
                                         </div>
-                                        @error('nama_kelas')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="guru" class="col-form-label text-md-right col-12 col-md-3">Wali Kelas</label>

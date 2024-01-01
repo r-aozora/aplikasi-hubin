@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProgramController extends Controller
 {
@@ -18,11 +19,11 @@ class ProgramController extends Controller
 
         return view('dashboard.program.index')
             ->with([
-                'title' => 'Program Keahlian',
-                'active' => 'Siswa',
+                'title'     => 'Program Keahlian',
+                'active'    => 'Siswa',
                 'subActive' => 'Program',
                 'triActive' => null,
-                'program' => $program
+                'program'   => $program
             ]);
     }
 
@@ -32,16 +33,13 @@ class ProgramController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'program_keahlian' => ['required', 'string', 'unique:program_keahlian,nama'],
         ]);
-
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
 
         try {
             Program::create([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
+                'slug' => Str::slug($request->input('program_keahlian')),
+                'nama' => $request->input('program_keahlian'),
             ]);
     
             toast('Program Keahlian berhasil ditambahkan!', 'success');
@@ -58,16 +56,13 @@ class ProgramController extends Controller
     public function update(Request $request, Program $program)
     {
         $request->validate([
-            'nama' => 'required',
+            'program_keahlian' => ['required', 'string', 'unique:program_keahlian,nama'],
         ]);
-
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama'));
-        $slug = strtolower(str_replace(' ', '-', $nama));
 
         try {
             $program->update([
-                'slug' => $slug,
-                'nama' => $request->input('nama'),
+                'slug' => Str::slug($request->input('program_keahlian')),
+                'nama' => $request->input('program_keahlian'),
             ]);
     
             toast('Program Keahlian berhasil diedit!', 'success');

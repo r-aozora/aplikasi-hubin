@@ -8,7 +8,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Program;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class KelasController extends Controller
 {
@@ -68,8 +68,6 @@ class KelasController extends Controller
 
     public function store(Request $request, )
     {
-        Session::flash('nama_kelas', $request->input('nama_kelas'));
-        
         $request->validate([
             'nama_kelas' => ['required', 'string'],
             'guru'       => ['required'],
@@ -78,12 +76,10 @@ class KelasController extends Controller
         ]);
 
         $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_kelas'));
-        $slug = $angkatan->slug . '-' . strtolower(str_replace(' ', '-', $nama));
 
         try {
             Kelas::create([
-                'slug'        => $slug,
+                'slug'        => $angkatan->slug . '-' . Str::slug($request->input('nama_kelas')),
                 'nama'        => $request->input('nama_kelas'),
                 'id_guru'     => $request->input('guru'),
                 'id_program'  => $request->input('program'),
@@ -139,12 +135,10 @@ class KelasController extends Controller
         ]);
 
         $angkatan = Angkatan::where('id', $request->input('angkatan'))->first();
-        $nama = preg_replace('/[^a-z0-9]+/i', ' ', $request->input('nama_kelas'));
-        $slug = $angkatan->slug . '-' . strtolower(str_replace(' ', '-', $nama));
 
         try {
             $kelas->update([
-                'slug'        => $slug,
+                'slug'        => $angkatan->slug . '-' . Str::slug($request->input('nama_kelas')),
                 'nama'        => $request->input('nama_kelas'),
                 'id_guru'     => $request->input('guru'),
                 'id_program'  => $request->input('program'),

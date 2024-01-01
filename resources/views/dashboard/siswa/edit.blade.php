@@ -37,6 +37,11 @@
                                 <h4>Edit Data<h4>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                                 <form action="{{ route('siswa.update', $siswa->slug) }}" method="post">
                                     @csrf
                                     @method('put')
@@ -44,27 +49,18 @@
                                         <label for="nama_siswa" class="col-form-label text-md-right col-12 col-md-3">Nama Siswa</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror" id="nama_siswa" name="nama_siswa" value="{{ $siswa->nama }}" required autofocus>
-                                            @error('nama_siswa')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="nis" class="col-form-label text-md-right col-12 col-md-3">NIS</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ $siswa->nis }}" required>
-                                            @error('nis')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="nisn" class="col-form-label text-md-right col-12 col-md-3">NISN</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('nisn') is-invalid @enderror" id="nisn" name="nisn" value="{{ $siswa->nisn }}" required>
-                                            @error('nisn')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -80,8 +76,12 @@
                                         <label for="kelas" class="col-form-label text-md-right col-12 col-md-3">Kelas</label>
                                         <div class="col-12 col-md-7">
                                             <select class="form-control choices" id="kelas" name="kelas" required>
-                                                @foreach ($kelas as $item)
-                                                    <option value="{{ $item->id }}" {{ $siswa->kelas->id === $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                @foreach ($angkatan as $item)
+                                                    <optgroup label="Tahun Angkatan {{ $item->nama }}">
+                                                        @foreach ($item->kelas as $kelas)
+                                                            <option value="{{ $kelas->id }}" {{ $kelas->id === $siswa->id_kelas ? 'selected' : '' }}>{{ $kelas->nama }}</option>
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -90,36 +90,24 @@
                                         <label for="telepon_siswa" class="col-form-label text-md-right col-12 col-md-3">No. Telepon Siswa</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('telepon_siswa') is-invalid @enderror" id="telepon_siswa" name="telepon_siswa" value="{{ $siswa->telepon }}" required>
-                                            @error('telepon_siswa')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="telepon_orang_tua" class="col-form-label text-md-right col-12 col-md-3">No. Telepon Orang Tua</label>
                                         <div class="col-12 col-md-7">
                                             <input type="text" class="form-control @error('telepon_orang_tua') is-invalid @enderror" id="telepon_orang_tua" name="telepon_orang_tua" value="{{ $siswa->telepon_ortu }}" required>
-                                            @error('telepon_orang_tua')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="email" class="col-form-label text-md-right col-12 col-md-3">Email</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $siswa->email }}" required>
-                                            @error('email')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ $siswa->email }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="alamat" class="col-form-label text-md-right col-12 col-md-3">Alamat</label>
                                         <div class="col-12 col-md-7">
                                             <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="5" required>{{ $siswa->alamat }}</textarea>
-                                            @error('alamat')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">

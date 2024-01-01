@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $user = User::with('guru')->get();
@@ -30,9 +27,6 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $notUser = Guru::whereDoesntHave('user')
@@ -49,20 +43,14 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        Session::flash('email', $request->input('email'));
-        Session::flash('username', $request->input('username'));
-
         $request->validate([
-            'nama_guru' => 'required',
-            'email'     => 'required',
-            'username'  => 'required',
-            'password'  => 'required',
-            'level'     => 'required',
+            'nama_guru' => ['required'],
+            'email'     => ['required', 'email', 'unique:users,email'],
+            'username'  => ['required', 'string', 'unique:users,username', 'max:255'],
+            'password'  => ['required'],
+            'level'     => ['required'],
         ]);
 
         try {
@@ -84,9 +72,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $user)
     {
         $notUser = Guru::whereDoesntHave('user')
@@ -104,16 +89,13 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'nama_guru' => 'required',
-            'email'     => 'required',
-            'username'  => 'required',
-            'level'     => 'required',
+            'nama_guru' => ['required'],
+            'email'     => ['required', 'email', 'unique:users,email'],
+            'username'  => ['required', 'string', 'unique:users,username', 'max:255'],
+            'level'     => ['required'],
         ]);
 
         try {
@@ -134,9 +116,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         $user->delete();

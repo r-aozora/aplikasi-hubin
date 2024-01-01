@@ -12,9 +12,14 @@
                     @csrf
                     @method('put')
                     <div class="modal-body">
-                        <div class="custom-file">
-                            <label for="nama">Program Keahlian</label>
-                            <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}" required>
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">{{ $error }}</div>
+                            @endforeach
+                        @endif
+                        <div class="form-group">
+                            <label for="program_keahlian">Program Keahlian</label>
+                            <input type="text" class="form-control @error('program_keahlian') is-invalid @enderror" id="program_keahlian" name="program_keahlian" value="{{ $item->nama }}" required>
                         </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">

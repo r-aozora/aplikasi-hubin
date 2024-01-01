@@ -36,19 +36,24 @@
                                 <h4>Edit Data</h4>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        <div class="alert alert-danger">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                                 <form action="{{ route('guru.update', $guru->slug) }}" method="post" class="needs-validation" novalidate>
                                     @csrf
                                     @method('put')
                                     <div class="form-group row mb-4">
-                                        <label for="nama" class="col-form-label text-md-right col-12 col-md-3">Nama Guru</label>
+                                        <label for="nama_guru" class="col-form-label text-md-right col-12 col-md-3">Nama Guru</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" id="nama" name="nama" value="{{ $guru->nama }}" required autofocus>
+                                            <input type="text" class="form-control @error('nama_guru') is-invalid @enderror" id="nama_guru" name="nama_guru" value="{{ $guru->nama }}" required autofocus>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
                                         <label for="nip" class="col-form-label text-md-right col-12 col-md-3">NIP</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" id="nip" name="nip" value="{{ $guru->nip }}" required>
+                                            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ $guru->nip }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
@@ -63,7 +68,7 @@
                                     <div class="form-group row mb-4">
                                         <label for="telepon" class="col-form-label text-md-right col-12 col-md-3">No. Telepon</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" id="telepon" name="telepon" value="{{ $guru->telepon }}" required>
+                                            <input type="text" class="form-control @error('telepon') is-invalid @enderror" id="telepon" name="telepon" value="{{ $guru->telepon }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-4">
