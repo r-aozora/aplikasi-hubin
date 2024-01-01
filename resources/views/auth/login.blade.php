@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="simple-footer">
-                            Copyright &copy; Aplikasi Monitoring Prakerin 2023
+                            Copyright &copy; 2023 Aplikasi Monitoring Prakerin
                         </div>
                     </div>
                 </div>
