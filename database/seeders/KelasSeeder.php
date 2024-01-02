@@ -72,6 +72,12 @@ class KelasSeeder extends Seeder
                 'id_guru' => 3,
                 'id_angkatan' => 1,
                 'id_program' => 1,
+            ], [
+                'slug' => 'xi-rpl-2',
+                'nama' => 'XI RPL 2',
+                'id_guru' => 2,
+                'id_angkatan' => 1,
+                'id_program' => 1,
             ]
         ]);
     }

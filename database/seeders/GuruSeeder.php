@@ -34,5 +34,7 @@ class GuruSeeder extends Seeder
                 'telepon' => '08123456789',
             ]
         ]);
+
+        Guru::factory(7)->create();
     }
 }
