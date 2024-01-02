@@ -25,12 +25,8 @@
                     <i class="fas fa-user"></i>
                     Profile
                 </a>
-                <a href="{{ route('help') }}" class="dropdown-item has-icon">
-                    <i class="fas fa-question-circle"></i>
-                    Panduan
-                </a>
                 <a href="{{ route('setting') }}" class="dropdown-item has-icon">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-cog"></i>
                     Pengaturan
                 </a>
                 <form action="{{ route('logout') }}" method="post">

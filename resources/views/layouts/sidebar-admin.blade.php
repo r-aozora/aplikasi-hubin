@@ -92,24 +92,12 @@
                     <span>Profile</span>
                 </a>
             </li>
-            <li class="dropdown {{ $active === 'Panduan' ? 'active' : '' }}">
-                <a href="{{ route('help') }}" class="nav-link">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Panduan</span>
-                </a>
-            </li>
             <li class="dropdown {{ $active === 'Pengaturan' ? 'active' : '' }}">
                 <a href="{{ route('setting') }}" class="nav-link">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-cog"></i>
                     <span>Pengaturan</span>
                 </a>
             </li>
         </ul>
-        {{-- <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i>
-                Main Page
-            </a>
-        </div> --}}
     </aside>
 </div>

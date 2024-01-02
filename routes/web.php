@@ -57,8 +57,6 @@ Route::middleware(['auth', 'checkLevel:admin,auru'])->group(function () {
     
         Route::resource('/siswa', SiswaController::class);
 
-        Route::get('/panduan', [DashboardController::class, 'help'])->name('help');
-
         Route::get('/pengaturan', [DashboardController::class, 'setting'])->name('setting');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
