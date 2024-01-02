@@ -56,6 +56,8 @@ Route::middleware(['auth', 'checkLevel:admin,auru'])->group(function () {
         Route::resource('/kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
     
         Route::resource('/siswa', SiswaController::class);
+        Route::post('/siswa/import', [SiswaController::class, 'import'])->name('siswa.import');
+        Route::post('/siswa/export', [SiswaController::class, 'export'])->name('siswa.export');
 
         Route::get('/pengaturan', [DashboardController::class, 'setting'])->name('setting');
 

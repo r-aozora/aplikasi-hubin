@@ -32,10 +32,10 @@
                                     <a href="{{ route('guru.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <a href="{{ route('guru.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data">
+                                    <a href="{{ route('guru.export') }}" class="btn btn-sm btn-info" data-toggle="tooltip" title="Download Data">
                                         <i class="fas fa-download"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-info btn-import" data-toggle="tooltip" title="Impor Data">
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data" onclick="$('#import-guru').modal('show')">
                                         <i class="fas fa-upload"></i>
                                     </button>
                                 </div>
@@ -99,9 +99,4 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
-    <script>
-        $('.btn-import').click(function() {
-            $('#import-guru').modal('show');
-        });
-    </script>
 @endsection

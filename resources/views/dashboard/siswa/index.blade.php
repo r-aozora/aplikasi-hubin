@@ -39,8 +39,14 @@
                                     <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Tambah Data">
                                         <i class="fas fa-plus"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Filter Data" onclick="$('#filter-siswa').modal('show');">
+                                    <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Filter Data" onclick="$('#filter-siswa').modal('show')">
                                         <i class="fas fa-filter"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Download Data" onclick="$('#export-siswa').modal('show')">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data" onclick="$('#import-siswa').modal('show')">
+                                        <i class="fas fa-upload"></i>
                                     </button>
                                 </div>
                             </div>
@@ -98,6 +104,8 @@
             </div>
         </section>
         @include('dashboard.siswa.filter')
+        @include('dashboard.siswa.import')
+        @include('dashboard.siswa.export')
     </div>
 @endsection
 

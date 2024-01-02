@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('link')
+    <link rel="stylesheet" href="{{ asset('assets/modules/choices.js/public/assets/styles/choices.css') }}">
 @endsection
 
 @section('content')
@@ -33,10 +34,10 @@
                             <div class="card-body">
                                 <h4>Data Siswa</h4>
                                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id, officia!</p>
-                                <a href="#" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Siswa">
+                                <button class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Siswa" onclick="$('#export-siswa').modal('show')">
                                     <i class="fas fa-download"></i>
-                                </a>
-                                <button class="btn btn-sm btn-info btn-import-siswa" data-toggle="tooltip" title="Impor Data Siswa">
+                                </button>
+                                <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data Siswa" onclick="$('#import-siswa').modal('show')">
                                     <i class="fas fa-upload"></i>
                                 </button>
                                 <a href="{{ route('siswa.index') }}" class="card-cta float-right">
@@ -57,7 +58,7 @@
                                 <a href="#" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Program Keahlian">
                                     <i class="fas fa-download"></i>
                                 </a>
-                                <button class="btn btn-sm btn-info btn-import-program" data-toggle="tooltip" title="Impor Data Program Keahlian">
+                                <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data Program Keahlian" onclick="$('#import-program').modal('show')">
                                     <i class="fas fa-upload"></i>
                                 </button>
                                 <a href="{{ route('program.index') }}" class="card-cta float-right">
@@ -75,10 +76,10 @@
                             <div class="card-body">
                                 <h4>Data Guru</h4>
                                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id, officia!</p>
-                                <a href="#" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Guru">
+                                <a href="{{ route('guru.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Guru">
                                     <i class="fas fa-download"></i>
                                 </a>
-                                <button class="btn btn-sm btn-info btn-import-guru" data-toggle="tooltip" title="Impor Data Guru">
+                                <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data Guru" onclick="$('#import-guru').modal('show')">
                                     <i class="fas fa-upload"></i>
                                 </button>
                                 <a href="{{ route('guru.index') }}" class="card-cta float-right">
@@ -96,10 +97,10 @@
                             <div class="card-body">
                                 <h4>Data Perusahaan</h4>
                                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id, officia!</p>
-                                <a href="#" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Perusahaan">
+                                <a href="{{ route('perusahaan.export') }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Download Data Perusahaan">
                                     <i class="fas fa-download"></i>
                                 </a>
-                                <button class="btn btn-sm btn-info btn-import-perusahaan" data-toggle="tooltip" title="Impor Data Perusahaan">
+                                <button class="btn btn-sm btn-info" data-toggle="tooltip" title="Impor Data Perusahaan" onclick="$('#import-perusahaan').modal('show')">
                                     <i class="fas fa-upload"></i>
                                 </button>
                                 <a href="{{ route('perusahaan.index') }}" class="card-cta float-right">
@@ -114,28 +115,16 @@
         </section>
 
         @include('dashboard.siswa.import')
-        @include('dashboard.program.import')
+        @include('dashboard.siswa.export')
+        {{-- @include('dashboard.program.import') --}}
         @include('dashboard.guru.import')
         @include('dashboard.perusahaan.import')
     </div>
 @endsection
 
 @section('script')
-    <script>
-        $('.btn-import-siswa').on('click', function() {
-            $('#import-siswa').modal('show')
-        })
+    <script src="{{ asset('assets/modules/choices.js/public/assets/scripts/choices.js') }}"></script>
 
-        $('.btn-import-program').on('click', function() {
-            $('#import-program').modal('show')
-        })
-
-        $('.btn-import-guru').on('click', function() {
-            $('#import-guru').modal('show')
-        })
-
-        $('.btn-import-perusahaan').on('click', function() {
-            $('#import-perusahaan').modal('show')
-        })
-    </script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('assets/js/page/modules-choices.js')}}"></script>
 @endsection

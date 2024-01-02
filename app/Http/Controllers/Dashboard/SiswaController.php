@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Exports\SiswaExport;
 use App\Http\Controllers\Controller;
+use App\Imports\SiswaImport;
 use App\Models\Angkatan;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -23,8 +26,8 @@ class SiswaController extends Controller
             ->get();
 
         $angkatan = Angkatan::with('kelas')
-                ->orderBy('nama', 'asc')
-                ->get();
+            ->orderBy('nama', 'asc')
+            ->get();
         
         $kelas = $id_kelas ? Kelas::where('id', $id_kelas)->first() : null;
 
@@ -174,5 +177,44 @@ class SiswaController extends Controller
         toast('Data Siswa berhasil dihapus.', 'success');
 
         return redirect()->back();
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => ['required', 'file', 'mimes:csv,xls,xlsx'],
+            'kelas' => ['required'],
+        ]);
+
+        $file = $request->file('file');
+        $kelas = $request->input('kelas');
+
+        try {
+            Excel::import(new SiswaImport($kelas), $file);
+    
+            toast('Data Siswa berhasil diimpor!', 'success');
+        } catch(\Exception $e) {
+            toast('Data Siswa gagal diimpor.', 'warning');
+        }
+
+        return redirect()->back();
+    }
+
+    public function export(Request $request)
+    {
+        $request->validate([
+            'kelas' => ['required'],
+        ]);
+
+        $kelas = Kelas::with('angkatan')->where('id', $request->input('kelas'))->first();
+
+        try {
+            return Excel::download(new SiswaExport($kelas->id), 'Data Siswa ' . $kelas->nama . '-' . Str::slug($kelas->angkatan->nama) . '.xlsx');
+        } catch (\Exception $e) {
+            dd($e);
+            // toast('Data Siswa gagal di download.', 'warning');
+
+            return redirect()->back();
+        }
     }
 }
