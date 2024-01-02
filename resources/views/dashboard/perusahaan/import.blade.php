@@ -10,7 +10,12 @@
             <form action="{{ route('perusahaan.import') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
                 <div class="modal-body">
-                    <div class="custom-file">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    @endif
+                    <div class="form-group">
                         <label for="file">Pilih File</label>
                         <input type="file" class="form-control" id="file" name="file" required>
                     </div>
